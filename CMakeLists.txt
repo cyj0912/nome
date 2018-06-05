@@ -174,6 +174,11 @@ add_executable(Nome MACOSX_BUNDLE ${SOURCES} ${HEADERS} ${PARSER_SOURCES} nome_r
 
 set_target_properties(Nome PROPERTIES MACOSX_BUNDLE_BUNDLE_NAME Nome MACOSX_BUNDLE_BUNDLE_VERSION 1.0)
 
+if(MSVC)
+	#Enable multithreaded building on MSVC
+	target_compile_options(Nome PRIVATE /MP)
+endif()
+
 target_link_libraries(Nome PRIVATE Math)
 
 target_link_libraries(Nome PRIVATE Qt5::Core Qt5::Gui Qt5::Widgets Qt5::OpenGL)
@@ -183,6 +188,7 @@ target_include_directories(Nome PRIVATE ${OPENGL_INCLUDE_DIR})
 target_link_libraries(Nome PRIVATE ${OPENGL_LIBRARIES})
 
 target_link_libraries(Nome PRIVATE glm)
+target_compile_definitions(Nome PRIVATE GLM_ENABLE_EXPERIMENTAL)
 
 install(TARGETS Nome RUNTIME DESTINATION . BUNDLE DESTINATION .)
 install(DIRECTORY examples DESTINATION .)
