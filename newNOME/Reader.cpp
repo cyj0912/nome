@@ -395,7 +395,7 @@ Vert* Reader::getVert(std::string name)
             }
 
             for (InstanceNew* i1 : i0->listInstances){
-                string currentNameInstance = i1->getFullName();
+                string currentNameInstance = i1->getName();
                 if (currentNameInstance.compare(faceName) == 0){
                     string afterfaceNameInstance = argAfterName.substr(argAfterName.find(".") + 1);
                     string faceNameInstance = afterfaceNameInstance.substr(0, afterfaceNameInstance.find("."));
