@@ -629,7 +629,6 @@ void SlideGLWidget::paintGLImpl()
             }
         }*/
 
-
         for (InstanceNew * newInstance: currSession->instances){
             newInstance->updateVerts();
         }
@@ -637,66 +636,22 @@ void SlideGLWidget::paintGLImpl()
         for (InstanceNew * newInstance: currSession->instances){
 
             for (Vert * v : newInstance->verts){
-                //std::cout << "====" << std::endl;
-                //std::cout << v->name << std::endl;
-                if (v->originalVert != NULL){
-                    *v->x = v->originalVert->xTransformed;
-                    *v->y = v->originalVert->yTransformed;
-                    *v->z = v->originalVert->zTransformed;
-
-                    v->xTransformed = v->originalVert->xTransformed;
-                    v->yTransformed = v->originalVert->yTransformed;
-                    v->zTransformed = v->originalVert->zTransformed;
-                    v->transformations.clear();
-                    /*std::cout << v->originalVert->name << std::endl;
-                    std::cout << v->transformations.size() << std::endl;
-                    std::cout << v->originalVert->xTransformed << std::endl;
-                    std::cout << v->originalVert->yTransformed << std::endl;
-                    std::cout << v->originalVert->zTransformed << std::endl;
-
-                    std::cout << v->xTransformed << std::endl;
-                    std::cout << v->yTransformed << std::endl;
-                    std::cout << v->zTransformed << std::endl;*/
-                }
-
                 if (v->transformations.size() > 0 && !(std::find(appliedVertTransformation.begin(), appliedVertTransformation.end(), v) != appliedVertTransformation.end())){
                     appliedVertTransformation.push_back(v);
                     for (TransformationNew * t : v->transformations){
                         v->applyTransformation(t);
                     }
                 }
-
-
             }
+        }
+
+
+        for (InstanceNew * newInstance: currSession->instances){
             newInstance->applyTransformationGroup();
             for (TransformationNew * t : newInstance->transformations){
                 newInstance->applyTransformation(t);
             }
         }
-
-
-        /*for (InstanceNew * newInstance: currSession->instances){
-            newInstance->applyTransformationGroup();
-            for (TransformationNew * t : newInstance->transformations){
-                newInstance->applyTransformation(t);
-            }
-        }*/
-
-        /*for (InstanceNew * newInstance: currSession->instances){
-            if (newInstance->name == "j"){
-                std::cout << newInstance->name << std::endl;
-                for (Vert * v: newInstance->verts){
-
-                    std::cout << "====" << std::endl;
-                    std::cout << *v->x << std::endl;
-                    std::cout << *v->y << std::endl;
-                    std::cout << *v->z << std::endl;
-                    std::cout << v->xTransformed << std::endl;
-                    std::cout << v->yTransformed << std::endl;
-                    std::cout << v->zTransformed << std::endl;
-                }
-            }
-        }*/
     }
 
 

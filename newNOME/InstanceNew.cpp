@@ -78,14 +78,15 @@ InstanceNew* createInstance(MeshNew* m0, std::list<Vert*> vertsDef, Reader* curr
    i0->currSession = currSession;
 
    //std::cout << m0->name << std::endl;
-   //std::cout << m0->name << std::endl;
    // Copy all the vertices from the mesh to the instance.
    for (Vert* v0 : m0->verts){
        if (onlyCreateNewVertices == true){
            Vert* newVertex = createVert(v0);
            newVertex->name = v0->name;
            // MAYBE CHECK TRANSFORMATIONS.
+
            newVertex->transformations = currReader->getVertTransformations(v0->index);
+           //std::cout << newVertex->transformations.size() << std::endl;
            newVertex->copyOfVert = v0;
            setSurface(newVertex, m0->surface);
            i0->verts.push_back(newVertex);

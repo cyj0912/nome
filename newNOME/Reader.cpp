@@ -354,6 +354,7 @@ InstanceNew* Reader::getInstance(std::string name)
 
 Vert* Reader::getVert(std::string name)
 {
+
     // Check for definitions first
     for (Vert* v0 : session->verts){
         if(v0->name.compare(name) == 0)
@@ -394,11 +395,10 @@ Vert* Reader::getVert(std::string name)
             }
 
             for (InstanceNew* i1 : i0->listInstances){
-                string currentNameInstance = i1->getName();
+                string currentNameInstance = i1->getFullName();
                 if (currentNameInstance.compare(faceName) == 0){
                     string afterfaceNameInstance = argAfterName.substr(argAfterName.find(".") + 1);
                     string faceNameInstance = afterfaceNameInstance.substr(0, afterfaceNameInstance.find("."));
-
 
                     for (FaceNew* f0 : i1->faces){
                         //std::cout << "faceNameInstance" << std::endl;
@@ -464,7 +464,6 @@ std::list<TransformationNew*> Reader::getVertTransformations(int id){
                     transformations.insert(transformations.end(), v0->transformations.begin(), v0->transformations.end());
                     transformations.insert(transformations.end(), i0->transformations.begin(), i0->transformations.end());
                     transformations.insert(transformations.end(), instanceElem->transformations.begin(), instanceElem->transformations.end());
-
                     return transformations;
                 }
             }
