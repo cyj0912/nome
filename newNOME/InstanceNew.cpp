@@ -567,16 +567,14 @@ void InstanceNew::updateVerts(){
 }
 
 void InstanceNew::applyTransformationGroup(){
-    //std::cout << name << std::endl;
     if (group != NULL){
         for (InstanceNew* currInstance : listInstances){
-            /*for (Vert* v : currInstance->verts){
+            for (Vert* v : currInstance->verts){
                 for (TransformationNew * t : v->transformations){
-                    std::cout << "HELLO" << std::endl;
                     v->applyTransformation(t);
                 }
 
-            }*/
+            }
             for (TransformationNew * t : currInstance->transformations){
                 currInstance->applyTransformation(t);
             }
