@@ -632,18 +632,18 @@ void SlideGLWidget::paintGLImpl()
         for (InstanceNew * newInstance: currSession->instances){
             newInstance->updateVerts();
         }
-        std::list<Vert*> appliedVertTransformation = std::list<Vert*>();
-        for (InstanceNew * newInstance: currSession->instances){
+        //std::list<Vert*> appliedVertTransformation = std::list<Vert*>();
+        //for (InstanceNew * newInstance: currSession->instances){
 
-            for (Vert * v : newInstance->verts){
-                if (v->transformations.size() > 0 && !(std::find(appliedVertTransformation.begin(), appliedVertTransformation.end(), v) != appliedVertTransformation.end())){
-                    appliedVertTransformation.push_back(v);
-                    for (TransformationNew * t : v->transformations){
-                        v->applyTransformation(t);
-                    }
-                }
-            }
-        }
+        //    for (Vert * v : newInstance->verts){
+        //        if (v->transformations.size() > 0 && !(std::find(appliedVertTransformation.begin(), appliedVertTransformation.end(), v) != appliedVertTransformation.end())){
+        //            appliedVertTransformation.push_back(v);
+        //            for (TransformationNew * t : v->transformations){
+        //                v->applyTransformation(t);
+        //            }
+        //        }
+        //    }
+        //}
 
 
         for (InstanceNew * newInstance: currSession->instances){
