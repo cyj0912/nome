@@ -1,8 +1,8 @@
-/* A Bison parser, made by GNU Bison 3.0.  */
+/* A Bison parser, made by GNU Bison 3.0.4.  */
 
 /* Bison interface for Yacc-like parsers in C
 
-   Copyright (C) 1984, 1989-1990, 2000-2013 Free Software Foundation, Inc.
+   Copyright (C) 1984, 1989-1990, 2000-2015 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -30,8 +30,8 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
-#ifndef YY_NOM_C_USERS_DIEPPEDALLE_DOCUMENTS_NOMEPROJECT_NOME_COMPILERNOME_PARSER_HPP_INCLUDED
-# define YY_NOM_C_USERS_DIEPPEDALLE_DOCUMENTS_NOMEPROJECT_NOME_COMPILERNOME_PARSER_HPP_INCLUDED
+#ifndef YY_NOM_E_DEVGRA_NOME_COMPILERNOME_PARSER_HPP_INCLUDED
+# define YY_NOM_E_DEVGRA_NOME_COMPILERNOME_PARSER_HPP_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -40,12 +40,12 @@
 extern int nomdebug;
 #endif
 /* "%code requires" blocks.  */
-#line 1 "C:\\Users\\dieppedalle\\Documents\\nomeProject\\nome\\compilerNome\\parser.y" /* yacc.c:1909  */
+#line 1 "compilerNome/parser.y" /* yacc.c:1909  */
 
 #include <newNOME/Session.h>
 
 
-#line 49 "C:\\Users\\dieppedalle\\Documents\\nomeProject\\nome\\compilerNome\\parser.hpp" /* yacc.c:1909  */
+#line 49 "E:/DevGra/nome/compilerNome/parser.hpp" /* yacc.c:1909  */
 
 /* Token type.  */
 #ifndef YYTOKENTYPE
@@ -135,8 +135,14 @@ extern int nomdebug;
     MERGE = 338,
     END_MERGE = 339,
     EPSILON = 340,
-    BANK_EXPR = 341,
-    NUMBER = 342
+    SWEEP = 341,
+    END_SWEEP = 342,
+    PATH = 343,
+    ENDPATH = 344,
+    CROSSSECTION = 345,
+    END_CROSSSECTION = 346,
+    BANK_EXPR = 347,
+    NUMBER = 348
   };
 #endif
 /* Tokens.  */
@@ -223,15 +229,21 @@ extern int nomdebug;
 #define MERGE 338
 #define END_MERGE 339
 #define EPSILON 340
-#define BANK_EXPR 341
-#define NUMBER 342
+#define SWEEP 341
+#define END_SWEEP 342
+#define PATH 343
+#define ENDPATH 344
+#define CROSSSECTION 345
+#define END_CROSSSECTION 346
+#define BANK_EXPR 347
+#define NUMBER 348
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef union YYSTYPE YYSTYPE;
+
 union YYSTYPE
 {
-#line 83 "C:\\Users\\dieppedalle\\Documents\\nomeProject\\nome\\compilerNome\\parser.y" /* yacc.c:1909  */
+#line 87 "compilerNome/parser.y" /* yacc.c:1909  */
 
     double intNumber;
     double number;
@@ -242,8 +254,10 @@ union YYSTYPE
         double number;   // int posVal;
     } numPos;
 
-#line 246 "C:\\Users\\dieppedalle\\Documents\\nomeProject\\nome\\compilerNome\\parser.hpp" /* yacc.c:1909  */
+#line 258 "E:/DevGra/nome/compilerNome/parser.hpp" /* yacc.c:1909  */
 };
+
+typedef union YYSTYPE YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
 #endif
@@ -267,4 +281,4 @@ extern YYSTYPE nomlval;
 extern YYLTYPE nomlloc;
 int nomparse (Session* currSession);
 
-#endif /* !YY_NOM_C_USERS_DIEPPEDALLE_DOCUMENTS_NOMEPROJECT_NOME_COMPILERNOME_PARSER_HPP_INCLUDED  */
+#endif /* !YY_NOM_E_DEVGRA_NOME_COMPILERNOME_PARSER_HPP_INCLUDED  */

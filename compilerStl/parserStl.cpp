@@ -1,8 +1,8 @@
-/* A Bison parser, made by GNU Bison 3.0.  */
+/* A Bison parser, made by GNU Bison 3.0.4.  */
 
 /* Bison implementation for Yacc-like parsers in C
 
-   Copyright (C) 1984, 1989-1990, 2000-2013 Free Software Foundation, Inc.
+   Copyright (C) 1984, 1989-1990, 2000-2015 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -44,7 +44,7 @@
 #define YYBISON 1
 
 /* Bison version.  */
-#define YYBISON_VERSION "3.0"
+#define YYBISON_VERSION "3.0.4"
 
 /* Skeleton name.  */
 #define YYSKELETON_NAME "yacc.c"
@@ -71,7 +71,7 @@
 #define yylloc          stllloc
 
 /* Copy the first part of user declarations.  */
-#line 5 "C:\\Users\\dieppedalle\\Documents\\nomeProject\\nome\\compilerStl\\parserStl.y" /* yacc.c:339  */
+#line 5 "compilerStl/parserStl.y" /* yacc.c:339  */
 
 #include <stdio.h>
 #include <string.h>
@@ -122,13 +122,13 @@ std::list<FaceNew *> currentSolidFace;
 std::list<TransformationNew *> currentTransformations;
 
 
-#line 126 "C:\\Users\\dieppedalle\\Documents\\nomeProject\\nome\\compilerStl\\parserStl.cpp" /* yacc.c:339  */
+#line 126 "E:/DevGra/nome/compilerStl/parserStl.cpp" /* yacc.c:339  */
 
-# ifndef YY_NULL
+# ifndef YY_NULLPTR
 #  if defined __cplusplus && 201103L <= __cplusplus
-#   define YY_NULL nullptr
+#   define YY_NULLPTR nullptr
 #  else
-#   define YY_NULL 0
+#   define YY_NULLPTR 0
 #  endif
 # endif
 
@@ -142,8 +142,8 @@ std::list<TransformationNew *> currentTransformations;
 
 /* In a future release of Bison, this section will be replaced
    by #include "parserStl.hpp".  */
-#ifndef YY_STL_C_USERS_DIEPPEDALLE_DOCUMENTS_NOMEPROJECT_NOME_COMPILERSTL_PARSERSTL_HPP_INCLUDED
-# define YY_STL_C_USERS_DIEPPEDALLE_DOCUMENTS_NOMEPROJECT_NOME_COMPILERSTL_PARSERSTL_HPP_INCLUDED
+#ifndef YY_STL_E_DEVGRA_NOME_COMPILERSTL_PARSERSTL_HPP_INCLUDED
+# define YY_STL_E_DEVGRA_NOME_COMPILERSTL_PARSERSTL_HPP_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -152,11 +152,11 @@ std::list<TransformationNew *> currentTransformations;
 extern int stldebug;
 #endif
 /* "%code requires" blocks.  */
-#line 1 "C:\\Users\\dieppedalle\\Documents\\nomeProject\\nome\\compilerStl\\parserStl.y" /* yacc.c:355  */
+#line 1 "compilerStl/parserStl.y" /* yacc.c:355  */
 
 #include <newNOME/Session.h>
 
-#line 160 "C:\\Users\\dieppedalle\\Documents\\nomeProject\\nome\\compilerStl\\parserStl.cpp" /* yacc.c:355  */
+#line 160 "E:/DevGra/nome/compilerStl/parserStl.cpp" /* yacc.c:355  */
 
 /* Token type.  */
 #ifndef YYTOKENTYPE
@@ -193,10 +193,10 @@ extern int stldebug;
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef union YYSTYPE YYSTYPE;
+
 union YYSTYPE
 {
-#line 66 "C:\\Users\\dieppedalle\\Documents\\nomeProject\\nome\\compilerStl\\parserStl.y" /* yacc.c:355  */
+#line 66 "compilerStl/parserStl.y" /* yacc.c:355  */
 
     double number;
     char *string;
@@ -205,8 +205,10 @@ union YYSTYPE
         double number;   // int posVal;
     } numPos;
 
-#line 209 "C:\\Users\\dieppedalle\\Documents\\nomeProject\\nome\\compilerStl\\parserStl.cpp" /* yacc.c:355  */
+#line 209 "E:/DevGra/nome/compilerStl/parserStl.cpp" /* yacc.c:355  */
 };
+
+typedef union YYSTYPE YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
 #endif
@@ -230,11 +232,11 @@ extern YYSTYPE stllval;
 extern YYLTYPE stllloc;
 int stlparse (Session* currSession);
 
-#endif /* !YY_STL_C_USERS_DIEPPEDALLE_DOCUMENTS_NOMEPROJECT_NOME_COMPILERSTL_PARSERSTL_HPP_INCLUDED  */
+#endif /* !YY_STL_E_DEVGRA_NOME_COMPILERSTL_PARSERSTL_HPP_INCLUDED  */
 
 /* Copy the second part of user declarations.  */
 
-#line 238 "C:\\Users\\dieppedalle\\Documents\\nomeProject\\nome\\compilerStl\\parserStl.cpp" /* yacc.c:358  */
+#line 240 "E:/DevGra/nome/compilerStl/parserStl.cpp" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -291,11 +293,30 @@ typedef short int yytype_int16;
 # endif
 #endif
 
-#ifndef __attribute__
-/* This feature is available in gcc versions 2.5 and later.  */
-# if (! defined __GNUC__ || __GNUC__ < 2 \
-      || (__GNUC__ == 2 && __GNUC_MINOR__ < 5))
-#  define __attribute__(Spec) /* empty */
+#ifndef YY_ATTRIBUTE
+# if (defined __GNUC__                                               \
+      && (2 < __GNUC__ || (__GNUC__ == 2 && 96 <= __GNUC_MINOR__)))  \
+     || defined __SUNPRO_C && 0x5110 <= __SUNPRO_C
+#  define YY_ATTRIBUTE(Spec) __attribute__(Spec)
+# else
+#  define YY_ATTRIBUTE(Spec) /* empty */
+# endif
+#endif
+
+#ifndef YY_ATTRIBUTE_PURE
+# define YY_ATTRIBUTE_PURE   YY_ATTRIBUTE ((__pure__))
+#endif
+
+#ifndef YY_ATTRIBUTE_UNUSED
+# define YY_ATTRIBUTE_UNUSED YY_ATTRIBUTE ((__unused__))
+#endif
+
+#if !defined _Noreturn \
+     && (!defined __STDC_VERSION__ || __STDC_VERSION__ < 201112)
+# if defined _MSC_VER && 1200 <= _MSC_VER
+#  define _Noreturn __declspec (noreturn)
+# else
+#  define _Noreturn YY_ATTRIBUTE ((__noreturn__))
 # endif
 #endif
 
@@ -528,7 +549,7 @@ static const char *const yytname[] =
   "$end", "error", "$undefined", "OUTER", "SOLID", "FACET", "ENDFACET",
   "LOOP", "ENDLOOP", "VERTEX", "NORMAL", "ENDSOLID", "VARIABLE", "NUMBER",
   "BANK_EXPR", "$accept", "commands", "command", "solid", "vertex",
-  "vertexArgs", "facetsArgs", "facets", YY_NULL
+  "vertexArgs", "facetsArgs", "facets", YY_NULLPTR
 };
 #endif
 
@@ -707,7 +728,7 @@ do {                                            \
 
 /* Print *YYLOCP on YYO.  Private, do not rely on its existence. */
 
-__attribute__((__unused__))
+YY_ATTRIBUTE_UNUSED
 static unsigned
 yy_location_print_ (FILE *yyo, YYLTYPE const * const yylocp)
 {
@@ -971,11 +992,11 @@ static int
 yysyntax_error (YYSIZE_T *yymsg_alloc, char **yymsg,
                 yytype_int16 *yyssp, int yytoken)
 {
-  YYSIZE_T yysize0 = yytnamerr (YY_NULL, yytname[yytoken]);
+  YYSIZE_T yysize0 = yytnamerr (YY_NULLPTR, yytname[yytoken]);
   YYSIZE_T yysize = yysize0;
   enum { YYERROR_VERBOSE_ARGS_MAXIMUM = 5 };
   /* Internationalized format string. */
-  const char *yyformat = YY_NULL;
+  const char *yyformat = YY_NULLPTR;
   /* Arguments of yyformat. */
   char const *yyarg[YYERROR_VERBOSE_ARGS_MAXIMUM];
   /* Number of reported tokens (one for the "unexpected", one per
@@ -1032,7 +1053,7 @@ yysyntax_error (YYSIZE_T *yymsg_alloc, char **yymsg,
                   }
                 yyarg[yycount++] = yytname[yyx];
                 {
-                  YYSIZE_T yysize1 = yysize + yytnamerr (YY_NULL, yytname[yyx]);
+                  YYSIZE_T yysize1 = yysize + yytnamerr (YY_NULLPTR, yytname[yyx]);
                   if (! (yysize <= yysize1
                          && yysize1 <= YYSTACK_ALLOC_MAXIMUM))
                     return 2;
@@ -1390,7 +1411,7 @@ yyreduce:
   switch (yyn)
     {
         case 5:
-#line 95 "C:\\Users\\dieppedalle\\Documents\\nomeProject\\nome\\compilerStl\\parserStl.y" /* yacc.c:1646  */
+#line 95 "compilerStl/parserStl.y" /* yacc.c:1646  */
     {
         Reader* currReader = createReader(currSession);
         MeshNew* currMesh = createMesh();
@@ -1427,11 +1448,11 @@ yyreduce:
         currSession->offsets.push_back(currOffset);
 
     }
-#line 1431 "C:\\Users\\dieppedalle\\Documents\\nomeProject\\nome\\compilerStl\\parserStl.cpp" /* yacc.c:1646  */
+#line 1452 "E:/DevGra/nome/compilerStl/parserStl.cpp" /* yacc.c:1646  */
     break;
 
   case 6:
-#line 134 "C:\\Users\\dieppedalle\\Documents\\nomeProject\\nome\\compilerStl\\parserStl.y" /* yacc.c:1646  */
+#line 134 "compilerStl/parserStl.y" /* yacc.c:1646  */
     {
         double *x = (double*) malloc(sizeof(double));
         double *y = (double*) malloc(sizeof(double));
@@ -1455,11 +1476,11 @@ yyreduce:
 
         currentFaceVertices.push_back(newVertex);
     }
-#line 1459 "C:\\Users\\dieppedalle\\Documents\\nomeProject\\nome\\compilerStl\\parserStl.cpp" /* yacc.c:1646  */
+#line 1480 "E:/DevGra/nome/compilerStl/parserStl.cpp" /* yacc.c:1646  */
     break;
 
   case 11:
-#line 166 "C:\\Users\\dieppedalle\\Documents\\nomeProject\\nome\\compilerStl\\parserStl.y" /* yacc.c:1646  */
+#line 166 "compilerStl/parserStl.y" /* yacc.c:1646  */
     {
         Reader* currReader = createReader(currSession);
         double *x = (double*) malloc(sizeof(double));
@@ -1482,11 +1503,11 @@ yyreduce:
         currentSolidFace.push_back(newFace);
         currentFaceVertices.clear();
     }
-#line 1486 "C:\\Users\\dieppedalle\\Documents\\nomeProject\\nome\\compilerStl\\parserStl.cpp" /* yacc.c:1646  */
+#line 1507 "E:/DevGra/nome/compilerStl/parserStl.cpp" /* yacc.c:1646  */
     break;
 
 
-#line 1490 "C:\\Users\\dieppedalle\\Documents\\nomeProject\\nome\\compilerStl\\parserStl.cpp" /* yacc.c:1646  */
+#line 1511 "E:/DevGra/nome/compilerStl/parserStl.cpp" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires

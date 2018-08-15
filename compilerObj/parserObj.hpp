@@ -1,8 +1,8 @@
-/* A Bison parser, made by GNU Bison 3.0.  */
+/* A Bison parser, made by GNU Bison 3.0.4.  */
 
 /* Bison interface for Yacc-like parsers in C
 
-   Copyright (C) 1984, 1989-1990, 2000-2013 Free Software Foundation, Inc.
+   Copyright (C) 1984, 1989-1990, 2000-2015 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -30,8 +30,8 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
-#ifndef YY_OBJ_C_USERS_DIEPPEDALLE_DOCUMENTS_NOMEPROJECT_NOME_COMPILEROBJ_PARSEROBJ_HPP_INCLUDED
-# define YY_OBJ_C_USERS_DIEPPEDALLE_DOCUMENTS_NOMEPROJECT_NOME_COMPILEROBJ_PARSEROBJ_HPP_INCLUDED
+#ifndef YY_OBJ_E_DEVGRA_NOME_COMPILEROBJ_PARSEROBJ_HPP_INCLUDED
+# define YY_OBJ_E_DEVGRA_NOME_COMPILEROBJ_PARSEROBJ_HPP_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -40,11 +40,11 @@
 extern int objdebug;
 #endif
 /* "%code requires" blocks.  */
-#line 1 "C:\\Users\\dieppedalle\\Documents\\nomeProject\\nome\\compilerObj\\parserObj.y" /* yacc.c:1909  */
+#line 1 "compilerObj/parserObj.y" /* yacc.c:1909  */
 
 #include <newNOME/Session.h>
 
-#line 48 "C:\\Users\\dieppedalle\\Documents\\nomeProject\\nome\\compilerObj\\parserObj.hpp" /* yacc.c:1909  */
+#line 48 "E:/DevGra/nome/compilerObj/parserObj.hpp" /* yacc.c:1909  */
 
 /* Token type.  */
 #ifndef YYTOKENTYPE
@@ -89,10 +89,10 @@ extern int objdebug;
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef union YYSTYPE YYSTYPE;
+
 union YYSTYPE
 {
-#line 85 "C:\\Users\\dieppedalle\\Documents\\nomeProject\\nome\\compilerObj\\parserObj.y" /* yacc.c:1909  */
+#line 85 "compilerObj/parserObj.y" /* yacc.c:1909  */
 
     double number;
     char *string;
@@ -101,8 +101,10 @@ union YYSTYPE
         double number;   // int posVal;
     } numPos;
 
-#line 105 "C:\\Users\\dieppedalle\\Documents\\nomeProject\\nome\\compilerObj\\parserObj.hpp" /* yacc.c:1909  */
+#line 105 "E:/DevGra/nome/compilerObj/parserObj.hpp" /* yacc.c:1909  */
 };
+
+typedef union YYSTYPE YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
 #endif
@@ -126,4 +128,4 @@ extern YYSTYPE objlval;
 extern YYLTYPE objlloc;
 int objparse (Session* currSession);
 
-#endif /* !YY_OBJ_C_USERS_DIEPPEDALLE_DOCUMENTS_NOMEPROJECT_NOME_COMPILEROBJ_PARSEROBJ_HPP_INCLUDED  */
+#endif /* !YY_OBJ_E_DEVGRA_NOME_COMPILEROBJ_PARSEROBJ_HPP_INCLUDED  */
