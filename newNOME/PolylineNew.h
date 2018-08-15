@@ -11,10 +11,13 @@
 #include "MeshNew.h"
 
 ///Mesh class, formed by faces, primarily quad faces, valence four vertices
-typedef class PolylineNew : public MeshNew
+typedef class PolylineNew : public MeshNew, public ISweepPath
 {
 public:
     bool setName(std::string n);
+
+	//Inherited via ISweepPath
+	std::vector<Matrix3x4> GetSweepFrames(const SweepPathParams& params) const override;
 } PolylineNew;
 
 ///Instance functions

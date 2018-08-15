@@ -110,7 +110,8 @@ set(SOURCES
         bankFlexBison.cpp
         newNOME/GroupWindow.cpp
         newNOME/Octree.cpp
-        newNOME/OctreeProxy.cpp)
+        newNOME/OctreeProxy.cpp
+        newNOME/Sweep.cpp)
 
 set(HEADERS
         edge.h
@@ -168,7 +169,8 @@ set(HEADERS
         compilerBank/parserBank.hpp
         newNOME/GroupWindow.h
         newNOME/Octree.h
-        newNOME/OctreeProxy.h)
+        newNOME/OctreeProxy.h
+        newNOME/Sweep.h)
 
 add_executable(Nome MACOSX_BUNDLE ${SOURCES} ${HEADERS} ${PARSER_SOURCES} nome_resource.rc)
 

@@ -3,8 +3,7 @@
 //  model
 //
 
-#ifndef Mesh_h
-#define Mesh_h
+#pragma once
 
 #include <stdio.h>
 #include <set>
@@ -72,4 +71,21 @@ public:
 MeshNew* createMesh();
 MeshNew* createMesh(MeshNew*);
 
-#endif /* Mesh_h */
+struct SweepPathParams
+{
+	bool bMinimizeTorsion;
+	bool bClosed;
+	int Symmetry;
+	float Azimuth;
+	float Twist;
+};
+
+//An abstruct class that exposes the sweep path
+class ISweepPath
+{
+public:
+	virtual ~ISweepPath() {}
+
+	///Returns the endpoints of the segments, the matrix contains both the frenet frame and the point location
+	virtual std::vector<Matrix3x4> GetSweepFrames(const SweepPathParams& params) const = 0;
+};

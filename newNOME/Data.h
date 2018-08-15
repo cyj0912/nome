@@ -10,6 +10,7 @@
 #include "TransformationNew.h"
 #include "Octree.h"
 #include "OctreeProxy.h"
+#include "Matrix3x4.h"
 
 #include <stdio.h>
 #include <list>
@@ -114,6 +115,9 @@ public:
     void update();
 
     void setWorldPos(double x, double y, double z);
+
+	Vector3 getUntransformedPosition() const;
+	Vector3 getTransformedPosition() const;
 } Vert;
 
 ///Edge - normal edge construct as defined in 3d space, must have at least two links

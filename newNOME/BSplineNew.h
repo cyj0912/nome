@@ -10,8 +10,7 @@
 #include "Data.h"
 #include "MeshNew.h"
 
-///Mesh class, formed by faces, primarily quad faces, valence four vertices
-typedef class BSplineNew : public MeshNew
+typedef class BSplineNew : public MeshNew, public ISweepPath
 {
 public:
     std::vector<Vert*> proxy;
@@ -38,6 +37,11 @@ public:
     //calculate
     float basis(int, int, float);
     void calculate(int, bool);
+
+	std::vector<Matrix3x4> GetSweepFrames(const SweepPathParams& params) const override;
+
+private:
+	std::vector<Vector3> PointArray;
 } BSplineNew;
 
 ///Instance functions

@@ -1337,6 +1337,16 @@ void Vert::setWorldPos(double x, double y, double z)
     updateOctreeProxy();
 }
 
+Vector3 Vert::getUntransformedPosition() const
+{
+	return { (float)*x, (float)*y, (float)*z };
+}
+
+Vector3 Vert::getTransformedPosition() const
+{
+	return { (float)xTransformed, (float)yTransformed, (float)zTransformed };
+}
+
 void Vert::applyTransformation(TransformationNew * t){
     if (dynamic_cast<Rotate*>(t)){
         Rotate* rotate = dynamic_cast<Rotate*>(t);

@@ -84,4 +84,15 @@ bool PolylineNew::setName(std::string n)
     return error;
 }
 
-
+std::vector<Matrix3x4> PolylineNew::GetSweepFrames(const SweepPathParams& params) const
+{
+	std::vector<Matrix3x4> result;
+	for (auto* v : verts)
+	{
+		Vector3 pos = v->getUntransformedPosition();
+		Matrix3x4 frame = Matrix3x4::IDENTITY;
+		frame.SetTranslation(pos);
+		result.push_back(frame);
+	}
+	return result;
+}

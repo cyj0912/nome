@@ -23,6 +23,7 @@
 #include <newNOME/GroupNew.h>
 #include <newNOME/BSplineNew.h>
 #include <newNOME/BezierCurveNew.h>
+#include <newNOME/Sweep.h>
 
 extern int nomlineno;
 extern char* nomtext;
@@ -55,6 +56,7 @@ std::string surfaceFromArg;
 std::string nameUnique;
 std::string nameUniqueFaceMesh;
 std::string nameUniqueInstanceGroup;
+SweepInitializer currentSweepInitializer;
 
 %}
 
@@ -74,6 +76,8 @@ BSPLINE END_BSPLINE CLOSED SLICES BEZIERCURVE END_BEZIERCURVE COS SIN TAN EXPONE
 MULTIPLY DIVIDE ADD SUBTRACT SLIDEREXPRESSION REVERSE FOREGROUND END_FOREGROUND BACKGROUND
 END_BACKGROUND INSIDEFACES END_INSIDEFACES OUTSIDEFACES END_OUTSIDEFACES OFFSETFACES END_OFFSETFACES
 MERGE END_MERGE EPSILON;
+
+%token SWEEP END_SWEEP PATH ENDPATH CROSSSECTION END_CROSSSECTION
 
 %error-verbose
 %locations
@@ -112,7 +116,7 @@ command:
   mesh | surface | point | face | object | bank |
   tunnel | funnel | polyline | instance | delete | group | circle |
   subdivision | offset | bspline | beziercurve | foreground | background |
-  insidefaces | outsidefaces | offsetfaces | merging;
+  insidefaces | outsidefaces | offsetfaces | merging | sweep;
 
 numberValue:
     NUMBER {
@@ -943,6 +947,54 @@ polyline:
         surfaceFromArg = "";
         }
         ;
+		
+sweep: SWEEP uniqueName sweep_param_pack END_SWEEP 
+       {
+	       try
+		   {
+		       Sweep* sweep = new Sweep(currSession, currentSweepInitializer);
+			   sweep->setName(nameUnique);
+			   currSession->meshes.push_back(sweep);
+			   currentSweepInitializer.Clear();
+		   }
+		   catch (const std::invalid_argument& e)
+		   {
+               nomerror(currSession, e.what());
+               YYABORT;
+		   }
+	   };
+
+sweep_param_pack: sweep_path
+                  | sweep_param_pack sweep_crosssection
+				  ;
+
+sweep_path: PATH VARIABLE ENDPATH
+            {
+				Reader* currReader = createReader(currSession);
+				MeshNew* path = currReader->getMesh($<string>2);
+				if (!path || !dynamic_cast<ISweepPath*>(path))
+				{
+					//The target path is not a valid path
+					nomerror(currSession, "Sweep path not found");
+					YYABORT;
+				}
+				currentSweepInitializer.PathInit.Path = dynamic_cast<ISweepPath*>(path);
+			}
+
+sweep_crosssection: CROSSSECTION VARIABLE END_CROSSSECTION
+					{
+						Reader* currReader = createReader(currSession);
+						MeshNew* path = currReader->getMesh($<string>2);
+						if (!path || !dynamic_cast<ISweepPath*>(path))
+						{
+							//The target path is not a valid path
+							nomerror(currSession, "Sweep cross section not found");
+							YYABORT;
+						}
+						SweepCrosssectionInitializer init;
+						init.CrossSection = dynamic_cast<ISweepPath*>(path);
+						currentSweepInitializer.CrossSectionInits.push_back(init);
+					}
 
 foreground:
     FOREGROUND transformArgs END_FOREGROUND

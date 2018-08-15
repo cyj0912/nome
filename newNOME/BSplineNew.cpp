@@ -105,6 +105,8 @@ void BSplineNew::calculate (int order, bool createNewVertices)
     std::vector<Vert*> proxyLoop = proxy;
     int segmentLoop = (int)round(this->segments);
 
+	PointArray.clear();
+
 
     if (isLoop == true){
         for (int i = 0; i < order-1; i++){
@@ -177,9 +179,26 @@ void BSplineNew::calculate (int order, bool createNewVertices)
             }
             numVertCreated += 1;
 
+			//TODO: one day, the math library shall support double
+			PointArray.emplace_back((float)*x, (float)*y, (float)*z);
+
             t = t + add;
         }
     }
+}
+
+std::vector<Matrix3x4> BSplineNew::GetSweepFrames(const SweepPathParams& params) const
+{
+	std::vector<Matrix3x4> result;
+	for (const auto& point : PointArray)
+	{
+		Matrix3x4 frame{ 0,0,-1,0,
+						 0,1,0,0,
+						 1,0,0,0 };
+		frame.SetTranslation(point);
+		result.push_back(frame);
+	}
+	return result;
 }
 
 static int bIndex = 0;
