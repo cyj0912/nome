@@ -42,7 +42,7 @@ class Sweep : public MeshNew
 public:
 	explicit Sweep(Session* session, const SweepInitializer& initializer);
 
-	bool CheckSemantic() const;
+	bool CheckSemantics() const;
 
 private:
 	void CalculateMesh();

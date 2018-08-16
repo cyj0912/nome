@@ -975,7 +975,7 @@ sweep_path: PATH VARIABLE ENDPATH
 				if (!path || !dynamic_cast<ISweepPath*>(path))
 				{
 					//The target path is not a valid path
-					nomerror(currSession, "Sweep path not found");
+					nomerror(currSession, "Sweep path not found or invalid.");
 					YYABORT;
 				}
 				currentSweepInitializer.PathInit.Path = dynamic_cast<ISweepPath*>(path);
@@ -988,7 +988,7 @@ sweep_crosssection: CROSSSECTION VARIABLE END_CROSSSECTION
 						if (!path || !dynamic_cast<ISweepPath*>(path))
 						{
 							//The target path is not a valid path
-							nomerror(currSession, "Sweep cross section not found");
+							nomerror(currSession, "Sweep cross section not found or invalid.");
 							YYABORT;
 						}
 						SweepCrosssectionInitializer init;

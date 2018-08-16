@@ -10,7 +10,7 @@ Sweep::Sweep(Session* session, const SweepInitializer& initializer)
 
 	CrossSection = initializer.CrossSectionInits[0].CrossSection;
 
-	if (!CheckSemantic())
+	if (!CheckSemantics())
 		throw std::invalid_argument("Cannot create sweep: some arguments are incorrect.");
 	surface = nullptr;
 	ParentSession = session;
@@ -18,7 +18,7 @@ Sweep::Sweep(Session* session, const SweepInitializer& initializer)
 	CalculateMesh();
 }
 
-bool Sweep::CheckSemantic() const
+bool Sweep::CheckSemantics() const
 {
 	if (!Path)
 		return false;
