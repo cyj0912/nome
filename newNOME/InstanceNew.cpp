@@ -543,7 +543,8 @@ void InstanceNew::updateVerts(){
             v0->yTransformed = y;
             v0->zTransformed = z;*/
 
-            v0->setWorldPos(*v0->x, *v0->y, *v0->z);
+			auto pos = v0->getUntransformedPosition();
+            v0->setWorldPos(pos[0], pos[1], pos[2]);
         }
     }
     else if (group != NULL){
@@ -561,7 +562,8 @@ void InstanceNew::updateVerts(){
                 v0->yTransformed = y;
                 v0->zTransformed = z;*/
 
-                v0->setWorldPos(*v0->x, *v0->y, *v0->z);
+				auto pos = v0->getUntransformedPosition();
+				v0->setWorldPos(pos[0], pos[1], pos[2]);
             }
         }
     }

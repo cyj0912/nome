@@ -629,9 +629,6 @@ void SlideGLWidget::paintGLImpl()
             }
         }*/
 
-        for (InstanceNew * newInstance: currSession->instances){
-            newInstance->updateVerts();
-        }
         //std::list<Vert*> appliedVertTransformation = std::list<Vert*>();
         //for (InstanceNew * newInstance: currSession->instances){
 
@@ -646,7 +643,8 @@ void SlideGLWidget::paintGLImpl()
         //}
 
 
-        for (InstanceNew * newInstance: currSession->instances){
+        for (InstanceNew* newInstance: currSession->instances){
+			newInstance->updateVerts();
             newInstance->applyTransformationGroup();
             for (TransformationNew * t : newInstance->transformations){
                 newInstance->applyTransformation(t);

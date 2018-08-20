@@ -796,9 +796,10 @@ bool drawVert(Vert* v0, Surface * instSurface, Session* currSession){
 
     glLoadName(v0->index);
 
-    float x = v0->xTransformed;
-    float y = v0->yTransformed;
-    float z = v0->zTransformed;
+	auto pos = v0->getTransformedPosition();
+	float x = pos[0];
+    float y = pos[1];
+	float z = pos[2];
     glBegin(GL_QUADS);
         glNormal3f(0, 0, 1);
         glVertex3f(x + 0.1 / 2, y + 0.1 / 2, z);
@@ -1339,6 +1340,8 @@ void Vert::setWorldPos(double x, double y, double z)
 
 Vector3 Vert::getUntransformedPosition() const
 {
+	if (copyOfVert)
+		return copyOfVert->getTransformedPosition();
 	return { (float)*x, (float)*y, (float)*z };
 }
 
