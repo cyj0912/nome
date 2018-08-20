@@ -1,8 +1,8 @@
-/* A Bison parser, made by GNU Bison 3.0.4.  */
+/* A Bison parser, made by GNU Bison 3.0.5.  */
 
 /* Bison implementation for Yacc-like parsers in C
 
-   Copyright (C) 1984, 1989-1990, 2000-2015 Free Software Foundation, Inc.
+   Copyright (C) 1984, 1989-1990, 2000-2015, 2018 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -44,7 +44,7 @@
 #define YYBISON 1
 
 /* Bison version.  */
-#define YYBISON_VERSION "3.0.4"
+#define YYBISON_VERSION "3.0.5"
 
 /* Skeleton name.  */
 #define YYSKELETON_NAME "yacc.c"
@@ -1111,6 +1111,7 @@ yysyntax_error (YYSIZE_T *yymsg_alloc, char **yymsg,
       case N:                               \
         yyformat = S;                       \
       break
+    default: /* Avoid compiler warnings. */
       YYCASE_(0, YY_("syntax error"));
       YYCASE_(1, YY_("syntax error, unexpected %s"));
       YYCASE_(2, YY_("syntax error, unexpected %s, expecting %s"));
@@ -1447,39 +1448,40 @@ yyreduce:
      GCC warning that YYVAL may be used uninitialized.  */
   yyval = yyvsp[1-yylen];
 
-  /* Default location.  */
+  /* Default location. */
   YYLLOC_DEFAULT (yyloc, (yylsp - yylen), yylen);
+  yyerror_range[1] = yyloc;
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
         case 18:
-#line 114 "compilerObj/parserObj.y" /* yacc.c:1646  */
+#line 114 "compilerObj/parserObj.y" /* yacc.c:1648  */
     {
       std::list<Vert*>::iterator it = currentMeshVertices3.begin();
       std::advance(it, atof((yyvsp[0].string))-1);
       currentFaceVertices3.push_back((*it));
       currentMeshVertices3.push_back((*it));
     }
-#line 1464 "E:/DevGra/nome/compilerObj/parserObj.cpp" /* yacc.c:1646  */
+#line 1466 "E:/DevGra/nome/compilerObj/parserObj.cpp" /* yacc.c:1648  */
     break;
 
   case 19:
-#line 124 "compilerObj/parserObj.y" /* yacc.c:1646  */
+#line 124 "compilerObj/parserObj.y" /* yacc.c:1648  */
     {
 
   }
-#line 1472 "E:/DevGra/nome/compilerObj/parserObj.cpp" /* yacc.c:1646  */
+#line 1474 "E:/DevGra/nome/compilerObj/parserObj.cpp" /* yacc.c:1648  */
     break;
 
   case 21:
-#line 130 "compilerObj/parserObj.y" /* yacc.c:1646  */
+#line 130 "compilerObj/parserObj.y" /* yacc.c:1648  */
     {
     }
-#line 1479 "E:/DevGra/nome/compilerObj/parserObj.cpp" /* yacc.c:1646  */
+#line 1481 "E:/DevGra/nome/compilerObj/parserObj.cpp" /* yacc.c:1648  */
     break;
 
   case 22:
-#line 141 "compilerObj/parserObj.y" /* yacc.c:1646  */
+#line 141 "compilerObj/parserObj.y" /* yacc.c:1648  */
     {
        //std::cout << currentFaceVertices3.size() << std::endl;
        if (currentFaceVertices3.size() > 2){
@@ -1491,19 +1493,19 @@ yyreduce:
        currentFaceVertices3.clear();
 
    }
-#line 1495 "E:/DevGra/nome/compilerObj/parserObj.cpp" /* yacc.c:1646  */
+#line 1497 "E:/DevGra/nome/compilerObj/parserObj.cpp" /* yacc.c:1648  */
     break;
 
   case 23:
-#line 154 "compilerObj/parserObj.y" /* yacc.c:1646  */
+#line 154 "compilerObj/parserObj.y" /* yacc.c:1648  */
     {
 
   }
-#line 1503 "E:/DevGra/nome/compilerObj/parserObj.cpp" /* yacc.c:1646  */
+#line 1505 "E:/DevGra/nome/compilerObj/parserObj.cpp" /* yacc.c:1648  */
     break;
 
   case 24:
-#line 160 "compilerObj/parserObj.y" /* yacc.c:1646  */
+#line 160 "compilerObj/parserObj.y" /* yacc.c:1648  */
     {
       double *x = (double*) malloc(sizeof(double));
       double *y = (double*) malloc(sizeof(double));
@@ -1525,68 +1527,68 @@ yyreduce:
           currentMeshVertices3.push_back(newVertex);
       }
     }
-#line 1529 "E:/DevGra/nome/compilerObj/parserObj.cpp" /* yacc.c:1646  */
+#line 1531 "E:/DevGra/nome/compilerObj/parserObj.cpp" /* yacc.c:1648  */
     break;
 
   case 25:
-#line 184 "compilerObj/parserObj.y" /* yacc.c:1646  */
+#line 184 "compilerObj/parserObj.y" /* yacc.c:1648  */
     {
     }
-#line 1536 "E:/DevGra/nome/compilerObj/parserObj.cpp" /* yacc.c:1646  */
+#line 1538 "E:/DevGra/nome/compilerObj/parserObj.cpp" /* yacc.c:1648  */
     break;
 
   case 26:
-#line 189 "compilerObj/parserObj.y" /* yacc.c:1646  */
+#line 189 "compilerObj/parserObj.y" /* yacc.c:1648  */
     {
     }
-#line 1543 "E:/DevGra/nome/compilerObj/parserObj.cpp" /* yacc.c:1646  */
+#line 1545 "E:/DevGra/nome/compilerObj/parserObj.cpp" /* yacc.c:1648  */
     break;
 
   case 27:
-#line 194 "compilerObj/parserObj.y" /* yacc.c:1646  */
+#line 194 "compilerObj/parserObj.y" /* yacc.c:1648  */
     {
     }
-#line 1550 "E:/DevGra/nome/compilerObj/parserObj.cpp" /* yacc.c:1646  */
+#line 1552 "E:/DevGra/nome/compilerObj/parserObj.cpp" /* yacc.c:1648  */
     break;
 
   case 28:
-#line 199 "compilerObj/parserObj.y" /* yacc.c:1646  */
+#line 199 "compilerObj/parserObj.y" /* yacc.c:1648  */
     {
     }
-#line 1557 "E:/DevGra/nome/compilerObj/parserObj.cpp" /* yacc.c:1646  */
+#line 1559 "E:/DevGra/nome/compilerObj/parserObj.cpp" /* yacc.c:1648  */
     break;
 
   case 29:
-#line 204 "compilerObj/parserObj.y" /* yacc.c:1646  */
+#line 204 "compilerObj/parserObj.y" /* yacc.c:1648  */
     {
     }
-#line 1564 "E:/DevGra/nome/compilerObj/parserObj.cpp" /* yacc.c:1646  */
+#line 1566 "E:/DevGra/nome/compilerObj/parserObj.cpp" /* yacc.c:1648  */
     break;
 
   case 30:
-#line 210 "compilerObj/parserObj.y" /* yacc.c:1646  */
+#line 210 "compilerObj/parserObj.y" /* yacc.c:1648  */
     {
     }
-#line 1571 "E:/DevGra/nome/compilerObj/parserObj.cpp" /* yacc.c:1646  */
+#line 1573 "E:/DevGra/nome/compilerObj/parserObj.cpp" /* yacc.c:1648  */
     break;
 
   case 31:
-#line 215 "compilerObj/parserObj.y" /* yacc.c:1646  */
+#line 215 "compilerObj/parserObj.y" /* yacc.c:1648  */
     {
     }
-#line 1578 "E:/DevGra/nome/compilerObj/parserObj.cpp" /* yacc.c:1646  */
+#line 1580 "E:/DevGra/nome/compilerObj/parserObj.cpp" /* yacc.c:1648  */
     break;
 
   case 33:
-#line 220 "compilerObj/parserObj.y" /* yacc.c:1646  */
+#line 220 "compilerObj/parserObj.y" /* yacc.c:1648  */
     {
 
     }
-#line 1586 "E:/DevGra/nome/compilerObj/parserObj.cpp" /* yacc.c:1646  */
+#line 1588 "E:/DevGra/nome/compilerObj/parserObj.cpp" /* yacc.c:1648  */
     break;
 
   case 34:
-#line 226 "compilerObj/parserObj.y" /* yacc.c:1646  */
+#line 226 "compilerObj/parserObj.y" /* yacc.c:1648  */
     {
         if (yychar == YYEOF) {
             /* Code to execute at the end of the parse */
@@ -1625,11 +1627,11 @@ yyreduce:
             currSession->offsets.push_back(currOffset);
         }
     }
-#line 1629 "E:/DevGra/nome/compilerObj/parserObj.cpp" /* yacc.c:1646  */
+#line 1631 "E:/DevGra/nome/compilerObj/parserObj.cpp" /* yacc.c:1648  */
     break;
 
 
-#line 1633 "E:/DevGra/nome/compilerObj/parserObj.cpp" /* yacc.c:1646  */
+#line 1635 "E:/DevGra/nome/compilerObj/parserObj.cpp" /* yacc.c:1648  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1752,7 +1754,6 @@ yyerrorlab:
   if (/*CONSTCOND*/ 0)
      goto yyerrorlab;
 
-  yyerror_range[1] = yylsp[1-yylen];
   /* Do not reclaim the symbols of the rule whose action triggered
      this YYERROR.  */
   YYPOPSTACK (yylen);

@@ -1,8 +1,8 @@
-/* A Bison parser, made by GNU Bison 3.0.4.  */
+/* A Bison parser, made by GNU Bison 3.0.5.  */
 
 /* Bison interface for Yacc-like parsers in C
 
-   Copyright (C) 1984, 1989-1990, 2000-2015 Free Software Foundation, Inc.
+   Copyright (C) 1984, 1989-1990, 2000-2015, 2018 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -40,11 +40,11 @@
 extern int objdebug;
 #endif
 /* "%code requires" blocks.  */
-#line 1 "compilerObj/parserObj.y" /* yacc.c:1909  */
+#line 1 "compilerObj/parserObj.y" /* yacc.c:1910  */
 
 #include <newNOME/Session.h>
 
-#line 48 "E:/DevGra/nome/compilerObj/parserObj.hpp" /* yacc.c:1909  */
+#line 48 "E:/DevGra/nome/compilerObj/parserObj.hpp" /* yacc.c:1910  */
 
 /* Token type.  */
 #ifndef YYTOKENTYPE
@@ -92,7 +92,7 @@ extern int objdebug;
 
 union YYSTYPE
 {
-#line 85 "compilerObj/parserObj.y" /* yacc.c:1909  */
+#line 85 "compilerObj/parserObj.y" /* yacc.c:1910  */
 
     double number;
     char *string;
@@ -101,7 +101,7 @@ union YYSTYPE
         double number;   // int posVal;
     } numPos;
 
-#line 105 "E:/DevGra/nome/compilerObj/parserObj.hpp" /* yacc.c:1909  */
+#line 105 "E:/DevGra/nome/compilerObj/parserObj.hpp" /* yacc.c:1910  */
 };
 
 typedef union YYSTYPE YYSTYPE;
