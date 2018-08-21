@@ -1340,8 +1340,17 @@ void Vert::setWorldPos(double x, double y, double z)
 
 Vector3 Vert::getUntransformedPosition() const
 {
+	//Here is a lot of ugly casework:
+	//  When copyOfVert is not null, this should be an instance vertex,
+	//  so the untransformed position should be based on the vertex from the mesh.
+	//  But here is the thing: if copyOfVert itself is an instance vertex too, we get its transformed position,
+	//  otherwise we get its untransformed position.
 	if (copyOfVert)
-		return copyOfVert->getTransformedPosition();
+	{
+		if (copyOfVert->copyOfVert)
+			return copyOfVert->getTransformedPosition();
+		return copyOfVert->getUntransformedPosition();
+	}
 	return { (float)*x, (float)*y, (float)*z };
 }
 
