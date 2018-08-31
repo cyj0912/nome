@@ -3,12 +3,15 @@ image: Visual Studio 2017
 shallow_clone: true
 
 install:
-- cmd: >-
-    set PATH=C:\Qt\5.10\msvc2017_64\bin;%PATH%
-
-    call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat"
-
-    vcpkg install glm:x64-windows
+  # update mysy2
+  - C:\msys64\usr\bin\bash -lc "pacman --needed --noconfirm -Sy pacman-mirrors"
+  - C:\msys64\usr\bin\bash -lc "pacman --noconfirm -Sy"
+  - C:\msys64\usr\bin\bash -lc "pacman --noconfirm -S bison flex"
+  # setup envionment
+  - set PATH=C:\Qt\5.11\msvc2017_64\bin;%PATH%
+  - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat"
+  # update glm
+  - vcpkg install glm:x64-windows
 
 build_script:
 - cmd: >-
@@ -16,7 +19,7 @@ build_script:
     
     cd build-appveyor
     
-    cmake .. -G "NMake Makefiles" -DCMAKE_TOOLCHAIN_FILE=C:\Tools\vcpkg\scripts\buildsystems\vcpkg.cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=%APPVEYOR_BUILD_FOLDER%\install
+    cmake .. -G "NMake Makefiles" -DCMAKE_TOOLCHAIN_FILE=C:\Tools\vcpkg\scripts\buildsystems\vcpkg.cmake -DFLEX_EXECUTABLE=C:/msys64/usr/bin/flex.exe -DBISON_EXECUTABLE=C:/msys64/usr/bin/bison.exe -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=%APPVEYOR_BUILD_FOLDER%\install
     
     type CMakeCache.txt
     
