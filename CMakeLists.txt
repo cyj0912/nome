@@ -6,6 +6,9 @@ project(Nome)
 list(APPEND CMAKE_PREFIX_PATH /usr/local/opt/flex)
 list(APPEND CMAKE_PREFIX_PATH /usr/local/opt/bison)
 
+#Do not run AUTOMOC on generated code
+cmake_policy(SET CMP0071 OLD)
+
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
