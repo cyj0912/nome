@@ -10,7 +10,7 @@ NOME is developend and released on various platforms, including Microsoft Window
 Appendix A: Commands of input .nome file
 Appendix B: User Interface Details
 
-## Microsoft Windows Libraries and Dependencies
+# Developing NOME
 In order to compile NOME, the following dependencies are needed:
   * Qt (https://www.qt.io/download/) (the open source version is free to download)
   * GLM (http://glm.g-truc.net/0.9.6/index.html). Download the zip version (currently called glm-0.9.8.3.zip). Unzip the file and navigate inside the glm folder. Place the nested glm folder at the root of the downloaded project. 
