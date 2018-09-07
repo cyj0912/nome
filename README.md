@@ -10,16 +10,13 @@ NOME is developend and released on various platforms, including Microsoft Window
 Appendix A: Commands of input .nome file
 Appendix B: User Interface Details
 
-# Programmer's Guide
-1. Working Platform
-2. Libraies and Dependcies
-3. Get started programming with NOME
-4. Some suggestions on contributing to NOME project
-
 ## Microsoft Windows Libraries and Dependencies
-To install the dependencies on Windows the user needs to download:
+In order to compile NOME, the following dependencies are needed:
   * Qt (https://www.qt.io/download/) (the open source version is free to download)
   * GLM (http://glm.g-truc.net/0.9.6/index.html). Download the zip version (currently called glm-0.9.8.3.zip). Unzip the file and navigate inside the glm folder. Place the nested glm folder at the root of the downloaded project. 
+  * Flex and Bison are required if you wish to modify the parser. Linux/Mac user can just install them with their favorite package manager. For Windows users, the Msys2 project provides a nice package that installs both.
 
-To run the project the user needs to open the Qt Creator application from the Windows menu and open the `nome.pro` file from the application. Click on the run button to run the project.
-
+## Example CMake Setup
+`
+CMAKE_PREFIX_PATH=<Qt Path>;<Flex and Bison Path>
+`
