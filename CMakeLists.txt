@@ -114,7 +114,8 @@ set(SOURCES
         newNOME/GroupWindow.cpp
         newNOME/Octree.cpp
         newNOME/OctreeProxy.cpp
-        newNOME/Sweep.cpp)
+        newNOME/Sweep.cpp
+		commonDialogs.cpp)
 
 set(HEADERS
         edge.h
@@ -173,7 +174,8 @@ set(HEADERS
         newNOME/GroupWindow.h
         newNOME/Octree.h
         newNOME/OctreeProxy.h
-        newNOME/Sweep.h)
+        newNOME/Sweep.h
+		commonDialogs.h)
 
 add_executable(Nome MACOSX_BUNDLE ${SOURCES} ${HEADERS} ${PARSER_SOURCES} nome_resource.rc)
 

@@ -23,6 +23,7 @@
 #include "newNOME/TunnelNew.h"
 #include "newNOME/SubdivisionNew.h"
 #include "newNOME/OffsetNew.h"
+#include "commonDialogs.h"
 
 SlideGLWidget::SlideGLWidget(QWidget *parent) :
     QGLWidget(parent)
@@ -219,7 +220,7 @@ void SlideGLWidget::mouse_select(int x, int y)
         dir.Normalize();
 
         float distMax = FLT_MAX;
-        Vert* selectedVertex = nullptr;
+		std::set<Vert*> selectionCandidates;
 
         Ray mouseRay = Ray(camPos, dir);
         vector<OctreeProxy*> rayIntersectResults;
@@ -230,16 +231,36 @@ void SlideGLWidget::mouse_select(int x, int y)
             if (vertProxy)
             {
                 float hitDistance = mouseRay.HitDistance(vertProxy->getWorldAABB());
-                if (hitDistance < distMax)
+				if (abs(hitDistance - distMax) < 0.01f)
+				{
+					//The vertex is just as close as current selection
+					selectionCandidates.insert(vertProxy->getOwner());
+				}
+                else if (hitDistance < distMax)
                 {
+					selectionCandidates.clear();
                     distMax = hitDistance;
-                    selectedVertex = vertProxy->getOwner();
+					selectionCandidates.insert(vertProxy->getOwner());
                 }
             }
         }
+
+		Vert* selectedVertex = nullptr;
+		Reader* currReader = createReader(currSession);
+		if (selectionCandidates.size() == 1)
+		{
+			selectedVertex = *selectionCandidates.begin();
+		}
+		else if (selectionCandidates.size() > 1)
+		{
+			//Show a list of vertices to choose from
+			VertListDialog selectionList(this, *currReader, selectionCandidates);
+			selectionList.exec();
+			selectedVertex = selectionList.GetSelection();
+		}
+
         if (selectedVertex)
         {
-            Reader* currReader = createReader(currSession);
             //std::cout << "hello" << std::endl;
             //std::cout << distMax << std::endl;
             //std::cout << selectedVertex->index << std::endl;
