@@ -87,12 +87,46 @@ bool PolylineNew::setName(std::string n)
 std::vector<Matrix3x4> PolylineNew::GetSweepFrames(const SweepPathParams& params) const
 {
 	std::vector<Matrix3x4> result;
+
+	//s stores all the positions
+	std::vector<Vector3> s;
 	for (auto* v : verts)
+		s.push_back(v->getUntransformedPosition());
+
+	//You can't really sweep correctly with size=1 or 2
+	if (s.size() == 1)
 	{
-		Vector3 pos = v->getUntransformedPosition();
-		Matrix3x4 frame = Matrix3x4::IDENTITY;
-		frame.SetTranslation(pos);
-		result.push_back(frame);
+		result.push_back(Matrix3x4(s[0], Quaternion::IDENTITY, Vector3::ONE));
+		return result;
+	}
+	else if (s.size() == 2)
+	{
+		result.push_back(Matrix3x4(s[0], Quaternion::IDENTITY, Vector3::ONE));
+		result.push_back(Matrix3x4(s[1], Quaternion::IDENTITY, Vector3::ONE));
+		return result;
+	}
+
+	//d stores all the derivatives (tangents)
+	std::vector<Vector3> d;
+	d.push_back((s[1] - s[0]).Normalized());
+	for (int i = 1; i < s.size() - 1; i++)
+	{
+		auto delta = s[i + 1] - s[i - 1];
+		d.push_back(delta.Normalized());
+	}
+	d.push_back((s[s.size() - 1] - s[s.size() - 2]).Normalized());
+
+	Vector3 Y = -(d[1] - d[0]);
+	Y.Normalize();
+	for (int i = 0; i < s.size(); i++)
+	{
+		Matrix3x4 f;
+		Vector3 X = Y.CrossProduct(d[i]).Normalized();
+		Vector3 newY = d[i].CrossProduct(X).Normalized();
+		Y = (Y + newY) / 2.0f;
+		f.SetRotation(Matrix3(X, newY, d[i]));
+		f.SetTranslation(s[i]);
+		result.push_back(f);
 	}
 	return result;
 }

@@ -69,32 +69,31 @@ void BSplineNew::set_order(int a)
 float BSplineNew::basis(int i, int k, float t)
 {
     //calculate basis function, i = control point index, k = order, t = variable parameter
-    if (k < 0)
-    {
-        return 0;
-    }
+	if (k < 0)
+	{
+		return 0;
+	}
 
-    else if (k == 0)
-    {
-        int comp = (int) floor(t);
+	else if (k == 0)
+	{
+		int comp = (int)floor(t);
 
-        if ((comp < i + 1) && (comp >= i))
-        {
-            return 1;
-        }
-        return 0;
-    }
+		if ((comp < i + 1) && (comp >= i))
+		{
+			return 1;
+		}
+		return 0;
+	}
 
-    else {
-        float a = (t - i)/k;
-        float b = (i + k + 1 - t)/k;
+	else {
+		float a = (t - i) / k;
+		float b = (i + k + 1 - t) / k;
 
-        a = a * basis(i, k-1, t);
-        b = b * basis(i+1, k-1, t);
+		a = a * basis(i, k - 1, t);
+		b = b * basis(i + 1, k - 1, t);
 
-        return a + b;
-    }
-
+		return a + b;
+	}
 }
 
 void BSplineNew::calculate (int order, bool createNewVertices)
@@ -105,7 +104,7 @@ void BSplineNew::calculate (int order, bool createNewVertices)
     std::vector<Vert*> proxyLoop = proxy;
     int segmentLoop = (int)round(this->segments);
 
-	PointArray.clear();
+    PointArray.clear();
 
 
     if (isLoop == true){
@@ -190,13 +189,44 @@ void BSplineNew::calculate (int order, bool createNewVertices)
 std::vector<Matrix3x4> BSplineNew::GetSweepFrames(const SweepPathParams& params) const
 {
 	std::vector<Matrix3x4> result;
-	for (const auto& point : PointArray)
+
+	//s stores all the positions
+	const std::vector<Vector3>& s = PointArray;
+
+	//You can't really sweep correctly with size=1 or 2
+	if (s.size() == 1)
 	{
-		Matrix3x4 frame{ 0,0,-1,0,
-						 0,1,0,0,
-						 1,0,0,0 };
-		frame.SetTranslation(point);
-		result.push_back(frame);
+		result.push_back(Matrix3x4(s[0], Quaternion::IDENTITY, Vector3::ONE));
+		return result;
+	}
+	else if (s.size() == 2)
+	{
+		result.push_back(Matrix3x4(s[0], Quaternion::IDENTITY, Vector3::ONE));
+		result.push_back(Matrix3x4(s[1], Quaternion::IDENTITY, Vector3::ONE));
+		return result;
+	}
+
+	//d stores all the derivatives (tangents)
+	std::vector<Vector3> d;
+	d.push_back((s[1] - s[0]).Normalized());
+	for (int i = 1; i < s.size() - 1; i++)
+	{
+		auto delta = s[i + 1] - s[i - 1];
+		d.push_back(delta.Normalized());
+	}
+	d.push_back((s[s.size() - 1] - s[s.size() - 2]).Normalized());
+
+	Vector3 Y = -(d[1] - d[0]);
+	Y.Normalize();
+	for (int i = 0; i < s.size(); i++)
+	{
+		Matrix3x4 f;
+		Vector3 X = Y.CrossProduct(d[i]).Normalized();
+		Vector3 newY = d[i].CrossProduct(X).Normalized();
+		Y = (Y + newY) / 2.0f;
+		f.SetRotation(Matrix3(X, newY, d[i]));
+		f.SetTranslation(s[i]);
+		result.push_back(f);
 	}
 	return result;
 }
