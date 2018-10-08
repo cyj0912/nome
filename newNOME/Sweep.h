@@ -28,11 +28,15 @@ struct SweepInitializer
 {
 	SweepPathInitializer PathInit;
 	std::vector<SweepCrosssectionInitializer> CrossSectionInits;
+	bool Closed = false;
+	bool MinTorsion = false;
 
 	void Clear()
 	{
 		PathInit.Clear();
 		CrossSectionInits.clear();
+		Closed = false;
+        MinTorsion = false;
 	}
 };
 
@@ -55,4 +59,7 @@ private:
 	ISweepPath* Path;
 
 	ISweepPath* CrossSection;
+
+	bool bIsClosed = false;
+	bool bMinTorsion = false;
 };

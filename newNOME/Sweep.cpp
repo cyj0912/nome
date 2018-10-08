@@ -10,6 +10,9 @@ Sweep::Sweep(Session* session, const SweepInitializer& initializer)
 
 	CrossSection = initializer.CrossSectionInits[0].CrossSection;
 
+	bIsClosed = initializer.Closed;
+    bMinTorsion = initializer.MinTorsion;
+
 	if (!CheckSemantics())
 		throw std::invalid_argument("Cannot create sweep: some arguments are incorrect.");
 	surface = nullptr;
@@ -43,13 +46,19 @@ void Sweep::CalculateMesh()
 
 	//Query the frenet frames according to our needs
 	SweepPathParams params;
-	params.bMinimizeTorsion = false;
-	params.bClosed = false;
+	params.bMinimizeTorsion = bMinTorsion;
+	params.bClosed = bIsClosed;
 	params.Symmetry = 1;
 	params.Azimuth = 0.0f;
 	params.Twist = 0.0f;
 	const auto pathFrames = Path->GetSweepFrames(params);
-	const auto csFrames = CrossSection->GetSweepFrames(params);
+    SweepPathParams csParams;
+    csParams.bMinimizeTorsion = false;
+    csParams.bClosed = false;
+    csParams.Symmetry = 1;
+    csParams.Azimuth = 0.0f;
+    csParams.Twist = 0.0f;
+	const auto csFrames = CrossSection->GetSweepFrames(csParams);
 	const auto pathCount = pathFrames.size();
 	const auto csCount = csFrames.size();
 	const int numSlices = pathCount - 1;

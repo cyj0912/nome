@@ -72,7 +72,7 @@ POLYLINE END_POLYLINE INSTANCE END_INSTANCE CIRCLE END_CIRCLE BEG_DELETE END_DEL
 GROUP  END_GROUP TRANSLATE ROTATE MIRROR SET OPARENTHESES EPARENTHESES OBRACE
 EXPR DOLLAR EBRACE PERIOD TOKHEAT STATE TOKTARGET TOKTEMPERATURE
 SCALE SUBDIVISION END_SUBDIVISION SUBDIVISIONS TYPE OFFSET END_OFFSET MIN MAX STEP
-BSPLINE END_BSPLINE CLOSED SLICES BEZIERCURVE END_BEZIERCURVE COS SIN TAN EXPONENT
+BSPLINE END_BSPLINE CLOSED MINIMIZETORSION SLICES BEZIERCURVE END_BEZIERCURVE COS SIN TAN EXPONENT
 MULTIPLY DIVIDE ADD SUBTRACT SLIDEREXPRESSION REVERSE FOREGROUND END_FOREGROUND BACKGROUND
 END_BACKGROUND INSIDEFACES END_INSIDEFACES OUTSIDEFACES END_OUTSIDEFACES OFFSETFACES END_OFFSETFACES
 MERGE END_MERGE EPSILON;
@@ -964,8 +964,10 @@ sweep: SWEEP uniqueName sweep_param_pack END_SWEEP
 		   }
 	   };
 
-sweep_param_pack: sweep_path
+sweep_param_pack: | sweep_param_pack sweep_path
                   | sweep_param_pack sweep_crosssection
+                  | sweep_param_pack sweep_closed
+                  | sweep_param_pack sweep_mintorsion
 				  ;
 
 sweep_path: PATH VARIABLE ENDPATH
@@ -995,6 +997,16 @@ sweep_crosssection: CROSSSECTION VARIABLE END_CROSSSECTION
 						init.CrossSection = dynamic_cast<ISweepPath*>(path);
 						currentSweepInitializer.CrossSectionInits.push_back(init);
 					}
+
+sweep_closed: CLOSED
+{
+    currentSweepInitializer.Closed = true;
+};
+
+sweep_mintorsion: MINIMIZETORSION
+                {
+                    currentSweepInitializer.MinTorsion = true;
+                };
 
 foreground:
     FOREGROUND transformArgs END_FOREGROUND
