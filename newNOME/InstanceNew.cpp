@@ -530,54 +530,30 @@ Node* InstanceNew::face(int i)
 
 void InstanceNew::updateVerts(){
     if (mesh != NULL){
+		//printf("updateVerts: inst:%s transform num: %d\n", getFullName().c_str(), transformations.size());
         for (Vert* v0 : verts){
-            /*double *x = (double*) malloc(sizeof(double));
-            double *y = (double*) malloc(sizeof(double));
-            double *z = (double*) malloc(sizeof(double));
-
-            *x = *(v0->x);
-            *y = *(v0->y);
-            *z = *(v0->z);
-
-            v0->xTransformed = x;
-            v0->yTransformed = y;
-            v0->zTransformed = z;*/
-
 			auto pos = v0->getUntransformedPosition();
             v0->setWorldPos(pos[0], pos[1], pos[2]);
         }
     }
     else if (group != NULL){
         for (InstanceNew* i0 : listInstances){
-            for (Vert* v0 : i0->verts){
-                /*double *x = (double*) malloc(sizeof(double));
-                double *y = (double*) malloc(sizeof(double));
-                double *z = (double*) malloc(sizeof(double));
-
-                *x = *(v0->x);
-                *y = *(v0->y);
-                *z = *(v0->z);
-
-                v0->xTransformed = x;
-                v0->yTransformed = y;
-                v0->zTransformed = z;*/
-
-				auto pos = v0->getUntransformedPosition();
-				v0->setWorldPos(pos[0], pos[1], pos[2]);
-            }
+			i0->updateVerts();
         }
     }
 }
 
-void InstanceNew::applyTransformationGroup(){
+void InstanceNew::applyTransformGroupChildren(){
     if (group != NULL){
         for (InstanceNew* currInstance : listInstances){
-            for (Vert* v : currInstance->verts){
-                for (TransformationNew * t : v->transformations){
-                    v->applyTransformation(t);
-                }
+    //        for (Vert* v : currInstance->verts){
+				//printf("v: %s len(tf):%d\n", v->getFullName().c_str(), v->transformations.size());
+    //            for (TransformationNew * t : v->transformations){
+    //                v->applyTransformation(t);
+    //            }
 
-            }
+    //        }
+			currInstance->applyTransformGroupChildren();
             for (TransformationNew * t : currInstance->transformations){
                 currInstance->applyTransformation(t);
             }
@@ -705,6 +681,9 @@ void InstanceNew::applyTransformation(TransformationNew* t){
     }
     else if (group != NULL){
         for (InstanceNew* i0 : listInstances){
+			//for (TransformationNew * nestedt : i0->transformations) {
+			//	i0->applyTransformation(nestedt);
+			//}
             i0->applyTransformation(t);
         }
     }

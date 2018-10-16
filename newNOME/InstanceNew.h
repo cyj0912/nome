@@ -33,7 +33,7 @@ public:
     bool setName(std::string n);
     bool updateNames();
     bool draw(Surface *s);
-    void applyTransformationGroup();
+    void applyTransformGroupChildren();
     void applyTransformation(TransformationNew* t);
     void undoTransformation(TransformationNew* t);
     void updateVerts();
