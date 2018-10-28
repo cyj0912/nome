@@ -363,9 +363,9 @@ Vert* Reader::getVert(std::string name)
 
 
     for (InstanceNew* i0 : session->instances){
-        string currentName = i0->getFullName();
-        string argName;
-        string argAfterName;
+        std::string currentName = i0->getFullName();
+        std::string argName;
+        std::string argAfterName;
         if (name[0] == '.'){
             argName = name.substr(0,  name.substr(1).find(".") + 1);
             argAfterName = name.substr(name.substr(1).find(".") + 2);
@@ -375,10 +375,10 @@ Vert* Reader::getVert(std::string name)
         }
 
         if (currentName.compare(argName) == 0){
-            string faceName = argAfterName.substr(0, argAfterName.find("."));
+            std::string faceName = argAfterName.substr(0, argAfterName.find("."));
             for (FaceNew* f0 : i0->faces){
                 if (f0->name.compare(faceName) == 0){
-                    string vertName = argAfterName.substr(argAfterName.find(".") + 1);
+                    std::string vertName = argAfterName.substr(argAfterName.find(".") + 1);
                     for (Vert* v0 : f0->verts){
                         if (v0->name.compare(vertName) == 0){
                             return v0;
@@ -395,15 +395,15 @@ Vert* Reader::getVert(std::string name)
             }
 
             for (InstanceNew* i1 : i0->listInstances){
-                string currentNameInstance = i1->getName();
+                std::string currentNameInstance = i1->getName();
                 if (currentNameInstance.compare(faceName) == 0){
-                    string afterfaceNameInstance = argAfterName.substr(argAfterName.find(".") + 1);
-                    string faceNameInstance = afterfaceNameInstance.substr(0, afterfaceNameInstance.find("."));
+                    std::string afterfaceNameInstance = argAfterName.substr(argAfterName.find(".") + 1);
+                    std::string faceNameInstance = afterfaceNameInstance.substr(0, afterfaceNameInstance.find("."));
 
                     for (FaceNew* f0 : i1->faces){
                         //std::cout << "faceNameInstance" << std::endl;
                         if (f0->name.compare(faceNameInstance) == 0){
-                            string vertName = afterfaceNameInstance.substr(afterfaceNameInstance.find(".") + 1);
+                            std::string vertName = afterfaceNameInstance.substr(afterfaceNameInstance.find(".") + 1);
                             for (Vert* v0 : f0->verts){
                                 if (v0->name.compare(vertName) == 0){
                                     return v0;
@@ -629,12 +629,12 @@ FaceNew* Reader::getFace(std::string name)
 
     for (InstanceNew* i0 : session->instances){
 
-        string currentName = i0->getFullName();
-        string argName = name.substr(0, name.find("."));
-        string argAfterName = name.substr(name.find(".") + 1);
+        std::string currentName = i0->getFullName();
+        std::string argName = name.substr(0, name.find("."));
+        std::string argAfterName = name.substr(name.find(".") + 1);
 
         if (currentName.compare(argName) == 0){
-            string faceName = argAfterName.substr(0, argAfterName.find("."));
+            std::string faceName = argAfterName.substr(0, argAfterName.find("."));
             for (FaceNew* f0 : i0->faces){
                 if (f0->name.compare(faceName) == 0){
                     return f0;

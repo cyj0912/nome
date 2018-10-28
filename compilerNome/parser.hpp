@@ -30,8 +30,8 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
-#ifndef YY_NOM_VOLUMES_MACDATA_BERKELEYCG_NOME_COMPILERNOME_PARSER_HPP_INCLUDED
-# define YY_NOM_VOLUMES_MACDATA_BERKELEYCG_NOME_COMPILERNOME_PARSER_HPP_INCLUDED
+#ifndef YY_NOM_E_DEVGRA_NOME_COMPILERNOME_PARSER_HPP_INCLUDED
+# define YY_NOM_E_DEVGRA_NOME_COMPILERNOME_PARSER_HPP_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -40,12 +40,12 @@
 extern int nomdebug;
 #endif
 /* "%code requires" blocks.  */
-#line 1 "compilerNome/parser.y" /* yacc.c:1919  */
+#line 1 "compilerNome/parser.y" /* yacc.c:1913  */
 
 #include <newNOME/Session.h>
 
 
-#line 49 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.hpp" /* yacc.c:1919  */
+#line 49 "E:/DevGra/nome/compilerNome/parser.hpp" /* yacc.c:1913  */
 
 /* Token type.  */
 #ifndef YYTOKENTYPE
@@ -245,7 +245,7 @@ extern int nomdebug;
 
 union YYSTYPE
 {
-#line 87 "compilerNome/parser.y" /* yacc.c:1919  */
+#line 88 "compilerNome/parser.y" /* yacc.c:1913  */
 
     double intNumber;
     double number;
@@ -256,7 +256,7 @@ union YYSTYPE
         double number;   // int posVal;
     } numPos;
 
-#line 260 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.hpp" /* yacc.c:1919  */
+#line 260 "E:/DevGra/nome/compilerNome/parser.hpp" /* yacc.c:1913  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -283,4 +283,4 @@ extern YYSTYPE nomlval;
 extern YYLTYPE nomlloc;
 int nomparse (Session* currSession);
 
-#endif /* !YY_NOM_VOLUMES_MACDATA_BERKELEYCG_NOME_COMPILERNOME_PARSER_HPP_INCLUDED  */
+#endif /* !YY_NOM_E_DEVGRA_NOME_COMPILERNOME_PARSER_HPP_INCLUDED  */

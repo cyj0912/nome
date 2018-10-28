@@ -1,4 +1,4 @@
-/* A Bison parser, made by GNU Bison 3.0.5.  */
+/* A Bison parser, made by GNU Bison 3.1.  */
 
 /* Bison interface for Yacc-like parsers in C
 
@@ -40,11 +40,11 @@
 extern int stldebug;
 #endif
 /* "%code requires" blocks.  */
-#line 1 "compilerStl/parserStl.y" /* yacc.c:1910  */
+#line 1 "compilerStl/parserStl.y" /* yacc.c:1913  */
 
 #include <newNOME/Session.h>
 
-#line 48 "E:/DevGra/nome/compilerStl/parserStl.hpp" /* yacc.c:1910  */
+#line 48 "E:/DevGra/nome/compilerStl/parserStl.hpp" /* yacc.c:1913  */
 
 /* Token type.  */
 #ifndef YYTOKENTYPE
@@ -84,7 +84,7 @@ extern int stldebug;
 
 union YYSTYPE
 {
-#line 66 "compilerStl/parserStl.y" /* yacc.c:1910  */
+#line 67 "compilerStl/parserStl.y" /* yacc.c:1913  */
 
     double number;
     char *string;
@@ -93,7 +93,7 @@ union YYSTYPE
         double number;   // int posVal;
     } numPos;
 
-#line 97 "E:/DevGra/nome/compilerStl/parserStl.hpp" /* yacc.c:1910  */
+#line 97 "E:/DevGra/nome/compilerStl/parserStl.hpp" /* yacc.c:1913  */
 };
 
 typedef union YYSTYPE YYSTYPE;

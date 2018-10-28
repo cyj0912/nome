@@ -1,4 +1,4 @@
-/* A Bison parser, made by GNU Bison 3.0.5.  */
+/* A Bison parser, made by GNU Bison 3.1.  */
 
 /* Bison implementation for Yacc-like parsers in C
 
@@ -44,7 +44,7 @@
 #define YYBISON 1
 
 /* Bison version.  */
-#define YYBISON_VERSION "3.0.5"
+#define YYBISON_VERSION "3.1"
 
 /* Skeleton name.  */
 #define YYSKELETON_NAME "yacc.c"
@@ -73,8 +73,9 @@
 /* Copy the first part of user declarations.  */
 #line 5 "compilerStl/parserStl.y" /* yacc.c:339  */
 
-#include <stdio.h>
-#include <string.h>
+#include <cstdio>
+#include <cstring>
+#include <string>
 #include <list>
 #include <newNOME/Data.h>
 #include <newNOME/MeshNew.h>
@@ -103,14 +104,14 @@ int stlwrap() {
     return 1;
 }
 
-map<string,QColor> surfaces;
-map<string,Vert*> vertices;
-std::vector<string> tempVariables;
-std::vector<string> tempFaceDelete;
-string currentSetName;
+std::map<std::string,QColor> surfaces;
+std::map<std::string,Vert*> vertices;
+std::vector<std::string> tempVariables;
+std::vector<std::string> tempFaceDelete;
+std::string currentSetName;
 std::list<SetNew *> currentSetList;
-map<string,std::vector<double>> currentBank;
-std::vector<string> currentInstanceList;
+std::map<std::string,std::vector<double>> currentBank;
+std::vector<std::string> currentInstanceList;
 std::list<InstanceNew *> currentGroup;
 std::list<FaceNew *> currentMeshFaces;
 std::list<Vert *> currentMeshVertices;
@@ -122,7 +123,7 @@ std::list<FaceNew *> currentSolidFace;
 std::list<TransformationNew *> currentTransformations;
 
 
-#line 126 "E:/DevGra/nome/compilerStl/parserStl.cpp" /* yacc.c:339  */
+#line 127 "E:/DevGra/nome/compilerStl/parserStl.cpp" /* yacc.c:339  */
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -156,7 +157,7 @@ extern int stldebug;
 
 #include <newNOME/Session.h>
 
-#line 160 "E:/DevGra/nome/compilerStl/parserStl.cpp" /* yacc.c:355  */
+#line 161 "E:/DevGra/nome/compilerStl/parserStl.cpp" /* yacc.c:355  */
 
 /* Token type.  */
 #ifndef YYTOKENTYPE
@@ -196,7 +197,7 @@ extern int stldebug;
 
 union YYSTYPE
 {
-#line 66 "compilerStl/parserStl.y" /* yacc.c:355  */
+#line 67 "compilerStl/parserStl.y" /* yacc.c:355  */
 
     double number;
     char *string;
@@ -205,7 +206,7 @@ union YYSTYPE
         double number;   // int posVal;
     } numPos;
 
-#line 209 "E:/DevGra/nome/compilerStl/parserStl.cpp" /* yacc.c:355  */
+#line 210 "E:/DevGra/nome/compilerStl/parserStl.cpp" /* yacc.c:355  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -236,7 +237,7 @@ int stlparse (Session* currSession);
 
 /* Copy the second part of user declarations.  */
 
-#line 240 "E:/DevGra/nome/compilerStl/parserStl.cpp" /* yacc.c:358  */
+#line 241 "E:/DevGra/nome/compilerStl/parserStl.cpp" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -257,13 +258,13 @@ typedef signed char yytype_int8;
 #ifdef YYTYPE_UINT16
 typedef YYTYPE_UINT16 yytype_uint16;
 #else
-typedef unsigned short int yytype_uint16;
+typedef unsigned short yytype_uint16;
 #endif
 
 #ifdef YYTYPE_INT16
 typedef YYTYPE_INT16 yytype_int16;
 #else
-typedef short int yytype_int16;
+typedef short yytype_int16;
 #endif
 
 #ifndef YYSIZE_T
@@ -275,7 +276,7 @@ typedef short int yytype_int16;
 #  include <stddef.h> /* INFRINGES ON USER NAME SPACE */
 #  define YYSIZE_T size_t
 # else
-#  define YYSIZE_T unsigned int
+#  define YYSIZE_T unsigned
 # endif
 #endif
 
@@ -327,7 +328,7 @@ typedef short int yytype_int16;
 # define YYUSE(E) /* empty */
 #endif
 
-#if defined __GNUC__ && 407 <= __GNUC__ * 100 + __GNUC_MINOR__
+#if defined __GNUC__ && ! defined __ICC && 407 <= __GNUC__ * 100 + __GNUC_MINOR__
 /* Suppress an incorrect diagnostic about yylval being uninitialized.  */
 # define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN \
     _Pragma ("GCC diagnostic push") \
@@ -497,7 +498,7 @@ union yyalloc
 #define YYMAXUTOK   269
 
 #define YYTRANSLATE(YYX)                                                \
-  ((unsigned int) (YYX) <= YYMAXUTOK ? yytranslate[YYX] : YYUNDEFTOK)
+  ((unsigned) (YYX) <= YYMAXUTOK ? yytranslate[YYX] : YYUNDEFTOK)
 
 /* YYTRANSLATE[TOKEN-NUM] -- Symbol number corresponding to TOKEN-NUM
    as returned by yylex, without out-of-bounds checking.  */
@@ -536,8 +537,8 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    83,    83,    84,    89,    94,   133,   158,   159,   161,
-     162,   165
+       0,    84,    84,    85,    90,    95,   134,   159,   160,   162,
+     163,   166
 };
 #endif
 
@@ -843,7 +844,7 @@ do {                                                            \
 static void
 yy_reduce_print (yytype_int16 *yyssp, YYSTYPE *yyvsp, YYLTYPE *yylsp, int yyrule, Session* currSession)
 {
-  unsigned long int yylno = yyrline[yyrule];
+  unsigned long yylno = yyrline[yyrule];
   int yynrhs = yyr2[yyrule];
   int yyi;
   YYFPRINTF (stderr, "Reducing stack by rule %d (line %lu):\n",
@@ -1300,7 +1301,7 @@ yyparse (Session* currSession)
       yylsp = yyls + yysize - 1;
 
       YYDPRINTF ((stderr, "Stack size increased to %lu\n",
-                  (unsigned long int) yystacksize));
+                  (unsigned long) yystacksize));
 
       if (yyss + yystacksize - 1 <= yyssp)
         YYABORT;
@@ -1413,7 +1414,7 @@ yyreduce:
   switch (yyn)
     {
         case 5:
-#line 95 "compilerStl/parserStl.y" /* yacc.c:1648  */
+#line 96 "compilerStl/parserStl.y" /* yacc.c:1651  */
     {
         Reader* currReader = createReader(currSession);
         MeshNew* currMesh = createMesh();
@@ -1450,11 +1451,11 @@ yyreduce:
         currSession->offsets.push_back(currOffset);
 
     }
-#line 1454 "E:/DevGra/nome/compilerStl/parserStl.cpp" /* yacc.c:1648  */
+#line 1455 "E:/DevGra/nome/compilerStl/parserStl.cpp" /* yacc.c:1651  */
     break;
 
   case 6:
-#line 134 "compilerStl/parserStl.y" /* yacc.c:1648  */
+#line 135 "compilerStl/parserStl.y" /* yacc.c:1651  */
     {
         double *x = (double*) malloc(sizeof(double));
         double *y = (double*) malloc(sizeof(double));
@@ -1478,11 +1479,11 @@ yyreduce:
 
         currentFaceVertices.push_back(newVertex);
     }
-#line 1482 "E:/DevGra/nome/compilerStl/parserStl.cpp" /* yacc.c:1648  */
+#line 1483 "E:/DevGra/nome/compilerStl/parserStl.cpp" /* yacc.c:1651  */
     break;
 
   case 11:
-#line 166 "compilerStl/parserStl.y" /* yacc.c:1648  */
+#line 167 "compilerStl/parserStl.y" /* yacc.c:1651  */
     {
         Reader* currReader = createReader(currSession);
         double *x = (double*) malloc(sizeof(double));
@@ -1505,11 +1506,11 @@ yyreduce:
         currentSolidFace.push_back(newFace);
         currentFaceVertices.clear();
     }
-#line 1509 "E:/DevGra/nome/compilerStl/parserStl.cpp" /* yacc.c:1648  */
+#line 1510 "E:/DevGra/nome/compilerStl/parserStl.cpp" /* yacc.c:1651  */
     break;
 
 
-#line 1513 "E:/DevGra/nome/compilerStl/parserStl.cpp" /* yacc.c:1648  */
+#line 1514 "E:/DevGra/nome/compilerStl/parserStl.cpp" /* yacc.c:1651  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires

@@ -25,6 +25,10 @@
 #include "newNOME/OffsetNew.h"
 #include "commonDialogs.h"
 
+#include <gl/GLU.h>
+
+#include <glm/gtx/transform.hpp>
+
 SlideGLWidget::SlideGLWidget(QWidget *parent) :
     QGLWidget(parent)
 {
@@ -33,23 +37,12 @@ SlideGLWidget::SlideGLWidget(QWidget *parent) :
     updateGlobalIndexList();
 }
 
-SlideGLWidget::SlideGLWidget(string name, QWidget *parent) :
+SlideGLWidget::SlideGLWidget(std::string name, QWidget *parent) :
     QGLWidget(parent)
 {
     generalSetup();
     makeSIFMesh(name);
     updateGlobalIndexList();
-}
-
-SlideGLWidget::SlideGLWidget(Group &group, Session *currSession, QWidget *parent) :
-    QGLWidget(parent)
-{
-    this->currSession = currSession;
-    generalSetup();
-    //makeDefaultMesh();
-    //hierarchical_scene = &group;
-    //makeSLFMesh();
-    //updateGlobalIndexList();
 }
 
 void SlideGLWidget::generalSetup()
@@ -63,7 +56,7 @@ void SlideGLWidget::generalSetup()
     backface = true;
     smoothshading = false;
     selection_mode = 1;
-    object2world = mat4(1);
+    object2world = glm::mat4(1);
     /*foreColor = QColor(255,0,0);
     backColor = QColor(0,0,0);
     outsideColor = QColor(255,0,0);
@@ -76,68 +69,27 @@ void SlideGLWidget::generalSetup()
     resize(600, 480);
     viewer_mode = 0;
     work_phase = 0;
-    temp_mesh.color = Qt::yellow;
-    temp_mesh.clear();
-    temp_mesh.type = 99;
-    consolidate_mesh.color = QColor(255, 69, 0);
-    consolidate_mesh.clear();
-    consolidate_mesh.isConsolidateMesh = true;
-    consolidate_mesh.type = 99;
-    group_from_consolidate_mesh = NULL;
-    trianglePanelty = 1.3;
+    trianglePanelty = 1.3f;
 }
 
 void SlideGLWidget::makeDefaultMesh()
 {
-    makeCube(master_mesh,0.5,0.5,0.5);
-    master_mesh.computeNormals();
-    master_mesh.color = foreColor;
-    global_mesh_list.push_back(&master_mesh);
-    global_mesh_list.push_back(&consolidate_mesh);
-    global_mesh_list.push_back(&temp_mesh);
 }
 
-void SlideGLWidget::makeSIFMesh(string name)
+void SlideGLWidget::makeSIFMesh(std::string name)
 {
-    /* Figure out the QuadSIF or SIF later.*/
-    makeWithSIF(master_mesh,name);
-    //makeWithQuadSIF(master_mesh,name);
-    master_mesh.computeNormals();
-    master_mesh.color = foreColor;
-    global_mesh_list.push_back(&master_mesh);
-    global_mesh_list.push_back(&consolidate_mesh);
-    global_mesh_list.push_back(&temp_mesh);
 }
 
 void SlideGLWidget::makeSLFMesh()
 {
-    hierarchical_scene_transformed.clearAndDelete();
-    hierarchical_scene_transformed = hierarchical_scene->makeCopyForTransform();
-    transform_meshes_in_scene();
-    hierarchical_scene_transformed.setColor(foreColor);
-    hierarchical_scene_transformed.assignColor();
-    hierarchical_scene_transformed.updateGroupElementName();
 }
 
 void SlideGLWidget::transform_meshes_in_scene()
 {
-    hierarchical_scene_transformed.updateCopyForTransform();
-    global_mesh_list = hierarchical_scene_transformed.flattenedMeshes();
-    global_polyline_list = hierarchical_scene_transformed.flattenedPolylines();
-
-    global_mesh_list.push_back(&consolidate_mesh);
-    global_mesh_list.push_back(&temp_mesh);
 }
 
 void SlideGLWidget::mergeAll()
 {
-    work_phase = glm::max(work_phase, 1);
-    global_mesh_list.pop_back();
-    merged_mesh.clearAndDelete();
-    merged_mesh = merge(global_mesh_list);
-    global_mesh_list.push_back(&temp_mesh);
-    merged_mesh.color = foreColor;
-    merged_mesh.computeNormals();
 }
 
 void SlideGLWidget::mergeCalled(bool)
@@ -152,38 +104,26 @@ void SlideGLWidget::mergeCalled(bool)
     repaint();
 }
 
-void SlideGLWidget::saveMesh(string name)
+void SlideGLWidget::saveMesh(std::string name)
 {
-    // Figure out the QuadSIF or SIF later/
-    STL *stl = new STL;
-    if(!offset_mesh.isEmpty()) {
-        stl -> STLOutput(offset_mesh, name);
-    } else {
-        emit feedback_status_bar(tr("Offset is empty, can't save file!"),0);
-    }
 }
 
-vec3 SlideGLWidget::get_arcball_vector(int x, int y)
+glm::vec3 SlideGLWidget::get_arcball_vector(int x, int y)
 {
-    vec3 p = vec3(1.0 * x / this->width() * 2 - 1.0,
+    glm::vec3 p = glm::vec3(1.0 * x / this->width() * 2 - 1.0,
       1.0 * y / this->height() * 2 - 1.0, 0);
     p.y = - p.y;
     float op_squared = p.x * p.x + p.y * p.y;
     if (op_squared <= 1 * 1) {
         p.z = sqrt(1 * 1 - op_squared);
     } else {
-        p = normalize(p);  // nearest point
+        p = glm::normalize(p);  // nearest point
     }
     return p;
 }
 
 void SlideGLWidget::set_to_editing_mode(bool in_editing_mode)
 {
-    hierarchical_scene_transformed.in_editing_mode = in_editing_mode;
-    for(Mesh*& mesh : global_mesh_list)
-    {
-        mesh->in_editing_mode = in_editing_mode;
-    }
 }
 
 void SlideGLWidget::mouse_select(int x, int y)
@@ -373,19 +313,6 @@ void SlideGLWidget::mouse_select(int x, int y)
     else if(selection_mode == 2)
     {
         currSession->selectBorder(hits, buff, posX, posY, posZ);
-        mySelect.selectWholeBorder(global_mesh_list,
-                                   global_polyline_list,
-                                   global_name_index_list,
-                                   global_polyline_name_index_list,
-                                   hits, buff, posX, posY, posZ);
-    }
-    else if(selection_mode == 3)
-    {
-        /*mySelect.selectPartialBorder(global_mesh_list,
-                                     global_polyline_list,
-                                     global_name_index_list,
-                                     global_polyline_name_index_list,
-                                     hits, buff, posX, posY, posZ);*/
     }
     glMatrixMode(GL_MODELVIEW);
     repaint();
@@ -428,9 +355,9 @@ void SlideGLWidget::initializeGL()
     glLightfv(GL_LIGHT1, GL_SPECULAR, light_specular1);
     glLightfv(GL_LIGHT1, GL_POSITION, light_position1);
 
-    transforms[MODE_CAMERA] = lookAt(vec3(0.0,  0.0, 10.0),
-                                     vec3(0.0,  0.0, 0.0),
-                                     vec3(0.0,  1.0, 0.0));
+	transforms[MODE_CAMERA] = glm::lookAt(glm::vec3(0.0, 0.0, 10.0),
+		glm::vec3(0.0, 0.0, 0.0),
+		glm::vec3(0.0, 1.0, 0.0));
 }
 
 void SlideGLWidget::resizeGL(int w, int h)
@@ -441,62 +368,6 @@ void SlideGLWidget::resizeGL(int w, int h)
     gluPerspective(45, (float) w / h, 0.1, 100);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-}
-
-void SlideGLWidget::draw_mesh(int start_index, Mesh *mesh)
-{
-    mesh -> drawMesh(start_index, smoothshading);
-}
-
-void SlideGLWidget::draw_polyline(int start_index, PolyLine *polyline)
-{
-    QColor color = polyline -> color;
-    GLfloat fcolor[] = {1.0f * color.red() / 255,
-                        1.0f * color.green() / 255,
-                        1.0f * color.blue() / 255,
-                        1.0f * color.alpha() /255};
-    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, fcolor);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, fcolor);
-    polyline -> drawLineWithCubes(start_index);
-}
-
-void SlideGLWidget::draw_scene()
-{
-    vector<PolyLine*>::iterator pIt;
-    vector<Mesh*>::iterator mIt;
-    vector<int>::iterator nIt;
-    for(mIt = global_mesh_list.begin(), nIt = global_name_index_list.begin();
-        nIt < global_name_index_list.end(); nIt++, mIt++)
-    {
-        draw_mesh(*nIt, *mIt);
-    }
-    for(pIt = global_polyline_list.begin(),  nIt = global_polyline_name_index_list.begin();
-        pIt != global_polyline_list.end(); nIt++, pIt++)
-    {
-        draw_polyline(*nIt, *pIt);
-    }
-    GLfloat afcolor[] = {0.0f, 1.0f, 1.0f, 1.0f};
-    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, afcolor);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, afcolor);
-    for(mIt = global_mesh_list.begin(); mIt != global_mesh_list.end(); mIt++)
-    {
-        Mesh * currentMesh = (*mIt);
-        currentMesh -> drawVertices();
-    }
-    for(pIt = global_polyline_list.begin(); pIt != global_polyline_list.end(); pIt++)
-    {
-        PolyLine * currentPolyline = (*pIt);
-        currentPolyline -> drawVertices();
-    }
-    if(!border1.isEmpty() || !border2.isEmpty())
-    {
-        glLineWidth(4.0);
-        border1.drawLine();
-        if(!border2.isEmpty()) {
-            border2.drawLine();
-        }
-        glLineWidth(1.0);
-    }
 }
 
 void SlideGLWidget::paintGL()
@@ -735,14 +606,16 @@ void SlideGLWidget::mouseMoveEvent(QMouseEvent* event)
 }
 
 void SlideGLWidget::timerEvent(QTimerEvent *event) {
+	const float ROTATION_SPEED = 0.1f;
+
     if(last_mx != cur_mx || last_my != cur_my) {
-        vec3 va = get_arcball_vector(last_mx, last_my);
-        vec3 vb = get_arcball_vector( cur_mx,  cur_my);
+        glm::vec3 va = get_arcball_vector(last_mx, last_my);
+		glm::vec3 vb = get_arcball_vector( cur_mx,  cur_my);
         float angle = acos(glm::min(1.0f, dot(va, vb)));
-        vec3 axis_in_camera_coord = cross(va, vb);
-        mat3 camera2object = inverse(mat3(transforms[MODE_CAMERA]) * mat3(object2world));
-        vec3 axis_in_object_coord = camera2object * axis_in_camera_coord;
-        object2world = rotate(object2world, (float) ROTATION_SPEED * angle, axis_in_object_coord);
+		glm::vec3 axis_in_camera_coord = cross(va, vb);
+		glm::mat3 camera2object = glm::inverse(glm::mat3(transforms[MODE_CAMERA]) * glm::mat3(object2world));
+		glm::vec3 axis_in_object_coord = camera2object * axis_in_camera_coord;
+        object2world = glm::rotate(object2world, (float) ROTATION_SPEED * angle, axis_in_object_coord);
         last_mx = cur_mx;
         last_my = cur_my;
         repaint();
@@ -753,7 +626,6 @@ void SlideGLWidget::keyPressEvent(QKeyEvent* event)
     switch(event->key())
     {
     case Qt::Key_Escape:
-        mySelect.clearSelection();
         break;
     case Qt::Key_W:
         wireframe = !wireframe;
@@ -817,58 +689,10 @@ void SlideGLWidget::keyPressEvent(QKeyEvent* event)
 
 void SlideGLWidget::subdivide(int level)
 {
-    if(level <= 0) {
-        subdiv_mesh = merged_mesh.makeCopy();
-        return;
-    }
-    //int cachedLevel = cache_subdivided_meshes.size();
-    //if(cachedLevel >= level)
-    //{
-    //    subdiv_mesh = cache_subdivided_meshes[level - 1];
-    //}
-    //else
-    //{
-    //    if(cachedLevel == 0)
-    //    {
-    //        subdiv_mesh = merged_mesh;
-    //    }
-    //    else
-    //    {
-    //        subdiv_mesh = cache_subdivided_meshes[cachedLevel - 1];
-    //    }
-    //    while(cachedLevel <= level)
-    //    {
-    //        subdiv_mesh = subdiv_mesh.makeCopy();
-    //        subdivider = new Subdivision(subdiv_mesh);
-    //        subdiv_mesh = subdivider->ccSubdivision(1);
-    //        subdiv_mesh.computeNormals();
-    //        cache_subdivided_meshes.push_back(subdiv_mesh);
-    //        cachedLevel++;
-    //    }
-    //}
-    subdivider = new Subdivision(merged_mesh);
-    subdiv_mesh.clearAndDelete();
-    subdiv_mesh = subdivider->ccSubdivision(level);
-    subdiv_mesh.computeNormals();
-    subdiv_mesh.color = foreColor;
 }
 
 void SlideGLWidget::offset(float value)
 {
-    work_phase = glm::max(work_phase, 3);
-    if(value == 0)
-    {
-        offset_mesh = merged_mesh.makeCopy();
-        return;
-    }
-    if(subdiv_mesh.isEmpty())
-    {
-        subdiv_mesh = merged_mesh.makeCopy();
-    }
-    offseter = new Offset(subdiv_mesh, value);
-    offseter -> makeFullOffset();
-    offset_mesh.clearAndDelete();
-    offset_mesh = offseter->offsetMesh;
 }
 
 void SlideGLWidget::viewContentChanged(int viewer_mode)
@@ -879,15 +703,6 @@ void SlideGLWidget::viewContentChanged(int viewer_mode)
 
 void SlideGLWidget::levelChanged(int new_level)
 {
-    work_phase = glm::max(work_phase, 2);
-    subdiv_level = new_level;
-    subdivide(new_level);
-    offset_mesh.clearAndDelete();
-    subdiv_offset_mesh.clearAndDelete();
-    viewer_mode = 2;
-    repaint();
-    //emit feedback_status_bar(tr("Subdivision Finished. Level: ")
-    //                         + QString::number(new_level), 0);
 }
 
 void SlideGLWidget::offsetValueChanged(float new_offset_value)
@@ -895,13 +710,12 @@ void SlideGLWidget::offsetValueChanged(float new_offset_value)
     viewer_mode = 3;
     offset_value = new_offset_value;
     offset(new_offset_value);
-    subdiv_offset_mesh.clearAndDelete();
     repaint();
 }
 
 void SlideGLWidget::resetViewDirection(bool)
 {
-    object2world = mat4(1);
+    object2world = glm::mat4(1);
     repaint();
 }
 
@@ -909,7 +723,7 @@ void SlideGLWidget::zoom_in()
 {
     if(cameraDistance > 0.001)
     {
-        cameraDistance *= 0.9;
+        cameraDistance *= 0.9f;
     }
 }
 
@@ -917,7 +731,7 @@ void SlideGLWidget::zoom_out()
 {
     if(cameraDistance < 200)
     {
-        cameraDistance *= 1.1;
+        cameraDistance *= 1.1f;
     }
 }
 
@@ -941,10 +755,6 @@ void SlideGLWidget::wheelEvent(QWheelEvent *event)
 void SlideGLWidget::setForeColor(QColor color)
 {
     foreColor = color;
-    master_mesh.color = foreColor;
-    merged_mesh.color = foreColor;
-    subdiv_mesh.color = foreColor;
-    offset_mesh.color = foreColor;
 
     double *r = (double*) malloc(sizeof(double));
     double *g = (double*) malloc(sizeof(double));
@@ -955,10 +765,6 @@ void SlideGLWidget::setForeColor(QColor color)
     *b = color.blue() / 255.0;
 
     currSession->foreColor = createSurface(r, g, b, "foreColor");
-
-    hierarchical_scene_transformed.setColor(foreColor);
-    hierarchical_scene_transformed.assignColor();
-
 
     repaint();
 }
@@ -1179,92 +985,10 @@ void SlideGLWidget::popUpGroupWindow(bool){
 
 void SlideGLWidget::addTempToMaster()
 {
-    Mesh newMesh;
-    vector<Vertex*>::iterator vIt;
-    for(vIt = master_mesh.vertList.begin();
-        vIt < master_mesh.vertList.end(); vIt ++)
-    {
-        Vertex * vertCopy = new Vertex;
-        vertCopy -> ID = (*vIt) -> ID;
-        vertCopy -> position = (*vIt) -> position;
-        newMesh.addVertex(vertCopy);
-    }
-    vector<Face*>::iterator fIt;
-    for(fIt = master_mesh.faceList.begin();
-     fIt < master_mesh.faceList.end(); fIt ++)
-    {
-        Face * tempFace = *fIt;
-        Edge * firstEdge = tempFace -> oneEdge;
-        Edge * currEdge = firstEdge;
-        Edge * nextEdge;
-        vector<Vertex*> vertices;
-        Vertex * tempv;
-        vertices.clear();
-        do {
-            if(tempFace == currEdge -> fa) {
-                tempv = currEdge -> vb;
-                nextEdge = currEdge -> nextVbFa;
-            } else {
-                if(currEdge -> mobius) {
-                    tempv = currEdge -> vb;
-                    nextEdge = currEdge -> nextVbFb;
-                } else {
-                    tempv = currEdge -> va;
-                    nextEdge = currEdge -> nextVaFb;
-                }
-            }
-            vertices.push_back(newMesh.vertList[tempv -> ID]);
-            currEdge = nextEdge;
-        } while (currEdge != firstEdge);
-        newMesh.addPolygonFace(vertices);
-    }
-    for(fIt = temp_mesh.faceList.begin();
-     fIt < temp_mesh.faceList.end(); fIt ++)
-    {
-        Face * tempFace = *fIt;
-        Edge * firstEdge = tempFace -> oneEdge;
-        Edge * currEdge = firstEdge;
-        Edge * nextEdge;
-        vector<Vertex*> vertices;
-        Vertex * tempv;
-        vertices.clear();
-        do {
-            if(tempFace == currEdge -> fa) {
-                tempv = currEdge -> vb;
-                nextEdge = currEdge -> nextVbFa;
-            } else {
-                if(currEdge -> mobius) {
-                    tempv = currEdge -> vb;
-                    nextEdge = currEdge -> nextVbFb;
-                } else {
-                    tempv = currEdge -> va;
-                    nextEdge = currEdge -> nextVaFb;
-                }
-            }
-            vertices.push_back(newMesh.vertList[tempv -> ID]);
-            currEdge = nextEdge;
-        } while (currEdge != firstEdge);
-        newMesh.addPolygonFace(vertices);
-    }
-    newMesh.color = master_mesh.color;
-    master_mesh = newMesh;
-    master_mesh.buildBoundary();
-    master_mesh.computeNormals();
-    repaint();
 }
 
-void SlideGLWidget::addTempToMasterCalled(bool) {
-    if(temp_mesh.isEmpty())
-    {
-        emit feedback_status_bar(tr("Current temp mesh is empty."), 0);
-        return;
-    }
-    addTempToMaster();
-    clearSubDivisionAndOffset();
-    clearSelectionCalled(true);
-    updateGlobalIndexList();
-    emit feedback_status_bar(tr("Joining temp mesh into initial mesh"), 0);
-    repaint();
+void SlideGLWidget::addTempToMasterCalled(bool)
+{
 }
 
 void SlideGLWidget::addBorderCalled(bool)
@@ -1280,23 +1004,12 @@ void SlideGLWidget::addBorderCalled(bool)
     repaint();
 }
 
-void SlideGLWidget::clearSubDivisionAndOffset() {
-    subdiv_mesh.clearAndDelete();
-    offset_mesh.clearAndDelete();
-    subdiv_offset_mesh.clearAndDelete();
-    //cache_subdivided_meshes.clear();
+void SlideGLWidget::clearSubDivisionAndOffset()
+{
 }
 
 void SlideGLWidget::clearSelection()
 {
-    mySelect.clearSelection();
-    border1.clear();
-    border2.clear();
-    temp_mesh.clearAndDelete();
-    if(temp_mesh.isEmpty() && consolidate_mesh.isEmpty())
-    {
-        set_to_editing_mode(false);
-    }
     repaint();
 }
 
@@ -1311,21 +1024,6 @@ void SlideGLWidget::clearSelectionCalled(bool)
 
 void SlideGLWidget::updateGlobalIndexList()
 {
-    int count = 0;
-    vector<Mesh*>::iterator mIt;
-    vector<PolyLine*>::iterator pIt;
-    global_name_index_list.clear();
-    global_polyline_name_index_list.clear();
-    for(mIt = global_mesh_list.begin(); mIt < global_mesh_list.end(); mIt++)
-    {
-        global_name_index_list.push_back(count);
-        count += (*mIt) -> faceList.size();
-    }
-    for(pIt = global_polyline_list.begin(); pIt < global_polyline_list.end(); pIt++)
-    {
-        global_polyline_name_index_list.push_back(count);
-        count += (*pIt) -> vertices.size();
-    }
 }
 
 void SlideGLWidget::resetTrianglePanelty(QString new_value)
@@ -1335,15 +1033,6 @@ void SlideGLWidget::resetTrianglePanelty(QString new_value)
 
 void SlideGLWidget::paramValueChanged(float)
 {
-    if(hierarchical_scene_transformed.in_editing_mode)
-    {
-        transform_meshes_in_scene();
-    }
-    else
-    {
-        makeSLFMesh();
-    }
-
     updateTempMesh();
     updateConsolidateMesh();
     updateSavedConsolidatedMesh();
@@ -1366,39 +1055,10 @@ void SlideGLWidget::paramValueChanged(float)
 
 void SlideGLWidget::updateSavedConsolidatedMesh()
 {
-    if(group_from_consolidate_mesh != NULL && group_from_consolidate_mesh->myMeshes.size() != 0)
-    {
-        for(Mesh& mesh : group_from_consolidate_mesh->myMeshes)
-        {
-            for(Vertex*& v: mesh.vertList)
-            {
-                v -> position = v -> source_vertex -> position;
-            }
-        }
-        vector<Mesh*> append_list = group_from_consolidate_mesh -> flattenedMeshes();
-        global_mesh_list.pop_back();
-        global_mesh_list.insert(global_mesh_list.end(), append_list.begin(), append_list.end());
-        global_mesh_list.push_back(&temp_mesh);
-    }
 }
 
 void SlideGLWidget::updateFromSavedMesh()
 {
-    //cout << "HELLO" << endl;
-    consolidate_mesh.computeNormals();
-
-    vector<Mesh*> append_list = group_from_consolidate_mesh -> flattenedMeshesTemp();
-
-    global_mesh_list.pop_back();
-    global_mesh_list.insert(global_mesh_list.end(), append_list.begin(), append_list.end());
-    global_mesh_list.push_back(&temp_mesh);
-    updateGlobalIndexList();
-    if(group_from_consolidate_mesh != NULL && group_from_consolidate_mesh->myMeshes.size() > 0)
-    {
-        set_to_editing_mode(true);
-    }
-
-    repaint();
 }
 
 void SlideGLWidget::deleteFaceCalled(bool)
@@ -1411,24 +1071,10 @@ void SlideGLWidget::deleteFaceCalled(bool)
 
 void SlideGLWidget::updateTempMesh()
 {
-    for(Vertex * v : temp_mesh.vertList)
-    {
-        if(v -> source_vertex != NULL)
-        {
-            v -> position = v -> source_vertex -> position;
-        }
-    }
 }
 
 void SlideGLWidget::updateConsolidateMesh()
 {
-    for(Vertex * v : consolidate_mesh.vertList)
-    {
-        if(v -> source_vertex != NULL)
-        {
-            v -> position = v -> source_vertex -> position;
-        }
-    }
 }
 
 void SlideGLWidget::createConsolidated(bool){

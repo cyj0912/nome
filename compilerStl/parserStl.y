@@ -3,8 +3,9 @@
 }
 
 %{
-#include <stdio.h>
-#include <string.h>
+#include <cstdio>
+#include <cstring>
+#include <string>
 #include <list>
 #include <newNOME/Data.h>
 #include <newNOME/MeshNew.h>
@@ -33,14 +34,14 @@ int stlwrap() {
     return 1;
 }
 
-map<string,QColor> surfaces;
-map<string,Vert*> vertices;
-std::vector<string> tempVariables;
-std::vector<string> tempFaceDelete;
-string currentSetName;
+std::map<std::string,QColor> surfaces;
+std::map<std::string,Vert*> vertices;
+std::vector<std::string> tempVariables;
+std::vector<std::string> tempFaceDelete;
+std::string currentSetName;
 std::list<SetNew *> currentSetList;
-map<string,std::vector<double>> currentBank;
-std::vector<string> currentInstanceList;
+std::map<std::string,std::vector<double>> currentBank;
+std::vector<std::string> currentInstanceList;
 std::list<InstanceNew *> currentGroup;
 std::list<FaceNew *> currentMeshFaces;
 std::list<Vert *> currentMeshVertices;

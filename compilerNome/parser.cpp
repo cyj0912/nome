@@ -73,9 +73,10 @@
 /* Copy the first part of user declarations.  */
 #line 6 "compilerNome/parser.y" /* yacc.c:339  */
 
-#include <stdio.h>
-#include <string.h>
+#include <cstdio>
+#include <cstring>
 #include <list>
+#include <string>
 #include <newNOME/Data.h>
 #include <newNOME/MeshNew.h>
 #include <newNOME/Session.h>
@@ -107,14 +108,14 @@ int nomwrap() {
     return 1;
 }
 
-map<string,QColor> surfaces2;
-map<string,Vert*> vertices2;
-std::vector<string> tempVariables2;
-std::vector<string> tempFaceDelete2;
-string currentSetName2;
+std::map<std::string,QColor> surfaces2;
+std::map<std::string,Vert*> vertices2;
+std::vector<std::string> tempVariables2;
+std::vector<std::string> tempFaceDelete2;
+std::string currentSetName2;
 std::list<SetNew *> currentSetList2;
-map<string,std::vector<double>> currentBank2;
-std::vector<string> currentInstanceList2;
+std::map<std::string,std::vector<double>> currentBank2;
+std::vector<std::string> currentInstanceList2;
 std::list<InstanceNew *> currentGroup2;
 std::list<FaceNew *> currentMeshFaces2;
 std::list<PolylineNew *> currentMeshPolyline;
@@ -128,7 +129,7 @@ std::string nameUniqueInstanceGroup;
 SweepInitializer currentSweepInitializer;
 
 
-#line 132 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:339  */
+#line 133 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:339  */
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -148,8 +149,8 @@ SweepInitializer currentSweepInitializer;
 
 /* In a future release of Bison, this section will be replaced
    by #include "parser.hpp".  */
-#ifndef YY_NOM_VOLUMES_MACDATA_BERKELEYCG_NOME_COMPILERNOME_PARSER_HPP_INCLUDED
-# define YY_NOM_VOLUMES_MACDATA_BERKELEYCG_NOME_COMPILERNOME_PARSER_HPP_INCLUDED
+#ifndef YY_NOM_E_DEVGRA_NOME_COMPILERNOME_PARSER_HPP_INCLUDED
+# define YY_NOM_E_DEVGRA_NOME_COMPILERNOME_PARSER_HPP_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -163,7 +164,7 @@ extern int nomdebug;
 #include <newNOME/Session.h>
 
 
-#line 167 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:355  */
+#line 168 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:355  */
 
 /* Token type.  */
 #ifndef YYTOKENTYPE
@@ -363,7 +364,7 @@ extern int nomdebug;
 
 union YYSTYPE
 {
-#line 87 "compilerNome/parser.y" /* yacc.c:355  */
+#line 88 "compilerNome/parser.y" /* yacc.c:355  */
 
     double intNumber;
     double number;
@@ -374,7 +375,7 @@ union YYSTYPE
         double number;   // int posVal;
     } numPos;
 
-#line 378 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:355  */
+#line 379 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:355  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -401,11 +402,11 @@ extern YYSTYPE nomlval;
 extern YYLTYPE nomlloc;
 int nomparse (Session* currSession);
 
-#endif /* !YY_NOM_VOLUMES_MACDATA_BERKELEYCG_NOME_COMPILERNOME_PARSER_HPP_INCLUDED  */
+#endif /* !YY_NOM_E_DEVGRA_NOME_COMPILERNOME_PARSER_HPP_INCLUDED  */
 
 /* Copy the second part of user declarations.  */
 
-#line 409 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:358  */
+#line 410 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -713,17 +714,17 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,   110,   110,   111,   116,   116,   116,   116,   116,   116,
-     117,   117,   117,   117,   117,   117,   117,   118,   118,   118,
-     118,   118,   118,   119,   119,   119,   119,   119,   122,   124,
-     133,   143,   155,   177,   187,   189,   195,   202,   203,   207,
-     208,   208,   208,   208,   208,   208,   212,   219,   248,   272,
-     296,   311,   312,   312,   315,   316,   320,   381,   382,   386,
-     391,   392,   396,   416,   445,   472,   488,   501,   524,   525,
-     529,   574,   627,   638,   650,   674,   708,   743,   749,   791,
-     798,   847,   913,   951,   967,   967,   968,   969,   970,   973,
-     986,  1001,  1006,  1012,  1031,  1050,  1069,  1088,  1107,  1164,
-    1200,  1226
+       0,   111,   111,   112,   117,   117,   117,   117,   117,   117,
+     118,   118,   118,   118,   118,   118,   118,   119,   119,   119,
+     119,   119,   119,   120,   120,   120,   120,   120,   123,   125,
+     134,   144,   156,   178,   188,   190,   196,   203,   204,   208,
+     209,   209,   209,   209,   209,   209,   213,   220,   249,   273,
+     297,   312,   313,   313,   316,   317,   321,   382,   383,   387,
+     392,   393,   397,   417,   446,   473,   489,   502,   525,   526,
+     530,   575,   628,   639,   651,   675,   709,   744,   750,   792,
+     799,   848,   914,   952,   968,   968,   969,   970,   971,   974,
+     987,  1002,  1007,  1013,  1032,  1051,  1070,  1089,  1108,  1165,
+    1201,  1227
 };
 #endif
 
@@ -1798,26 +1799,26 @@ yyreduce:
   switch (yyn)
     {
         case 28:
-#line 122 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 123 "compilerNome/parser.y" /* yacc.c:1651  */
     {
         (yyval.string) = strdup((yyvsp[0].string));
     }
-#line 1806 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 1807 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 29:
-#line 125 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 126 "compilerNome/parser.y" /* yacc.c:1651  */
     {
         std::string exprStr = strdup((yyvsp[0].string));
         exprStr.erase(0, 6);
         exprStr.erase(exprStr.size() - 1);
         (yyval.string) = strdup(exprStr.c_str());
     }
-#line 1817 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 1818 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 30:
-#line 134 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 135 "compilerNome/parser.y" /* yacc.c:1651  */
     {
         Reader* currReader = createReader(currSession);
         if (!currReader->isUnique(strdup((yyvsp[0].string)))){
@@ -1826,14 +1827,14 @@ yyreduce:
         }
         nameUnique = strdup((yyvsp[0].string));
     }
-#line 1830 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 1831 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 31:
-#line 144 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 145 "compilerNome/parser.y" /* yacc.c:1651  */
     {
         for (FaceNew* fa : currentMeshFaces2){
-            string currentF = strdup((yyvsp[0].string));
+            std::string currentF = strdup((yyvsp[0].string));
           if(!currentF.compare(fa->name)){
             nomerror(currSession, "Duplicate construct name.");
             YYABORT;
@@ -1841,14 +1842,14 @@ yyreduce:
         }
         nameUniqueFaceMesh = strdup((yyvsp[0].string));
     }
-#line 1845 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 1846 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 32:
-#line 156 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 157 "compilerNome/parser.y" /* yacc.c:1651  */
     {
         for (InstanceNew* fa : currentGroup2){
-            string currentF = strdup((yyvsp[0].string));
+            std::string currentF = strdup((yyvsp[0].string));
           if(!currentF.compare(fa->name)){
             nomerror(currSession, "Duplicate construct name.");
             YYABORT;
@@ -1856,61 +1857,61 @@ yyreduce:
         }
         nameUniqueInstanceGroup= strdup((yyvsp[0].string));
     }
-#line 1860 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 1861 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 33:
-#line 178 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 179 "compilerNome/parser.y" /* yacc.c:1651  */
     {
         (yyval.numPos).string = strdup((yyvsp[0].string));
         (yyval.numPos).number = nomcolumn;
     }
-#line 1869 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 1870 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 35:
-#line 189 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 190 "compilerNome/parser.y" /* yacc.c:1651  */
     {
         tempVariables2.push_back((yyvsp[0].string));
     }
-#line 1877 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 1878 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 36:
-#line 195 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 196 "compilerNome/parser.y" /* yacc.c:1651  */
     {
         if (surfaceFromArg.length() == 0){
           surfaceFromArg = strdup((yyvsp[0].string));
         }
     }
-#line 1887 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 1888 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 37:
-#line 202 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 203 "compilerNome/parser.y" /* yacc.c:1651  */
     {(yyval.boolean) = false;}
-#line 1893 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 1894 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 38:
-#line 203 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 204 "compilerNome/parser.y" /* yacc.c:1651  */
     {
         (yyval.boolean) = true;
     }
-#line 1901 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 1902 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 46:
-#line 213 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 214 "compilerNome/parser.y" /* yacc.c:1651  */
     {
       Reverse* currReverse = createReverse();
       currentTransformations2.push_back(currReverse);
     }
-#line 1910 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 1911 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 47:
-#line 220 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 221 "compilerNome/parser.y" /* yacc.c:1651  */
     {
         double *x = (double*) malloc(sizeof(double));
         double *y = (double*) malloc(sizeof(double));
@@ -1936,11 +1937,11 @@ yyreduce:
         currentTransformations2.push_back(currRotate);
 
     }
-#line 1940 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 1941 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 48:
-#line 249 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 250 "compilerNome/parser.y" /* yacc.c:1651  */
     {
         double *x = (double*) malloc(sizeof(double));
         double *y = (double*) malloc(sizeof(double));
@@ -1961,11 +1962,11 @@ yyreduce:
 
         currentTransformations2.push_back(currTranslate);
     }
-#line 1965 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 1966 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 49:
-#line 273 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 274 "compilerNome/parser.y" /* yacc.c:1651  */
     {
         double *x = (double*) malloc(sizeof(double));
         double *y = (double*) malloc(sizeof(double));
@@ -1986,11 +1987,11 @@ yyreduce:
 
         currentTransformations2.push_back(currScale);
     }
-#line 1990 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 1991 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 50:
-#line 297 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 298 "compilerNome/parser.y" /* yacc.c:1651  */
     {
         double *currentValSet = (double*) malloc(sizeof(double));
         parseGetBankVal((yyvsp[-4].string), currSession, currentValSet, nomlineno);
@@ -2003,16 +2004,16 @@ yyreduce:
         double w = *currentValSet;
 
     }
-#line 2007 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 2008 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 56:
-#line 321 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 322 "compilerNome/parser.y" /* yacc.c:1651  */
     {
         Reader* currReader = createReader(currSession);
 
-        string instanceName = strdup((yyvsp[-3].string));
-        string lookFor = strdup((yyvsp[-2].string));
+        std::string instanceName = strdup((yyvsp[-3].string));
+        std::string lookFor = strdup((yyvsp[-2].string));
 
         MeshNew * currentMesh = currReader->getMesh((yyvsp[-2].string));
 
@@ -2051,7 +2052,7 @@ yyreduce:
           }
         }*/
 
-        string surfaceName = surfaceFromArg;
+        std::string surfaceName = surfaceFromArg;
         // Check if a surface has been applied.
         if (surfaceName.length() != 0){
             Surface * currentSurface = currReader->surf(surfaceFromArg);
@@ -2066,19 +2067,19 @@ yyreduce:
         currentGroup2.push_back(newInstance);
         surfaceFromArg = "";
     }
-#line 2070 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 2071 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 59:
-#line 387 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 388 "compilerNome/parser.y" /* yacc.c:1651  */
     {
-        string instanceName = strdup((yyvsp[0].string));
+        std::string instanceName = strdup((yyvsp[0].string));
     }
-#line 2078 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 2079 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 62:
-#line 397 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 398 "compilerNome/parser.y" /* yacc.c:1651  */
     {
         double *subdivision = (double*) malloc(sizeof(double));
 
@@ -2096,11 +2097,11 @@ yyreduce:
         SubdivisionNew* currSubdivision = createSubdivision(strdup((yyvsp[-5].string)), strdup((yyvsp[-3].string)), subdivision);
         currSession->subdivisions.push_back(currSubdivision);
     }
-#line 2100 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 2101 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 63:
-#line 417 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 418 "compilerNome/parser.y" /* yacc.c:1651  */
     {
         double *min = (double*) malloc(sizeof(double));
         double *max = (double*) malloc(sizeof(double));
@@ -2125,11 +2126,11 @@ yyreduce:
 
         currSession->offsets.push_back(currOffset);
     }
-#line 2129 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 2130 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 64:
-#line 446 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 447 "compilerNome/parser.y" /* yacc.c:1651  */
     {
 
         MeshNew* currMesh = createMesh();
@@ -2153,22 +2154,22 @@ yyreduce:
         currentMeshEdges2.clear();
         currentMeshVertices2.clear();
         }
-#line 2157 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 2158 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 65:
-#line 473 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 474 "compilerNome/parser.y" /* yacc.c:1651  */
     {
         GroupNew* currGroup = createGroup(currentGroup2);
         currGroup->setName(nameUnique);
         currSession->groups.push_back(currGroup);
         currentGroup2.clear();
         }
-#line 2168 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 2169 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 66:
-#line 489 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 490 "compilerNome/parser.y" /* yacc.c:1651  */
     {
         Reader* currReader = createReader(currSession);
 
@@ -2178,13 +2179,13 @@ yyreduce:
 
         tempFaceDelete2.clear();
         }
-#line 2182 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 2183 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 67:
-#line 502 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 503 "compilerNome/parser.y" /* yacc.c:1651  */
     {
-        string currentSetName = (yyvsp[-4].string);
+        std::string currentSetName = (yyvsp[-4].string);
         double currentSetValue = (double)atof((yyvsp[-3].numPos).string);
         double *currentValSet = (double*) malloc(sizeof(double));
         parseGetBankVal((yyvsp[-2].string), currSession, currentValSet, nomlineno);
@@ -2193,7 +2194,7 @@ yyreduce:
         double currentSetEnd = *currentValSet;
         parseGetBankVal((yyvsp[0].string), currSession, currentValSet, nomlineno);
         double currentSetStepSize = *currentValSet;
-        string currentSetValueString = (yyvsp[-3].numPos).string;
+        std::string currentSetValueString = (yyvsp[-3].numPos).string;
 
 
         int begPos = (yyvsp[-3].numPos).number-currentSetValueString.length();
@@ -2203,17 +2204,17 @@ yyreduce:
 
         currentSetList2.push_back(currentSet);
         }
-#line 2207 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 2208 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 70:
-#line 530 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 531 "compilerNome/parser.y" /* yacc.c:1651  */
     {
     Reader* currReader = createReader(currSession);
 
     // Create list of vertices of face.
     std::list<Vert*> verticesPolyline;
-    for (std::vector<string>::iterator it = tempVariables2.begin() ; it != tempVariables2.end(); ++it){
+    for (std::vector<std::string>::iterator it = tempVariables2.begin() ; it != tempVariables2.end(); ++it){
         Vert * currentVertex = currReader->getVert(*it);
         if (currentVertex != NULL) {
             verticesPolyline.push_back(currentVertex);
@@ -2232,7 +2233,7 @@ yyreduce:
 
     currPolyline->setName(nameUnique);
 
-    string surfaceName = surfaceFromArg;
+    std::string surfaceName = surfaceFromArg;
     // Check if a surface has been applied.
     if (surfaceName.length() != 0){
         Surface * currentSurface = currReader->surf(surfaceFromArg);
@@ -2249,17 +2250,17 @@ yyreduce:
     tempVariables2.clear();
     surfaceFromArg = "";
 }
-#line 2253 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 2254 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 71:
-#line 575 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 576 "compilerNome/parser.y" /* yacc.c:1651  */
     {
         Reader* currReader = createReader(currSession);
 
         std::list<Vert*> verticesFace;
         //std::cout << "FACE MESH" << std::endl;
-        for (std::vector<string>::iterator it = tempVariables2.begin() ; it != tempVariables2.end(); ++it){
+        for (std::vector<std::string>::iterator it = tempVariables2.begin() ; it != tempVariables2.end(); ++it){
             Vert * currentVertex = currReader->getVert(*it);
             if (currentVertex != NULL) {
                 verticesFace.push_back(currentVertex);
@@ -2285,7 +2286,7 @@ yyreduce:
         FaceNew * newFace = createFace(verticesFace, &currentMeshEdges2, currReader, false);
         setName(newFace, nameUniqueFaceMesh);
 
-        string surfaceName = surfaceFromArg;
+        std::string surfaceName = surfaceFromArg;
         // Check if a surface has been applied.
         if (surfaceName.length() != 0){
             Surface * currentSurface = currReader->surf(surfaceFromArg);
@@ -2303,11 +2304,11 @@ yyreduce:
         tempVariables2.clear();
         surfaceFromArg = "";
     }
-#line 2307 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 2308 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 72:
-#line 628 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 629 "compilerNome/parser.y" /* yacc.c:1651  */
     {
         BankNew * currentBank2 = createBank();
         currentBank2->name = strdup((yyvsp[-2].string));
@@ -2315,11 +2316,11 @@ yyreduce:
         currSession->banks.push_back(currentBank2);
         currentSetList2.clear();
         }
-#line 2319 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 2320 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 73:
-#line 639 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 640 "compilerNome/parser.y" /* yacc.c:1651  */
     {
         double *epsilonVal = (double*) malloc(sizeof(double));
 
@@ -2329,13 +2330,13 @@ yyreduce:
         currSession->epsilon = *epsilonVal;
         currSession->epsilonStr = strdup((yyvsp[-1].string));
     }
-#line 2333 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 2334 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 74:
-#line 651 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 652 "compilerNome/parser.y" /* yacc.c:1651  */
     {
-        string name = (yyvsp[-5].string);
+        std::string name = (yyvsp[-5].string);
         double *num = (double*) malloc(sizeof(double));
         double *rad = (double*) malloc(sizeof(double));
 
@@ -2355,15 +2356,15 @@ yyreduce:
 
         currSession->circles.push_back(currCircle);
     }
-#line 2359 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 2360 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 75:
-#line 676 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 677 "compilerNome/parser.y" /* yacc.c:1651  */
     {
         Reader* currReader = createReader(currSession);
 
-        string name = (yyvsp[-7].string);
+        std::string name = (yyvsp[-7].string);
         double *n = (double*) malloc(sizeof(double));
         double *ro = (double*) malloc(sizeof(double));
         double *ratio = (double*) malloc(sizeof(double));
@@ -2389,15 +2390,15 @@ yyreduce:
 
         currSession->tunnels.push_back(currTunnel);
         }
-#line 2393 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 2394 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 76:
-#line 710 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 711 "compilerNome/parser.y" /* yacc.c:1651  */
     {
         Reader* currReader = createReader(currSession);
 
-        string name = (yyvsp[-7].string);
+        std::string name = (yyvsp[-7].string);
         double *n = (double*) malloc(sizeof(double));
         double *ro = (double*) malloc(sizeof(double));
         double *ratio = (double*) malloc(sizeof(double));
@@ -2424,23 +2425,23 @@ yyreduce:
 
         currSession->funnels.push_back(currFunnel);
         }
-#line 2428 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 2429 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 77:
-#line 744 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 745 "compilerNome/parser.y" /* yacc.c:1651  */
     {
         }
-#line 2435 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 2436 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 78:
-#line 750 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 751 "compilerNome/parser.y" /* yacc.c:1651  */
     {
         Reader* currReader = createReader(currSession);
 
         std::list<Vert*> verticesFace;
-        for (std::vector<string>::iterator it = tempVariables2.begin() ; it != tempVariables2.end(); ++it){
+        for (std::vector<std::string>::iterator it = tempVariables2.begin() ; it != tempVariables2.end(); ++it){
             Vert * currentVertex = currReader->getVert(*it);
             if (currentVertex != NULL) {
                 verticesFace.push_back(currentVertex);
@@ -2456,7 +2457,7 @@ yyreduce:
         setName(newFace, nameUnique);
 
 
-        string surfaceName = surfaceFromArg;
+        std::string surfaceName = surfaceFromArg;
         // Check if a surface has been applied.
         if (surfaceName.length() != 0){
             Surface * currentSurface = currReader->surf(surfaceFromArg);
@@ -2474,19 +2475,19 @@ yyreduce:
         tempVariables2.clear();
         surfaceFromArg = "";
         }
-#line 2478 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 2479 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 79:
-#line 792 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 793 "compilerNome/parser.y" /* yacc.c:1651  */
     {
         tempFaceDelete2.push_back((yyvsp[-1].string));
         }
-#line 2486 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 2487 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 80:
-#line 798 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 799 "compilerNome/parser.y" /* yacc.c:1651  */
     {
     double *slices = (double*) malloc(sizeof(double));
     Reader* currReader = createReader(currSession);
@@ -2503,7 +2504,7 @@ yyreduce:
     currBezierCurve->currSession = currSession;
 
     // Create list of vertices of face.
-    for (std::vector<string>::iterator it = tempVariables2.begin() ; it != tempVariables2.end(); ++it){
+    for (std::vector<std::string>::iterator it = tempVariables2.begin() ; it != tempVariables2.end(); ++it){
         Vert * currentVertex = currReader->getVert(*it);
         if (currentVertex != NULL) {
             currBezierCurve->proxy.push_back(currentVertex);
@@ -2516,7 +2517,7 @@ yyreduce:
 
     currBezierCurve->updateBezierCurve();
 
-    string surfaceName = surfaceFromArg;
+    std::string surfaceName = surfaceFromArg;
     // Check if a surface has been applied.
     if (surfaceName.length() != 0){
         Surface * currentSurface = currReader->surf(surfaceFromArg);
@@ -2533,11 +2534,11 @@ yyreduce:
     tempVariables2.clear();
     surfaceFromArg = "";
 }
-#line 2537 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 2538 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 81:
-#line 847 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 848 "compilerNome/parser.y" /* yacc.c:1651  */
     {
     if ((yyvsp[-7].intNumber) != (yyvsp[0].intNumber)) {
         nomerror(currSession, "bspline and endbspline do not have the same number.");
@@ -2558,7 +2559,7 @@ yyreduce:
 
 
     // Create list of vertices of face.
-    for (std::vector<string>::iterator it = tempVariables2.begin() ; it != tempVariables2.end(); ++it){
+    for (std::vector<std::string>::iterator it = tempVariables2.begin() ; it != tempVariables2.end(); ++it){
         Vert * currentVertex = currReader->getVert(*it);
         if (currentVertex != NULL) {
             currBSpline->proxy.push_back(currentVertex);
@@ -2583,7 +2584,7 @@ yyreduce:
 
     currBSpline->updateBSpline();
 
-    string surfaceName = surfaceFromArg;
+    std::string surfaceName = surfaceFromArg;
     // Check if a surface has been applied.
     if (surfaceName.length() != 0){
         Surface * currentSurface = currReader->surf(surfaceFromArg);
@@ -2602,17 +2603,17 @@ yyreduce:
     tempVariables2.clear();
     surfaceFromArg = "";
   }
-#line 2606 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 2607 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 82:
-#line 914 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 915 "compilerNome/parser.y" /* yacc.c:1651  */
     {
         Reader* currReader = createReader(currSession);
 
         // Create list of vertices of face.
         std::list<Vert*> verticesPolyline;
-        for (std::vector<string>::iterator it = tempVariables2.begin() ; it != tempVariables2.end(); ++it){
+        for (std::vector<std::string>::iterator it = tempVariables2.begin() ; it != tempVariables2.end(); ++it){
             Vert * currentVertex = currReader->getVert(*it);
             if (currentVertex != NULL) {
                 verticesPolyline.push_back(currentVertex);
@@ -2626,7 +2627,7 @@ yyreduce:
         PolylineNew* currPolyline = createPolylineNew(verticesPolyline);
         currPolyline->setName(nameUnique);
 
-        string surfaceName = surfaceFromArg;
+        std::string surfaceName = surfaceFromArg;
         // Check if a surface has been applied.
         if (surfaceName.length() != 0){
             Surface * currentSurface = currReader->surf(surfaceFromArg);
@@ -2642,11 +2643,11 @@ yyreduce:
         tempVariables2.clear();
         surfaceFromArg = "";
         }
-#line 2646 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 2647 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 83:
-#line 952 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 953 "compilerNome/parser.y" /* yacc.c:1651  */
     {
 	       try
 		   {
@@ -2661,11 +2662,11 @@ yyreduce:
                YYABORT;
 		   }
 	   }
-#line 2665 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 2666 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 89:
-#line 974 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 975 "compilerNome/parser.y" /* yacc.c:1651  */
     {
 				Reader* currReader = createReader(currSession);
 				MeshNew* path = currReader->getMesh((yyvsp[-1].string));
@@ -2677,11 +2678,11 @@ yyreduce:
 				}
 				currentSweepInitializer.PathInit.Path = dynamic_cast<ISweepPath*>(path);
 			}
-#line 2681 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 2682 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 90:
-#line 987 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 988 "compilerNome/parser.y" /* yacc.c:1651  */
     {
 						Reader* currReader = createReader(currSession);
 						MeshNew* path = currReader->getMesh((yyvsp[-1].string));
@@ -2695,30 +2696,30 @@ yyreduce:
 						init.CrossSection = dynamic_cast<ISweepPath*>(path);
 						currentSweepInitializer.CrossSectionInits.push_back(init);
 					}
-#line 2699 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 2700 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 91:
-#line 1002 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 1003 "compilerNome/parser.y" /* yacc.c:1651  */
     {
     currentSweepInitializer.Closed = true;
 }
-#line 2707 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 2708 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 92:
-#line 1007 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 1008 "compilerNome/parser.y" /* yacc.c:1651  */
     {
                     currentSweepInitializer.MinTorsion = true;
                 }
-#line 2715 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 2716 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 93:
-#line 1013 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 1014 "compilerNome/parser.y" /* yacc.c:1651  */
     {
       Reader* currReader = createReader(currSession);
-      string surfaceName = surfaceFromArg;
+      std::string surfaceName = surfaceFromArg;
       // Check if a surface has been applied.
       if (surfaceName.length() != 0){
           Surface * currentSurface = currReader->surf(surfaceFromArg);
@@ -2732,14 +2733,14 @@ yyreduce:
       }
       surfaceFromArg = "";
     }
-#line 2736 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 2737 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 94:
-#line 1032 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 1033 "compilerNome/parser.y" /* yacc.c:1651  */
     {
       Reader* currReader = createReader(currSession);
-      string surfaceName = surfaceFromArg;
+      std::string surfaceName = surfaceFromArg;
       // Check if a surface has been applied.
       if (surfaceName.length() != 0){
           Surface * currentSurface = currReader->surf(surfaceFromArg);
@@ -2753,14 +2754,14 @@ yyreduce:
       }
       surfaceFromArg = "";
     }
-#line 2757 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 2758 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 95:
-#line 1051 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 1052 "compilerNome/parser.y" /* yacc.c:1651  */
     {
       Reader* currReader = createReader(currSession);
-      string surfaceName = surfaceFromArg;
+      std::string surfaceName = surfaceFromArg;
       // Check if a surface has been applied.
       if (surfaceName.length() != 0){
           Surface * currentSurface = currReader->surf(surfaceFromArg);
@@ -2774,14 +2775,14 @@ yyreduce:
       }
       surfaceFromArg = "";
     }
-#line 2778 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 2779 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 96:
-#line 1070 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 1071 "compilerNome/parser.y" /* yacc.c:1651  */
     {
       Reader* currReader = createReader(currSession);
-      string surfaceName = surfaceFromArg;
+      std::string surfaceName = surfaceFromArg;
       // Check if a surface has been applied.
       if (surfaceName.length() != 0){
           Surface * currentSurface = currReader->surf(surfaceFromArg);
@@ -2795,14 +2796,14 @@ yyreduce:
       }
       surfaceFromArg = "";
     }
-#line 2799 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 2800 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 97:
-#line 1089 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 1090 "compilerNome/parser.y" /* yacc.c:1651  */
     {
       Reader* currReader = createReader(currSession);
-      string surfaceName = surfaceFromArg;
+      std::string surfaceName = surfaceFromArg;
       // Check if a surface has been applied.
       if (surfaceName.length() != 0){
           Surface * currentSurface = currReader->surf(surfaceFromArg);
@@ -2816,16 +2817,16 @@ yyreduce:
       }
       surfaceFromArg = "";
     }
-#line 2820 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 2821 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 98:
-#line 1108 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 1109 "compilerNome/parser.y" /* yacc.c:1651  */
     {
         Reader* currReader = createReader(currSession);
 
-        string instanceName = nameUnique;
-        string lookFor = strdup((yyvsp[-2].string));
+        std::string instanceName = nameUnique;
+        std::string lookFor = strdup((yyvsp[-2].string));
 
         MeshNew * currentMesh = currReader->getMesh((yyvsp[-2].string));
 
@@ -2858,7 +2859,7 @@ yyreduce:
             newInstance->applyTransformation(t);
         }
 
-        string surfaceName = surfaceFromArg;
+        std::string surfaceName = surfaceFromArg;
         // Check if a surface has been applied.
         if (surfaceName.length() != 0){
             Surface * currentSurface = currReader->surf(surfaceFromArg);
@@ -2874,16 +2875,16 @@ yyreduce:
         currSession->instances.push_back(newInstance);
         surfaceFromArg = "";
         }
-#line 2878 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 2879 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 99:
-#line 1165 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 1166 "compilerNome/parser.y" /* yacc.c:1651  */
     {
           Reader* currReader = createReader(currSession);
 
           std::list<FaceNew*> facesObject;
-          for (std::vector<string>::iterator it = tempVariables2.begin() ; it != tempVariables2.end(); ++it){
+          for (std::vector<std::string>::iterator it = tempVariables2.begin() ; it != tempVariables2.end(); ++it){
               FaceNew * currentFace = currReader->getFace(*it);
               if (currentFace != NULL) {
                   facesObject.push_back(currentFace);
@@ -2911,11 +2912,11 @@ yyreduce:
 
           tempVariables2.clear();
         }
-#line 2915 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 2916 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 100:
-#line 1201 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 1202 "compilerNome/parser.y" /* yacc.c:1651  */
     {
         double *r = (double*) malloc(sizeof(double));
         double *g = (double*) malloc(sizeof(double));
@@ -2938,11 +2939,11 @@ yyreduce:
 
         currSession->surfaces.push_back(currSurface);
         }
-#line 2942 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 2943 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
   case 101:
-#line 1227 "compilerNome/parser.y" /* yacc.c:1666  */
+#line 1228 "compilerNome/parser.y" /* yacc.c:1651  */
     {
         double *x = (double*) malloc(sizeof(double));
         double *y = (double*) malloc(sizeof(double));
@@ -2966,11 +2967,11 @@ yyreduce:
 
         currSession->verts.push_back(newVertex);
         }
-#line 2970 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 2971 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
     break;
 
 
-#line 2974 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.cpp" /* yacc.c:1666  */
+#line 2975 "E:/DevGra/nome/compilerNome/parser.cpp" /* yacc.c:1651  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires

@@ -8,19 +8,22 @@
 #include "mainwindow.h"
 #include "nomeglwidget.h"
 #include <QApplication>
+#include <QSurfaceFormat>
 
-
+#include <iostream>
 
 int main(int argc, char *argv[])
 {
-    cout << "Welcome to NOME!" << endl;
-
+    std::cout << "Welcome to NOME!" << std::endl;
 
     QApplication a(argc, argv);
-    //SlideGLWidget s;
-    //s.show();
-    MainWindow window;
-    window.setGeometry(200,200,400,100);
+
+	QSurfaceFormat fmt;
+	fmt.setDepthBufferSize(24);
+	fmt.setStencilBufferSize(8);
+	QSurfaceFormat::setDefaultFormat(fmt);
+
+    CMainWindow window;
     window.show();
 
     return a.exec();

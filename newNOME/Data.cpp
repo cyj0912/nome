@@ -42,7 +42,7 @@ double *getBankValue(std::string str, Session* currSession){
     //std::cout << "START BANK" << std::endl;
     auto first = str.find("$") + 1;
     auto last = str.find(".");
-    string strNew = str.substr (first,last-first);
+    std::string strNew = str.substr (first,last-first);
 
     for(auto b : currSession->banks) {
         if (b->name == strNew){
@@ -131,7 +131,7 @@ Vert* createVert(double *x, double *y, double *z, double w)
     v0->weight = w;
     std::list<EdgeNew*> edges; std::list<FaceNew*> faces;
     v0->edges = edges; v0->faces = faces;
-    v0->transformations = list<TransformationNew*>();
+    v0->transformations = std::list<TransformationNew*>();
     
     return v0;
 }

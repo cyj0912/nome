@@ -17,8 +17,6 @@
 /// Mode = 0 : Transformations off, Mode = 1 : Transformations on
 /// (This just means search at the mesh/instance level respectively)
 
-using namespace std;
-
 typedef class Reader
 {
 private:

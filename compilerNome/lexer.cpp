@@ -1,6 +1,6 @@
-#line 1 "/Volumes/macData/BerkeleyCG/nome/compilerNome/lexer.cpp"
+#line 1 "E:/DevGra/nome/compilerNome/lexer.cpp"
 
-#line 3 "/Volumes/macData/BerkeleyCG/nome/compilerNome/lexer.cpp"
+#line 3 "E:/DevGra/nome/compilerNome/lexer.cpp"
 
 #define  YY_INT_ALIGNED short int
 
@@ -1031,10 +1031,10 @@ int numBegComments = 0;
     nomcolumn += nomleng;
 
 static int isatty(int) {return 0;}
-#line 1034 "/Volumes/macData/BerkeleyCG/nome/compilerNome/lexer.cpp"
+#line 1034 "E:/DevGra/nome/compilerNome/lexer.cpp"
 #define YY_NO_UNISTD_H 1
 
-#line 1037 "/Volumes/macData/BerkeleyCG/nome/compilerNome/lexer.cpp"
+#line 1037 "E:/DevGra/nome/compilerNome/lexer.cpp"
 
 #define INITIAL 0
 #define MULTI_COMMENT 1
@@ -1255,7 +1255,7 @@ YY_DECL
 	{
 #line 27 "compilerNome/lexer.l"
 
-#line 1258 "/Volumes/macData/BerkeleyCG/nome/compilerNome/lexer.cpp"
+#line 1258 "E:/DevGra/nome/compilerNome/lexer.cpp"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1775,7 +1775,7 @@ YY_RULE_SETUP
 #line 120 "compilerNome/lexer.l"
 ECHO;
 	YY_BREAK
-#line 1778 "/Volumes/macData/BerkeleyCG/nome/compilerNome/lexer.cpp"
+#line 1778 "E:/DevGra/nome/compilerNome/lexer.cpp"
 
 	case YY_END_OF_BUFFER:
 		{

@@ -3,8 +3,9 @@
 }
 
 %{
-#include <stdio.h>
-#include <string.h>
+#include <cstdio>
+#include <cstring>
+#include <string>
 #include <list>
 #include <newNOME/Data.h>
 #include <newNOME/MeshNew.h>
@@ -33,14 +34,14 @@ int objwrap() {
     return 1;
 }
 
-map<string,QColor> surfaces3;
-map<string,Vert*> vertices3;
-std::vector<string> tempVariables3;
-std::vector<string> tempFaceDelete3;
-string currentSetName3;
+std::map<std::string, QColor> surfaces3;
+std::map<std::string, Vert*> vertices3;
+std::vector<std::string> tempVariables3;
+std::vector<std::string> tempFaceDelete3;
+std::string currentSetName3;
 std::list<SetNew *> currentSetList3;
-map<string,std::vector<double>> currentBank3;
-std::vector<string> currentInstanceList3;
+std::map<std::string, std::vector<double>> currentBank3;
+std::vector<std::string> currentInstanceList3;
 std::list<InstanceNew *> currentGroup3;
 std::list<FaceNew *> currentMeshFaces3;
 std::list<Vert *> currentMeshVertices3;
@@ -54,7 +55,7 @@ std::list<TransformationNew *> currentTransformations3;
 double *getBankValue3(std::string str, Session* currSession){
     unsigned first = str.find("$") + 1;
     unsigned last = str.find(".");
-    string strNew = str.substr (first,last-first);
+    std::string strNew = str.substr (first,last-first);
 
     for(auto b : currSession->banks) {
         if (b->name == strNew){

@@ -211,12 +211,12 @@ void ControlPanel::setupLayout()
 
 void ControlPanel::test(QString test)
 {
-    cout<<test.toStdString()<<endl;
+	std::cout << test.toStdString() << std::endl;
 }
 
 void ControlPanel::test(bool checked)
 {
-    cout<<"Hello!"<<endl;
+	std::cout << "Hello!" << std::endl;
 }
 
 void ControlPanel::viewContentReset()
@@ -353,7 +353,8 @@ void ControlPanel::regenerateScene()
 
 	currSession->reset();
 	currSession->parseSavedStr();
-	mainWindow->recreateSliders();
+	//TODO: Urgent
+	//mainWindow->recreateSliders();
 
 	canvas->update();
 }

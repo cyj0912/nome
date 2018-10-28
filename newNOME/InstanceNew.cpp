@@ -347,8 +347,8 @@ void InstanceNew::flattenInstance(MeshNew* flattenedMesh)
             flattenedMesh->faces.push_back(createDupFace(f));
         }
     }
-    list<EdgeNew*> newListEdges = list<EdgeNew*>();
-    list<FaceNew*> newListFaces = list<FaceNew*>();
+    std::list<EdgeNew*> newListEdges = std::list<EdgeNew*>();
+    std::list<FaceNew*> newListFaces = std::list<FaceNew*>();
     for (Vert* v0 : flattenedMesh->verts){
         for (EdgeNew* oldEdge : v0->edges){
             for (EdgeNew* newEdge : flattenedMesh->edges){
@@ -408,8 +408,8 @@ void InstanceNew::flattenInstance(MeshNew* flattenedMesh)
         }
     }
 
-    list<EdgeNew*> newListEdgesF = list<EdgeNew*>();
-    list<Vert*> newListVertsF = list<Vert*>();
+	std::list<EdgeNew*> newListEdgesF = std::list<EdgeNew*>();
+	std::list<Vert*> newListVertsF = std::list<Vert*>();
     for (FaceNew* f0 : flattenedMesh->faces){
         for (EdgeNew* oldEdge : f0->edges){
             for (EdgeNew* newEdge : flattenedMesh->edges){

@@ -1,4 +1,4 @@
-/* A Bison parser, made by GNU Bison 3.0.5.  */
+/* A Bison parser, made by GNU Bison 3.1.  */
 
 /* Bison interface for Yacc-like parsers in C
 
@@ -40,11 +40,11 @@
 extern int bankdebug;
 #endif
 /* "%code requires" blocks.  */
-#line 1 "compilerBank/parserBank.y" /* yacc.c:1910  */
+#line 1 "compilerBank/parserBank.y" /* yacc.c:1913  */
 
 #include <newNOME/Session.h>
 
-#line 48 "E:/DevGra/nome/compilerBank/parserBank.hpp" /* yacc.c:1910  */
+#line 48 "E:/DevGra/nome/compilerBank/parserBank.hpp" /* yacc.c:1913  */
 
 /* Token type.  */
 #ifndef YYTOKENTYPE
@@ -110,12 +110,12 @@ extern int bankdebug;
 
 union YYSTYPE
 {
-#line 49 "compilerBank/parserBank.y" /* yacc.c:1910  */
+#line 49 "compilerBank/parserBank.y" /* yacc.c:1913  */
 
     double number;
     char *string;
 
-#line 119 "E:/DevGra/nome/compilerBank/parserBank.hpp" /* yacc.c:1910  */
+#line 119 "E:/DevGra/nome/compilerBank/parserBank.hpp" /* yacc.c:1913  */
 };
 
 typedef union YYSTYPE YYSTYPE;

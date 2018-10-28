@@ -1,3 +1,80 @@
+#include "mainwindow.h"
+
+#include <QAction>
+#include <QMenu>
+#include <QMenuBar>
+#include <QStatusBar>
+
+CMainWindow::CMainWindow(QWidget* parent) : QMainWindow(parent)
+{
+	SetupUi();
+}
+
+CMainWindow::~CMainWindow()
+{
+}
+
+void CMainWindow::SetupUi()
+{
+	auto* MainWindow = this;
+
+	//Copied from designer
+	if (MainWindow->objectName().isEmpty())
+		MainWindow->setObjectName(QStringLiteral("MainWindow"));
+	MainWindow->resize(800, 600);
+	actionNew = new QAction(MainWindow);
+	actionNew->setObjectName(QStringLiteral("actionNew"));
+	actionOpen = new QAction(MainWindow);
+	actionOpen->setObjectName(QStringLiteral("actionOpen"));
+	actionSave = new QAction(MainWindow);
+	actionSave->setObjectName(QStringLiteral("actionSave"));
+	actionSave_As = new QAction(MainWindow);
+	actionSave_As->setObjectName(QStringLiteral("actionSave_As"));
+	actionClose = new QAction(MainWindow);
+	actionClose->setObjectName(QStringLiteral("actionClose"));
+	actionQUit = new QAction(MainWindow);
+	actionQUit->setObjectName(QStringLiteral("actionQUit"));
+	actionAbout = new QAction(MainWindow);
+	actionAbout->setObjectName(QStringLiteral("actionAbout"));
+	actionAbout_Qt = new QAction(MainWindow);
+	actionAbout_Qt->setObjectName(QStringLiteral("actionAbout_Qt"));
+	actionQuit = new QAction(MainWindow);
+	actionQuit->setObjectName(QStringLiteral("actionQuit"));
+	centralwidget = new QWidget(MainWindow);
+	centralwidget->setObjectName(QStringLiteral("centralwidget"));
+	horizontalLayout = new QHBoxLayout(centralwidget);
+	horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+	MainWindow->setCentralWidget(centralwidget);
+	menubar = new QMenuBar(MainWindow);
+	menubar->setObjectName(QStringLiteral("menubar"));
+	menubar->setGeometry(QRect(0, 0, 800, 26));
+	menuFile = new QMenu(menubar);
+	menuFile->setObjectName(QStringLiteral("menuFile"));
+	menuHelp = new QMenu(menubar);
+	menuHelp->setObjectName(QStringLiteral("menuHelp"));
+	MainWindow->setMenuBar(menubar);
+	statusbar = new QStatusBar(MainWindow);
+	statusbar->setObjectName(QStringLiteral("statusbar"));
+	MainWindow->setStatusBar(statusbar);
+
+	menubar->addAction(menuFile->menuAction());
+	menubar->addAction(menuHelp->menuAction());
+	menuFile->addAction(actionNew);
+	menuFile->addAction(actionOpen);
+	menuFile->addSeparator();
+	menuFile->addAction(actionSave);
+	menuFile->addAction(actionSave_As);
+	menuFile->addSeparator();
+	menuFile->addAction(actionClose);
+	menuFile->addSeparator();
+	menuFile->addAction(actionQuit);
+	menuHelp->addAction(actionAbout);
+	menuHelp->addAction(actionAbout_Qt);
+
+	QMetaObject::connectSlotsByName(MainWindow);
+}
+
+#if 0
 /**
  * @author Andy Wang, UC Berkeley.
  * Copyright 2016 reserve.
@@ -490,3 +567,4 @@ void MainWindow::save_current_status_nome(string out_put_file)
         file<<"instance " + instanceName + " " + consolidatedMeshName + " endinstance\n";
     }
 }
+#endif

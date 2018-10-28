@@ -1,4 +1,4 @@
-/* A Bison parser, made by GNU Bison 3.0.5.  */
+/* A Bison parser, made by GNU Bison 3.1.  */
 
 /* Bison implementation for Yacc-like parsers in C
 
@@ -44,7 +44,7 @@
 #define YYBISON 1
 
 /* Bison version.  */
-#define YYBISON_VERSION "3.0.5"
+#define YYBISON_VERSION "3.1"
 
 /* Skeleton name.  */
 #define YYSKELETON_NAME "yacc.c"
@@ -262,13 +262,13 @@ typedef signed char yytype_int8;
 #ifdef YYTYPE_UINT16
 typedef YYTYPE_UINT16 yytype_uint16;
 #else
-typedef unsigned short int yytype_uint16;
+typedef unsigned short yytype_uint16;
 #endif
 
 #ifdef YYTYPE_INT16
 typedef YYTYPE_INT16 yytype_int16;
 #else
-typedef short int yytype_int16;
+typedef short yytype_int16;
 #endif
 
 #ifndef YYSIZE_T
@@ -280,7 +280,7 @@ typedef short int yytype_int16;
 #  include <stddef.h> /* INFRINGES ON USER NAME SPACE */
 #  define YYSIZE_T size_t
 # else
-#  define YYSIZE_T unsigned int
+#  define YYSIZE_T unsigned
 # endif
 #endif
 
@@ -332,7 +332,7 @@ typedef short int yytype_int16;
 # define YYUSE(E) /* empty */
 #endif
 
-#if defined __GNUC__ && 407 <= __GNUC__ * 100 + __GNUC_MINOR__
+#if defined __GNUC__ && ! defined __ICC && 407 <= __GNUC__ * 100 + __GNUC_MINOR__
 /* Suppress an incorrect diagnostic about yylval being uninitialized.  */
 # define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN \
     _Pragma ("GCC diagnostic push") \
@@ -502,7 +502,7 @@ union yyalloc
 #define YYMAXUTOK   282
 
 #define YYTRANSLATE(YYX)                                                \
-  ((unsigned int) (YYX) <= YYMAXUTOK ? yytranslate[YYX] : YYUNDEFTOK)
+  ((unsigned) (YYX) <= YYMAXUTOK ? yytranslate[YYX] : YYUNDEFTOK)
 
 /* YYTRANSLATE[TOKEN-NUM] -- Symbol number corresponding to TOKEN-NUM
    as returned by yylex, without out-of-bounds checking.  */
@@ -883,7 +883,7 @@ do {                                                            \
 static void
 yy_reduce_print (yytype_int16 *yyssp, YYSTYPE *yyvsp, YYLTYPE *yylsp, int yyrule, Session* currSession)
 {
-  unsigned long int yylno = yyrline[yyrule];
+  unsigned long yylno = yyrline[yyrule];
   int yynrhs = yyr2[yyrule];
   int yyi;
   YYFPRINTF (stderr, "Reducing stack by rule %d (line %lu):\n",
@@ -1340,7 +1340,7 @@ yyparse (Session* currSession)
       yylsp = yyls + yysize - 1;
 
       YYDPRINTF ((stderr, "Stack size increased to %lu\n",
-                  (unsigned long int) yystacksize));
+                  (unsigned long) yystacksize));
 
       if (yyss + yystacksize - 1 <= yyssp)
         YYABORT;
@@ -1453,201 +1453,201 @@ yyreduce:
   switch (yyn)
     {
         case 4:
-#line 62 "compilerBank/parserBank.y" /* yacc.c:1648  */
+#line 62 "compilerBank/parserBank.y" /* yacc.c:1651  */
     {
     result = (yyvsp[0].number);
     }
-#line 1461 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1648  */
+#line 1461 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1651  */
     break;
 
   case 5:
-#line 68 "compilerBank/parserBank.y" /* yacc.c:1648  */
+#line 68 "compilerBank/parserBank.y" /* yacc.c:1651  */
     {(yyval.number) = (yyvsp[-2].number) + (yyvsp[0].number);}
-#line 1467 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1648  */
+#line 1467 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1651  */
     break;
 
   case 6:
-#line 70 "compilerBank/parserBank.y" /* yacc.c:1648  */
+#line 70 "compilerBank/parserBank.y" /* yacc.c:1651  */
     {(yyval.number) = (yyvsp[-2].number) - (yyvsp[0].number);}
-#line 1473 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1648  */
+#line 1473 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1651  */
     break;
 
   case 7:
-#line 72 "compilerBank/parserBank.y" /* yacc.c:1648  */
+#line 72 "compilerBank/parserBank.y" /* yacc.c:1651  */
     {(yyval.number) = (yyvsp[0].number);}
-#line 1479 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1648  */
+#line 1479 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1651  */
     break;
 
   case 8:
-#line 75 "compilerBank/parserBank.y" /* yacc.c:1648  */
+#line 75 "compilerBank/parserBank.y" /* yacc.c:1651  */
     {(yyval.number) = (yyvsp[-2].number) * (yyvsp[0].number);}
-#line 1485 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1648  */
+#line 1485 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1651  */
     break;
 
   case 9:
-#line 76 "compilerBank/parserBank.y" /* yacc.c:1648  */
+#line 76 "compilerBank/parserBank.y" /* yacc.c:1651  */
     {(yyval.number) = (yyvsp[-2].number) / (yyvsp[0].number);}
-#line 1491 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1648  */
+#line 1491 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1651  */
     break;
 
   case 10:
-#line 77 "compilerBank/parserBank.y" /* yacc.c:1648  */
+#line 77 "compilerBank/parserBank.y" /* yacc.c:1651  */
     {(yyval.number) = (yyvsp[0].number);}
-#line 1497 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1648  */
+#line 1497 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1651  */
     break;
 
   case 11:
-#line 80 "compilerBank/parserBank.y" /* yacc.c:1648  */
+#line 80 "compilerBank/parserBank.y" /* yacc.c:1651  */
     {(yyval.number) = pow((yyvsp[-2].number), (yyvsp[0].number));}
-#line 1503 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1648  */
+#line 1503 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1651  */
     break;
 
   case 12:
-#line 81 "compilerBank/parserBank.y" /* yacc.c:1648  */
+#line 81 "compilerBank/parserBank.y" /* yacc.c:1651  */
     { (yyval.number) = (yyvsp[0].number); }
-#line 1509 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1648  */
+#line 1509 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1651  */
     break;
 
   case 13:
-#line 84 "compilerBank/parserBank.y" /* yacc.c:1648  */
+#line 84 "compilerBank/parserBank.y" /* yacc.c:1651  */
     {(yyval.number) = sqrt((yyvsp[0].number));}
-#line 1515 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1648  */
+#line 1515 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1651  */
     break;
 
   case 14:
-#line 85 "compilerBank/parserBank.y" /* yacc.c:1648  */
+#line 85 "compilerBank/parserBank.y" /* yacc.c:1651  */
     {(yyval.number) = cos((yyvsp[0].number));}
-#line 1521 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1648  */
+#line 1521 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1651  */
     break;
 
   case 15:
-#line 86 "compilerBank/parserBank.y" /* yacc.c:1648  */
+#line 86 "compilerBank/parserBank.y" /* yacc.c:1651  */
     {(yyval.number) = sin((yyvsp[0].number));}
-#line 1527 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1648  */
+#line 1527 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1651  */
     break;
 
   case 16:
-#line 87 "compilerBank/parserBank.y" /* yacc.c:1648  */
+#line 87 "compilerBank/parserBank.y" /* yacc.c:1651  */
     {(yyval.number) = tan((yyvsp[0].number));}
-#line 1533 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1648  */
+#line 1533 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1651  */
     break;
 
   case 17:
-#line 88 "compilerBank/parserBank.y" /* yacc.c:1648  */
+#line 88 "compilerBank/parserBank.y" /* yacc.c:1651  */
     {(yyval.number) = 1/(cos((yyvsp[0].number)));}
-#line 1539 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1648  */
+#line 1539 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1651  */
     break;
 
   case 18:
-#line 89 "compilerBank/parserBank.y" /* yacc.c:1648  */
+#line 89 "compilerBank/parserBank.y" /* yacc.c:1651  */
     {(yyval.number) = 1/(sin((yyvsp[0].number)));}
-#line 1545 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1648  */
+#line 1545 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1651  */
     break;
 
   case 19:
-#line 90 "compilerBank/parserBank.y" /* yacc.c:1648  */
+#line 90 "compilerBank/parserBank.y" /* yacc.c:1651  */
     {(yyval.number) = tan((yyvsp[0].number));}
-#line 1551 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1648  */
+#line 1551 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1651  */
     break;
 
   case 20:
-#line 91 "compilerBank/parserBank.y" /* yacc.c:1648  */
+#line 91 "compilerBank/parserBank.y" /* yacc.c:1651  */
     {(yyval.number) = acos((yyvsp[0].number));}
-#line 1557 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1648  */
+#line 1557 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1651  */
     break;
 
   case 21:
-#line 92 "compilerBank/parserBank.y" /* yacc.c:1648  */
+#line 92 "compilerBank/parserBank.y" /* yacc.c:1651  */
     {(yyval.number) = asin((yyvsp[0].number));}
-#line 1563 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1648  */
+#line 1563 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1651  */
     break;
 
   case 22:
-#line 93 "compilerBank/parserBank.y" /* yacc.c:1648  */
+#line 93 "compilerBank/parserBank.y" /* yacc.c:1651  */
     {(yyval.number) = atan((yyvsp[0].number));}
-#line 1569 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1648  */
+#line 1569 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1651  */
     break;
 
   case 23:
-#line 94 "compilerBank/parserBank.y" /* yacc.c:1648  */
+#line 94 "compilerBank/parserBank.y" /* yacc.c:1651  */
     {(yyval.number) = 1/(acos((yyvsp[0].number)));}
-#line 1575 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1648  */
+#line 1575 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1651  */
     break;
 
   case 24:
-#line 95 "compilerBank/parserBank.y" /* yacc.c:1648  */
+#line 95 "compilerBank/parserBank.y" /* yacc.c:1651  */
     {(yyval.number) = 1/(asin((yyvsp[0].number)));}
-#line 1581 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1648  */
+#line 1581 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1651  */
     break;
 
   case 25:
-#line 96 "compilerBank/parserBank.y" /* yacc.c:1648  */
+#line 96 "compilerBank/parserBank.y" /* yacc.c:1651  */
     {(yyval.number) = 1/(atan((yyvsp[0].number)));}
-#line 1587 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1648  */
+#line 1587 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1651  */
     break;
 
   case 26:
-#line 97 "compilerBank/parserBank.y" /* yacc.c:1648  */
+#line 97 "compilerBank/parserBank.y" /* yacc.c:1651  */
     {(yyval.number) = log10((yyvsp[0].number));}
-#line 1593 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1648  */
+#line 1593 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1651  */
     break;
 
   case 27:
-#line 98 "compilerBank/parserBank.y" /* yacc.c:1648  */
+#line 98 "compilerBank/parserBank.y" /* yacc.c:1651  */
     {(yyval.number) = log((yyvsp[0].number));}
-#line 1599 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1648  */
+#line 1599 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1651  */
     break;
 
   case 28:
-#line 99 "compilerBank/parserBank.y" /* yacc.c:1648  */
+#line 99 "compilerBank/parserBank.y" /* yacc.c:1651  */
     {(yyval.number) = -1 * (yyvsp[0].number);}
-#line 1605 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1648  */
+#line 1605 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1651  */
     break;
 
   case 29:
-#line 100 "compilerBank/parserBank.y" /* yacc.c:1648  */
+#line 100 "compilerBank/parserBank.y" /* yacc.c:1651  */
     {(yyval.number) = (yyvsp[-1].number) *(yyvsp[0].number);}
-#line 1611 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1648  */
+#line 1611 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1651  */
     break;
 
   case 30:
-#line 101 "compilerBank/parserBank.y" /* yacc.c:1648  */
+#line 101 "compilerBank/parserBank.y" /* yacc.c:1651  */
     {(yyval.number) = (yyvsp[0].number);}
-#line 1617 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1648  */
+#line 1617 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1651  */
     break;
 
   case 31:
-#line 104 "compilerBank/parserBank.y" /* yacc.c:1648  */
+#line 104 "compilerBank/parserBank.y" /* yacc.c:1651  */
     {(yyval.number) = (yyvsp[-1].number);}
-#line 1623 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1648  */
+#line 1623 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1651  */
     break;
 
   case 32:
-#line 105 "compilerBank/parserBank.y" /* yacc.c:1648  */
+#line 105 "compilerBank/parserBank.y" /* yacc.c:1651  */
     {(yyval.number) = (yyvsp[0].number);}
-#line 1629 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1648  */
+#line 1629 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1651  */
     break;
 
   case 33:
-#line 108 "compilerBank/parserBank.y" /* yacc.c:1648  */
+#line 108 "compilerBank/parserBank.y" /* yacc.c:1651  */
     { (yyval.number) = M_E;}
-#line 1635 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1648  */
+#line 1635 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1651  */
     break;
 
   case 34:
-#line 109 "compilerBank/parserBank.y" /* yacc.c:1648  */
+#line 109 "compilerBank/parserBank.y" /* yacc.c:1651  */
     {(yyval.number) = (yyvsp[0].number);}
-#line 1641 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1648  */
+#line 1641 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1651  */
     break;
 
   case 35:
-#line 110 "compilerBank/parserBank.y" /* yacc.c:1648  */
+#line 110 "compilerBank/parserBank.y" /* yacc.c:1651  */
     {double* bankVal = getBankValue((yyvsp[0].string), currSession); std::string nameBank((yyvsp[0].string)); if (bankVal == NULL && lineNumberG != 0){std::cout << "Bank " + nameBank + " not found on line "; return -1;} else{(yyval.number) = *bankVal;} }
-#line 1647 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1648  */
+#line 1647 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1651  */
     break;
 
 
-#line 1651 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1648  */
+#line 1651 "E:/DevGra/nome/compilerBank/parserBank.cpp" /* yacc.c:1651  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1881,7 +1881,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 112 "compilerBank/parserBank.y" /* yacc.c:1907  */
+#line 112 "compilerBank/parserBank.y" /* yacc.c:1910  */
 
 /* Declarations */
 void set_input_string(const char* in, int lineNumber);

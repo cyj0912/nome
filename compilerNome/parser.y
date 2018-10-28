@@ -4,9 +4,10 @@
 }
 
 %{
-#include <stdio.h>
-#include <string.h>
+#include <cstdio>
+#include <cstring>
 #include <list>
+#include <string>
 #include <newNOME/Data.h>
 #include <newNOME/MeshNew.h>
 #include <newNOME/Session.h>
@@ -38,14 +39,14 @@ int nomwrap() {
     return 1;
 }
 
-map<string,QColor> surfaces2;
-map<string,Vert*> vertices2;
-std::vector<string> tempVariables2;
-std::vector<string> tempFaceDelete2;
-string currentSetName2;
+std::map<std::string,QColor> surfaces2;
+std::map<std::string,Vert*> vertices2;
+std::vector<std::string> tempVariables2;
+std::vector<std::string> tempFaceDelete2;
+std::string currentSetName2;
 std::list<SetNew *> currentSetList2;
-map<string,std::vector<double>> currentBank2;
-std::vector<string> currentInstanceList2;
+std::map<std::string,std::vector<double>> currentBank2;
+std::vector<std::string> currentInstanceList2;
 std::list<InstanceNew *> currentGroup2;
 std::list<FaceNew *> currentMeshFaces2;
 std::list<PolylineNew *> currentMeshPolyline;
@@ -143,7 +144,7 @@ uniqueName: VARIABLE
 uniqueNameFaceMesh: VARIABLE
     {
         for (FaceNew* fa : currentMeshFaces2){
-            string currentF = strdup($<string>1);
+            std::string currentF = strdup($<string>1);
           if(!currentF.compare(fa->name)){
             nomerror(currSession, "Duplicate construct name.");
             YYABORT;
@@ -155,7 +156,7 @@ uniqueNameFaceMesh: VARIABLE
 uniqueNameInstanceGroup: VARIABLE
     {
         for (InstanceNew* fa : currentGroup2){
-            string currentF = strdup($<string>1);
+            std::string currentF = strdup($<string>1);
           if(!currentF.compare(fa->name)){
             nomerror(currSession, "Duplicate construct name.");
             YYABORT;
@@ -321,8 +322,8 @@ instanceGroup:
     {
         Reader* currReader = createReader(currSession);
 
-        string instanceName = strdup($<string>2);
-        string lookFor = strdup($<string>3);
+        std::string instanceName = strdup($<string>2);
+        std::string lookFor = strdup($<string>3);
 
         MeshNew * currentMesh = currReader->getMesh($<string>3);
 
@@ -361,7 +362,7 @@ instanceGroup:
           }
         }*/
 
-        string surfaceName = surfaceFromArg;
+        std::string surfaceName = surfaceFromArg;
         // Check if a surface has been applied.
         if (surfaceName.length() != 0){
             Surface * currentSurface = currReader->surf(surfaceFromArg);
@@ -385,7 +386,7 @@ faceDeleteArgs:
 instanceOffseSubdivide:
     INSTANCE VARIABLE
     {
-        string instanceName = strdup($<string>2);
+        std::string instanceName = strdup($<string>2);
     };
 
 instanceOffseSubdivideArgs:
@@ -500,7 +501,7 @@ delete:
 set:
     SET VARIABLE numPosTok numberValue numberValue numberValue
     {
-        string currentSetName = $<string>2;
+        std::string currentSetName = $<string>2;
         double currentSetValue = (double)atof($<numPos>3.string);
         double *currentValSet = (double*) malloc(sizeof(double));
         parseGetBankVal($<string>4, currSession, currentValSet, nomlineno);
@@ -509,7 +510,7 @@ set:
         double currentSetEnd = *currentValSet;
         parseGetBankVal($<string>6, currSession, currentValSet, nomlineno);
         double currentSetStepSize = *currentValSet;
-        string currentSetValueString = $<numPos>3.string;
+        std::string currentSetValueString = $<numPos>3.string;
 
 
         int begPos = $<numPos>3.number-currentSetValueString.length();
@@ -532,7 +533,7 @@ POLYLINE uniqueName parenthesisName transformArgs END_POLYLINE
 
     // Create list of vertices of face.
     std::list<Vert*> verticesPolyline;
-    for (std::vector<string>::iterator it = tempVariables2.begin() ; it != tempVariables2.end(); ++it){
+    for (std::vector<std::string>::iterator it = tempVariables2.begin() ; it != tempVariables2.end(); ++it){
         Vert * currentVertex = currReader->getVert(*it);
         if (currentVertex != NULL) {
             verticesPolyline.push_back(currentVertex);
@@ -551,7 +552,7 @@ POLYLINE uniqueName parenthesisName transformArgs END_POLYLINE
 
     currPolyline->setName(nameUnique);
 
-    string surfaceName = surfaceFromArg;
+    std::string surfaceName = surfaceFromArg;
     // Check if a surface has been applied.
     if (surfaceName.length() != 0){
         Surface * currentSurface = currReader->surf(surfaceFromArg);
@@ -577,7 +578,7 @@ faceMesh:
 
         std::list<Vert*> verticesFace;
         //std::cout << "FACE MESH" << std::endl;
-        for (std::vector<string>::iterator it = tempVariables2.begin() ; it != tempVariables2.end(); ++it){
+        for (std::vector<std::string>::iterator it = tempVariables2.begin() ; it != tempVariables2.end(); ++it){
             Vert * currentVertex = currReader->getVert(*it);
             if (currentVertex != NULL) {
                 verticesFace.push_back(currentVertex);
@@ -603,7 +604,7 @@ faceMesh:
         FaceNew * newFace = createFace(verticesFace, &currentMeshEdges2, currReader, false);
         setName(newFace, nameUniqueFaceMesh);
 
-        string surfaceName = surfaceFromArg;
+        std::string surfaceName = surfaceFromArg;
         // Check if a surface has been applied.
         if (surfaceName.length() != 0){
             Surface * currentSurface = currReader->surf(surfaceFromArg);
@@ -649,7 +650,7 @@ merging:
 circle:
     CIRCLE uniqueName OPARENTHESES numberValue numberValue EPARENTHESES END_CIRCLE
     {
-        string name = $<string>2;
+        std::string name = $<string>2;
         double *num = (double*) malloc(sizeof(double));
         double *rad = (double*) malloc(sizeof(double));
 
@@ -676,7 +677,7 @@ tunnel:
         {
         Reader* currReader = createReader(currSession);
 
-        string name = $<string>2;
+        std::string name = $<string>2;
         double *n = (double*) malloc(sizeof(double));
         double *ro = (double*) malloc(sizeof(double));
         double *ratio = (double*) malloc(sizeof(double));
@@ -710,7 +711,7 @@ funnel:
         {
         Reader* currReader = createReader(currSession);
 
-        string name = $<string>2;
+        std::string name = $<string>2;
         double *n = (double*) malloc(sizeof(double));
         double *ro = (double*) malloc(sizeof(double));
         double *ratio = (double*) malloc(sizeof(double));
@@ -751,7 +752,7 @@ face:
         Reader* currReader = createReader(currSession);
 
         std::list<Vert*> verticesFace;
-        for (std::vector<string>::iterator it = tempVariables2.begin() ; it != tempVariables2.end(); ++it){
+        for (std::vector<std::string>::iterator it = tempVariables2.begin() ; it != tempVariables2.end(); ++it){
             Vert * currentVertex = currReader->getVert(*it);
             if (currentVertex != NULL) {
                 verticesFace.push_back(currentVertex);
@@ -767,7 +768,7 @@ face:
         setName(newFace, nameUnique);
 
 
-        string surfaceName = surfaceFromArg;
+        std::string surfaceName = surfaceFromArg;
         // Check if a surface has been applied.
         if (surfaceName.length() != 0){
             Surface * currentSurface = currReader->surf(surfaceFromArg);
@@ -811,7 +812,7 @@ beziercurve:
     currBezierCurve->currSession = currSession;
 
     // Create list of vertices of face.
-    for (std::vector<string>::iterator it = tempVariables2.begin() ; it != tempVariables2.end(); ++it){
+    for (std::vector<std::string>::iterator it = tempVariables2.begin() ; it != tempVariables2.end(); ++it){
         Vert * currentVertex = currReader->getVert(*it);
         if (currentVertex != NULL) {
             currBezierCurve->proxy.push_back(currentVertex);
@@ -824,7 +825,7 @@ beziercurve:
 
     currBezierCurve->updateBezierCurve();
 
-    string surfaceName = surfaceFromArg;
+    std::string surfaceName = surfaceFromArg;
     // Check if a surface has been applied.
     if (surfaceName.length() != 0){
         Surface * currentSurface = currReader->surf(surfaceFromArg);
@@ -864,7 +865,7 @@ bspline:
 
 
     // Create list of vertices of face.
-    for (std::vector<string>::iterator it = tempVariables2.begin() ; it != tempVariables2.end(); ++it){
+    for (std::vector<std::string>::iterator it = tempVariables2.begin() ; it != tempVariables2.end(); ++it){
         Vert * currentVertex = currReader->getVert(*it);
         if (currentVertex != NULL) {
             currBSpline->proxy.push_back(currentVertex);
@@ -889,7 +890,7 @@ bspline:
 
     currBSpline->updateBSpline();
 
-    string surfaceName = surfaceFromArg;
+    std::string surfaceName = surfaceFromArg;
     // Check if a surface has been applied.
     if (surfaceName.length() != 0){
         Surface * currentSurface = currReader->surf(surfaceFromArg);
@@ -916,7 +917,7 @@ polyline:
 
         // Create list of vertices of face.
         std::list<Vert*> verticesPolyline;
-        for (std::vector<string>::iterator it = tempVariables2.begin() ; it != tempVariables2.end(); ++it){
+        for (std::vector<std::string>::iterator it = tempVariables2.begin() ; it != tempVariables2.end(); ++it){
             Vert * currentVertex = currReader->getVert(*it);
             if (currentVertex != NULL) {
                 verticesPolyline.push_back(currentVertex);
@@ -930,7 +931,7 @@ polyline:
         PolylineNew* currPolyline = createPolylineNew(verticesPolyline);
         currPolyline->setName(nameUnique);
 
-        string surfaceName = surfaceFromArg;
+        std::string surfaceName = surfaceFromArg;
         // Check if a surface has been applied.
         if (surfaceName.length() != 0){
             Surface * currentSurface = currReader->surf(surfaceFromArg);
@@ -1012,7 +1013,7 @@ foreground:
     FOREGROUND transformArgs END_FOREGROUND
     {
       Reader* currReader = createReader(currSession);
-      string surfaceName = surfaceFromArg;
+      std::string surfaceName = surfaceFromArg;
       // Check if a surface has been applied.
       if (surfaceName.length() != 0){
           Surface * currentSurface = currReader->surf(surfaceFromArg);
@@ -1031,7 +1032,7 @@ background:
     BACKGROUND transformArgs END_BACKGROUND
     {
       Reader* currReader = createReader(currSession);
-      string surfaceName = surfaceFromArg;
+      std::string surfaceName = surfaceFromArg;
       // Check if a surface has been applied.
       if (surfaceName.length() != 0){
           Surface * currentSurface = currReader->surf(surfaceFromArg);
@@ -1050,7 +1051,7 @@ insidefaces:
     INSIDEFACES transformArgs END_INSIDEFACES
     {
       Reader* currReader = createReader(currSession);
-      string surfaceName = surfaceFromArg;
+      std::string surfaceName = surfaceFromArg;
       // Check if a surface has been applied.
       if (surfaceName.length() != 0){
           Surface * currentSurface = currReader->surf(surfaceFromArg);
@@ -1069,7 +1070,7 @@ outsidefaces:
     OUTSIDEFACES transformArgs END_OUTSIDEFACES
     {
       Reader* currReader = createReader(currSession);
-      string surfaceName = surfaceFromArg;
+      std::string surfaceName = surfaceFromArg;
       // Check if a surface has been applied.
       if (surfaceName.length() != 0){
           Surface * currentSurface = currReader->surf(surfaceFromArg);
@@ -1088,7 +1089,7 @@ offsetfaces:
     OFFSETFACES transformArgs END_OFFSETFACES
     {
       Reader* currReader = createReader(currSession);
-      string surfaceName = surfaceFromArg;
+      std::string surfaceName = surfaceFromArg;
       // Check if a surface has been applied.
       if (surfaceName.length() != 0){
           Surface * currentSurface = currReader->surf(surfaceFromArg);
@@ -1108,8 +1109,8 @@ instance:
     {
         Reader* currReader = createReader(currSession);
 
-        string instanceName = nameUnique;
-        string lookFor = strdup($<string>3);
+        std::string instanceName = nameUnique;
+        std::string lookFor = strdup($<string>3);
 
         MeshNew * currentMesh = currReader->getMesh($<string>3);
 
@@ -1142,7 +1143,7 @@ instance:
             newInstance->applyTransformation(t);
         }
 
-        string surfaceName = surfaceFromArg;
+        std::string surfaceName = surfaceFromArg;
         // Check if a surface has been applied.
         if (surfaceName.length() != 0){
             Surface * currentSurface = currReader->surf(surfaceFromArg);
@@ -1166,7 +1167,7 @@ object:
           Reader* currReader = createReader(currSession);
 
           std::list<FaceNew*> facesObject;
-          for (std::vector<string>::iterator it = tempVariables2.begin() ; it != tempVariables2.end(); ++it){
+          for (std::vector<std::string>::iterator it = tempVariables2.begin() ; it != tempVariables2.end(); ++it){
               FaceNew * currentFace = currReader->getFace(*it);
               if (currentFace != NULL) {
                   facesObject.push_back(currentFace);
