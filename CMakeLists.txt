@@ -50,37 +50,14 @@ endif()
 
 set(SOURCES
         main.cpp
-        edge.cpp
-        vertex.cpp
-        face.cpp
-        mesh.cpp
-        polyline.cpp
-        merge.cpp
-        transformation.cpp
-        makeMesh.cpp
-        subdivision.cpp
-        offset.cpp
-        stl.cpp
-        zipper.cpp
-        makePolyline.cpp
-        myselection.cpp
         controlpanel.cpp
         mainwindow.cpp
-        group.cpp
-        makegroup.cpp
-        sliderpanel.cpp
-        parameter.cpp
-        myslider.cpp
-        parameterbank.cpp
-        utils.cpp
         nomeparser.cpp
         nomeglwidget.cpp
-        bspline.cpp
         newNOME/Data.cpp
         newNOME/IO.cpp
         newNOME/Reader.cpp
         newNOME/Session.cpp
-        testpolyline.cpp
         newNOME/GroupNew.cpp
         newNOME/InstanceNew.cpp
         newNOME/MeshNew.cpp
@@ -118,37 +95,14 @@ set(SOURCES
 		commonDialogs.cpp)
 
 set(HEADERS
-        edge.h
-        vertex.h
-        face.h
-        mesh.h
-        polyline.h
-        transformation.h
-        merge.h
-        makeMesh.h
-        subdivison.h
-        offset.h
-        stl.h
-        zipper.h
-        makePolyline.h
-        myselection.h
         controlpanel.h
         mainwindow.h
-        group.h
-        makegroup.h
-        sliderpanel.h
-        parameter.h
-        myslider.h
-        parameterbank.h
-        utils.h
         nomeparser.h
         nomeglwidget.h
-        bspline.h
         newNOME/Data.h
         newNOME/IO.h
         newNOME/Reader.h
         newNOME/Session.h
-        testpolyline.h
         newNOME/GroupNew.h
         newNOME/InstanceNew.h
         newNOME/MeshNew.h
@@ -177,7 +131,15 @@ set(HEADERS
         newNOME/Sweep.h
 		commonDialogs.h)
 
-add_executable(Nome MACOSX_BUNDLE ${SOURCES} ${HEADERS} ${PARSER_SOURCES} nome_resource.rc)
+set(GLAD_SOURCES
+		glad/include/glad/glad.h
+		glad/include/KHR/khrplatform.h
+		glad/src/glad.c
+		)
+
+add_executable(Nome MACOSX_BUNDLE ${SOURCES} ${HEADERS} ${PARSER_SOURCES} ${GLAD_SOURCES} nome_resource.rc)
+
+target_include_directories(Nome PRIVATE glad/include)
 
 set_target_properties(Nome PROPERTIES MACOSX_BUNDLE_BUNDLE_NAME Nome MACOSX_BUNDLE_BUNDLE_VERSION 1.0)
 
