@@ -12,6 +12,7 @@ cmake_policy(SET CMP0071 OLD)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
 
 add_subdirectory(Math)
 
@@ -51,7 +52,8 @@ endif()
 set(SOURCES
         main.cpp
         controlpanel.cpp
-        mainwindow.cpp
+        MainWindow.cpp
+		MainWindow.ui
         nomeparser.cpp
         nomeglwidget.cpp
         newNOME/Data.cpp
@@ -96,7 +98,7 @@ set(SOURCES
 
 set(HEADERS
         controlpanel.h
-        mainwindow.h
+        MainWindow.h
         nomeparser.h
         nomeglwidget.h
         newNOME/Data.h

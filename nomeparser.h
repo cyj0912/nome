@@ -1,19 +1,11 @@
-#ifndef NOMEPARSER_H
-#define NOMEPARSER_H
+#pragma once
 
-#include <vector>
-#include "nomeglwidget.h"
 #include <string>
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include "newNOME/Session.h"
+
+class Session;
 
 class NomeParser
 {
 public:
-    NomeParser();
-	Session* makeWithNome(std::string input);
+	static Session* makeWithNome(std::string input);
 };
-
-#endif // MINISLFPARSER_H

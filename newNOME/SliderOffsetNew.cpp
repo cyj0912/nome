@@ -31,7 +31,7 @@ SliderOffsetNew::SliderOffsetNew(OffsetNew* offset, SlideGLWidget * canvas)
 
 
     sliderLayout->addWidget(slider);
-    sliderLayout -> addWidget(new QLabel(QString::number(*offset->max)));
+	sliderLayout->addWidget(new QLabel(QString::number(*offset->max)));
 
     connect(slider,SIGNAL(valueChanged(int)),this,SLOT(sliderValueChanged(int)));
 };
@@ -42,7 +42,7 @@ void SliderOffsetNew::sliderValueChanged(int value)
     label->setText((offset->name + ": ").c_str() + QString::number(value * (*offset -> step) + *offset -> min));
     canvas->currSession->recalculateOffset = true;
 
-    canvas -> updateGL();
+	canvas->update();
 };
 
 

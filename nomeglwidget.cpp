@@ -30,7 +30,7 @@
 #include <glm/gtx/transform.hpp>
 
 SlideGLWidget::SlideGLWidget(QWidget *parent) :
-    QGLWidget(parent)
+	QOpenGLWidget(parent)
 {
     generalSetup();
     makeDefaultMesh();
@@ -38,11 +38,17 @@ SlideGLWidget::SlideGLWidget(QWidget *parent) :
 }
 
 SlideGLWidget::SlideGLWidget(std::string name, QWidget *parent) :
-    QGLWidget(parent)
+	QOpenGLWidget(parent)
 {
     generalSetup();
     makeSIFMesh(name);
     updateGlobalIndexList();
+}
+
+SlideGLWidget::SlideGLWidget(QWidget* parent, Session* session)
+{
+	this->currSession = session;
+	generalSetup();
 }
 
 void SlideGLWidget::generalSetup()

@@ -12,7 +12,7 @@ GroupWindow::GroupWindow(){
 
 }
 
-GroupWindow::GroupWindow(QGLWidget * currWidget)
+GroupWindow::GroupWindow(QWidget * currWidget)
 {
     this -> currWidget = currWidget;
 

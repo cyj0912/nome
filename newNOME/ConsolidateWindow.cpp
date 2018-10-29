@@ -12,7 +12,7 @@ ConsolidateWindow::ConsolidateWindow(){
 
 }
 
-ConsolidateWindow::ConsolidateWindow(QGLWidget * currWidget)
+ConsolidateWindow::ConsolidateWindow(QWidget * currWidget)
 {
     this -> currWidget = currWidget;
 

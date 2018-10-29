@@ -17,6 +17,9 @@ int main(int argc, char *argv[])
     std::cout << "Welcome to NOME!" << std::endl;
 
     QApplication a(argc, argv);
+	a.setApplicationName("Nome");
+	a.setOrganizationName("UC Berkeley");
+	a.setOrganizationDomain("eecs.berkeley.edu");
 
 	QSurfaceFormat fmt;
 	fmt.setDepthBufferSize(24);

@@ -8,7 +8,6 @@
 #include <QHBoxLayout>
 #include <QSlider>
 #include <QLabel>
-#include <QGLWidget>
 #include <QLineEdit>
 #include <QPushButton>
 
@@ -17,12 +16,12 @@ class ConsolidateWindow: public QObject
   Q_OBJECT
   public:
     ConsolidateWindow();
-    ConsolidateWindow(QGLWidget * hello);
+    ConsolidateWindow(QWidget * hello);
     ~ ConsolidateWindow(){};
 
   public:
   QWidget *window;
-  QGLWidget * currWidget;
+  QWidget * currWidget;
   QVBoxLayout* layout;
   QLabel* instanceLabel;
   QLineEdit* textboxInstanceName;

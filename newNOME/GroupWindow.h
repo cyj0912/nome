@@ -9,7 +9,6 @@
 #include <QHBoxLayout>
 #include <QSlider>
 #include <QLabel>
-#include <QGLWidget>
 #include <QLineEdit>
 #include <QPushButton>
 
@@ -18,12 +17,12 @@ class GroupWindow: public QObject
   Q_OBJECT
   public:
     GroupWindow();
-    GroupWindow(QGLWidget * hello);
+    GroupWindow(QWidget * hello);
     ~ GroupWindow(){};
 
   public:
   QWidget *window;
-  QGLWidget * currWidget;
+  QWidget * currWidget;
   QVBoxLayout* layout;
   QLabel* instanceLabel;
   QLineEdit* textboxInstanceName;

@@ -15,7 +15,7 @@ ControlPanel::ControlPanel()
     //buildConnection();
 }
 
-ControlPanel::ControlPanel(MainWindow* parentWindow, SlideGLWidget * canvas, Session* currSession)
+ControlPanel::ControlPanel(CMainWindow* parentWindow, SlideGLWidget * canvas, Session* currSession)
 {
 	mainWindow = parentWindow;
     this -> currSession = currSession;

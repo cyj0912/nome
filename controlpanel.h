@@ -5,8 +5,7 @@
  * Advised by Prof. Sequin H. Carlos.
  */
 
-#ifndef CONTROLPANEL_H
-#define CONTROLPANEL_H
+#pragma once
 
 #include <QWidget>
 #include <iostream>
@@ -25,7 +24,7 @@
 
 class SlideGLWidget;
 class Session;
-class MainWindow;
+class CMainWindow;
 
 class ControlPanel : public QWidget
 {
@@ -34,7 +33,7 @@ class ControlPanel : public QWidget
 public:
     ControlPanel();
     /* @param canvas, the canvas that this panel control.*/
-    ControlPanel(MainWindow* parentWindow, SlideGLWidget * canvas, Session* currSession);
+    ControlPanel(CMainWindow* parentWindow, SlideGLWidget * canvas, Session* currSession);
     /* Set up the layout and widgets.*/
     void setupLayout();
     /* Build the connections. */
@@ -51,7 +50,7 @@ public:
     float offsetValue;
     Session* currSession;
 private:
-	MainWindow * mainWindow;
+	CMainWindow * mainWindow;
     SlideGLWidget *canvas;
     /* Widgets and Layout in this Control Panel.*/
     QVBoxLayout *mainLayout;
@@ -145,6 +144,3 @@ public slots:
 signals:
     void makeOffsetMesh(float);
 };
-
-
-#endif // CONTROLPANEL_H

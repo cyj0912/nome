@@ -3,11 +3,6 @@
 #include "stlFlexBison.cpp"
 #include "objFlexBison.cpp"
 
-NomeParser::NomeParser()
-{
-
-}
-
 Session* NomeParser::makeWithNome(std::string input)
 {
     if(input.substr(input.find_last_of(".") + 1) == "stl") {
@@ -20,5 +15,5 @@ Session* NomeParser::makeWithNome(std::string input)
         ObjCompiler* objCompilerSession = new ObjCompiler (input);
         return objCompilerSession->getSession();
     }
+	return nullptr;
 }
-

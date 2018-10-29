@@ -42,7 +42,7 @@ void SliderSubdivisionNew::sliderValueChanged(int value)
     label->setText((subdivision->name + ": ").c_str() + QString::number(value));
     canvas->currSession->recalculateSubdivision = true;
 
-    canvas -> updateGL();
+	canvas->update();
 };
 
 

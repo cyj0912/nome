@@ -14,18 +14,19 @@
 #include <glm/glm.hpp>
 
 #include <QMainWindow>
-
+#include <QOpenGLWidget>
 #include <QMessageBox>
 #include <QColor>
 #include <QString>
 
-class SlideGLWidget: public QGLWidget
+class SlideGLWidget: public QOpenGLWidget
 {
     Q_OBJECT
 
 public:
     explicit SlideGLWidget(QWidget *parent = 0);
     SlideGLWidget(std::string name, QWidget *parent = 0);
+	SlideGLWidget(QWidget* parent, Session* session);
     ~SlideGLWidget();
     ConsolidateWindow *conWindow;
     GroupWindow *groupWindow;
@@ -199,24 +200,24 @@ public:
     /* Update the saved consolidated mesh. */
     void updateSavedConsolidatedMesh();
 protected:
-    void initializeGL();
-    void resizeGL(int w, int h);
-    void paintGL();
+    void initializeGL() override;
+    void resizeGL(int w, int h) override;
+    void paintGL() override;
     void paintGLImpl();
-    void mousePressEvent(QMouseEvent*);
-    void mouseMoveEvent(QMouseEvent*);
-    void keyPressEvent(QKeyEvent*);
+    void mousePressEvent(QMouseEvent*) override;
+    void mouseMoveEvent(QMouseEvent*) override;
+    void keyPressEvent(QKeyEvent*) override;
     /**
      * @brief timerEvent: Timer Event for this MainWindow.
      * Similar to OnIdleFunc of GLUT.
      */
-    void timerEvent(QTimerEvent *event);
+    void timerEvent(QTimerEvent *event) override;
     /**
      * @brief wheelEvent: Handles mouse wheel event.
      * Will zoom in or zoom out in the scene.
      * @param event: The qt wheel event.
      */
-    void wheelEvent(QWheelEvent *event);
+    void wheelEvent(QWheelEvent *event) override;
 public slots:
     /**
      * @brief viewContentChanged: Change the current view mesh.
