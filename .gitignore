@@ -1,3 +1,5 @@
 *.user
 *.user.*
 glm/
+.idea
+cmake-build-*

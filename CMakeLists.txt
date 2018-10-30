@@ -21,6 +21,7 @@ find_package(Qt5Core REQUIRED)
 find_package(Qt5Gui REQUIRED)
 find_package(Qt5Widgets REQUIRED)
 find_package(Qt5OpenGL REQUIRED)
+set(OpenGL_GL_PREFERENCE GLVND)
 find_package(OpenGL REQUIRED)
 find_package(glm REQUIRED)
 
@@ -174,7 +175,7 @@ install(DIRECTORY examples DESTINATION .)
 find_package(Python3 COMPONENTS Development)
 target_link_libraries(Nome PRIVATE Python3::Python)
 
-find_package(Boost REQUIRED COMPONENTS python37)
+find_package(Boost REQUIRED COMPONENTS python3${Python3_VERSION_MINOR})
 
 target_link_libraries(Nome PRIVATE Boost::boost)
-target_link_libraries(Nome PRIVATE Boost::python37)
+target_link_libraries(Nome PRIVATE Boost::python3${Python3_VERSION_MINOR})
