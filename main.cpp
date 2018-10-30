@@ -5,8 +5,7 @@
  * Advised by Prof. Sequin H. Carlos.
  */
 
-#include "mainwindow.h"
-#include "nomeglwidget.h"
+#include "MainWindow.h"
 #include "DarkStyle.h"
 #include <QApplication>
 #include <QSurfaceFormat>

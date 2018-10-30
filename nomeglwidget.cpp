@@ -25,7 +25,11 @@
 #include "newNOME/OffsetNew.h"
 #include "commonDialogs.h"
 
+#ifdef __APPLE__
+#include <OpenGL/GLU.h>
+#else
 #include <gl/GLU.h>
+#endif
 
 #include <glm/gtx/transform.hpp>
 

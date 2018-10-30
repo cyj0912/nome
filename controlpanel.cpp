@@ -6,7 +6,7 @@
  */
 
 #include "controlpanel.h"
-#include "mainwindow.h"
+#include "MainWindow.h"
 #include "nomeglwidget.h"
 
 ControlPanel::ControlPanel()
