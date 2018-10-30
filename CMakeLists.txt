@@ -98,7 +98,8 @@ set(SOURCES
         newNOME/Octree.cpp
         newNOME/OctreeProxy.cpp
         newNOME/Sweep.cpp
-		commonDialogs.cpp)
+		commonDialogs.cpp
+        NomeDocument.cpp)
 
 set(HEADERS
         controlpanel.h
@@ -136,7 +137,8 @@ set(HEADERS
         newNOME/Octree.h
         newNOME/OctreeProxy.h
         newNOME/Sweep.h
-		commonDialogs.h)
+		commonDialogs.h
+        NomeDocument.h)
 
 set(GLAD_SOURCES
 		glad/include/glad/glad.h
@@ -146,7 +148,7 @@ set(GLAD_SOURCES
 		
 file(GLOB SCRIPTING_SOURCES Scripting/*.cpp Scripting/*.h)
 
-add_executable(Nome MACOSX_BUNDLE ${SOURCES} ${HEADERS} ${PARSER_SOURCES} ${GLAD_SOURCES} ${SCRIPTING_SOURCES} nome_resource.rc)
+add_executable(Nome MACOSX_BUNDLE ${SOURCES} ${HEADERS} ${PARSER_SOURCES} ${SCRIPTING_SOURCES} nome_resource.rc)
 
 target_include_directories(Nome PRIVATE glad/include)
 
@@ -179,3 +181,8 @@ find_package(Boost REQUIRED COMPONENTS python3${Python3_VERSION_MINOR})
 
 target_link_libraries(Nome PRIVATE Boost::boost)
 target_link_libraries(Nome PRIVATE Boost::python3${Python3_VERSION_MINOR})
+
+#Platform specific
+if(LINUX)
+    target_link_libraries(Nome PRIVATE -ldl)
+endif()

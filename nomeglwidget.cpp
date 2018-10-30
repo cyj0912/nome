@@ -28,7 +28,7 @@
 #ifdef __APPLE__
 #include <OpenGL/GLU.h>
 #else
-#include <gl/GLU.h>
+#include <GL/glu.h>
 #endif
 
 #include <glm/gtx/transform.hpp>

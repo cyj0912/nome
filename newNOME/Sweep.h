@@ -53,7 +53,7 @@ private:
 
 	//General data
 	Session* ParentSession;
-	Reader* Reader;
+	Reader* MReader;
 
 	///The path to sweep along
 	ISweepPath* Path;

@@ -17,7 +17,7 @@
 /// Mode = 0 : Transformations off, Mode = 1 : Transformations on
 /// (This just means search at the mesh/instance level respectively)
 
-typedef class Reader
+class Reader
 {
 private:
     int accesses;
@@ -63,7 +63,7 @@ public:
     std::string getVertName(int id);
     std::string getFaceName(int id);
     GroupNew* getGroup(std::string);
-} Reader;
+};
 
 ///Instantiation
 Reader* createReader(Session*);

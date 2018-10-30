@@ -17,7 +17,7 @@ Sweep::Sweep(Session* session, const SweepInitializer& initializer)
 		throw std::invalid_argument("Cannot create sweep: some arguments are incorrect.");
 	surface = nullptr;
 	ParentSession = session;
-	Reader = createReader(ParentSession);
+	MReader = createReader(ParentSession);
 	CalculateMesh();
 }
 
@@ -116,7 +116,7 @@ void Sweep::CalculateMesh()
 			verticesFace.push_back(p2v);
 			verticesFace.push_back(p4v);
 			verticesFace.push_back(p3v);
-			FaceNew* newFace = createFace(verticesFace, &(edges), Reader, false);
+			FaceNew* newFace = createFace(verticesFace, &(edges), MReader, false);
 			newFace->setName("r" + std::to_string(slice) + "f" + std::to_string(csSlice - 1));
 			faces.push_back(newFace);
 
