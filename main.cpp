@@ -21,6 +21,8 @@ int main(int argc, char *argv[])
 	a.setOrganizationName("UC Berkeley");
 	a.setOrganizationDomain("eecs.berkeley.edu");
 
+	a.setStyle("fusion");
+
 	QSurfaceFormat fmt;
 	fmt.setDepthBufferSize(24);
 	fmt.setStencilBufferSize(8);

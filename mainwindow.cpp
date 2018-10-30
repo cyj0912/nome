@@ -9,17 +9,83 @@
 #include "newNOME/SliderSubdivisionNew.h"
 #include "newNOME/SliderOffsetNew.h"
 
+#include "PythonModule.h"
+
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QSettings>
 
 #include <vector>
 
+//>>>>>>
+#include "Console.h"
+
+class CPythonConsole : public QWidget
+{
+public:
+	explicit CPythonConsole(QWidget* parent = nullptr);
+
+	~CPythonConsole() override;
+
+private:
+	void WriteData(const QByteArray& data);
+
+	std::string LineBuffer;
+};
+
+CPythonConsole::CPythonConsole(QWidget* parent) : QWidget(parent, Qt::Window)
+{
+	auto* layout = new QVBoxLayout(this);
+	setLayout(layout);
+	layout->setContentsMargins(0, 0, 0, 0);
+
+	auto* console = new CConsole(this);
+	layout->addWidget(console);
+
+	connect(console, &CConsole::getData, this, &CPythonConsole::WriteData);
+
+	setWindowTitle("Python Console");
+
+	InitPython();
+}
+
+CPythonConsole::~CPythonConsole()
+{
+	FiniPythion();
+}
+
+void CPythonConsole::WriteData(const QByteArray& data)
+{
+	if (data.length() == 0)
+		return;
+
+	for (int i = 0; i < data.length(); i++)
+	{
+		char ch = data.at(i);
+		if (ch == '\n' || ch == '\r')
+		{
+			if (LineBuffer.size() != 0)
+			{
+				std::cout << ">>> " << LineBuffer << std::endl;
+				PythonRun(LineBuffer.c_str());
+				LineBuffer.clear();
+			}
+		}
+		else
+		{
+			LineBuffer.push_back(ch);
+		}
+	}
+}
+//<<<<<<
+
 CMainWindow::CMainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::CMainWindow)
 {
     ui->setupUi(this);
+
+	ui->sliderDock->hide();
 
 	connect(ui->actionExit, &QAction::triggered, this, &QMainWindow::close);
 	connect(ui->actionAbout, &QAction::triggered, [this]() {
@@ -77,7 +143,7 @@ void CMainWindow::CreateSliders(SlideGLWidget* canvas, Session* currSession)
 {
 	for (auto b : currSession->banks)
 	{
-		QWidget* window = new QWidget;
+		QWidget* window = new QWidget(this, Qt::Window);
 		window->resize(400, 0);
 		QVBoxLayout* layout = new QVBoxLayout(window);
 		QLabel* label = new QLabel(b->name.c_str());
@@ -94,7 +160,7 @@ void CMainWindow::CreateSliders(SlideGLWidget* canvas, Session* currSession)
 
 void CMainWindow::CreateSubdivisionSliders(SlideGLWidget* canvas, Session* currSession)
 {
-	QWidget *window = new QWidget;
+	QWidget *window = new QWidget(this, Qt::Window);
 	window->resize(400, 0);
 	QVBoxLayout* layout = new QVBoxLayout(window);
 	QLabel* label = new QLabel("SUBDIVISION");
@@ -109,7 +175,7 @@ void CMainWindow::CreateSubdivisionSliders(SlideGLWidget* canvas, Session* currS
 
 void CMainWindow::CreateOffsetSliders(SlideGLWidget* canvas, Session* currSession)
 {
-	QWidget *window = new QWidget;
+	QWidget *window = new QWidget(this, Qt::Window);
 	window->resize(400, 0);
 	QVBoxLayout* layout = new QVBoxLayout(window);
 	QLabel* label = new QLabel("OFFSET");
@@ -183,4 +249,19 @@ void CMainWindow::on_actionSave_As_triggered()
 void CMainWindow::on_actionClose_triggered()
 {
 	QMessageBox::information(this, "Info", "Not implemented", QMessageBox::Ok);
+}
+
+void CMainWindow::on_actionPython_Console_toggled(bool state)
+{
+	if (state)
+	{
+		auto* pyConsole = new CPythonConsole(this);
+		pyConsole->setObjectName("pyConsole");
+		pyConsole->show();
+	}
+	else
+	{
+		auto* pyConsole = findChild<CPythonConsole*>("pyConsole");
+		delete pyConsole;
+	}
 }

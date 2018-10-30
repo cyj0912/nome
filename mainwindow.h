@@ -37,6 +37,7 @@ private slots:
 	void on_actionSave_triggered();
 	void on_actionSave_As_triggered();
 	void on_actionClose_triggered();
+	void on_actionPython_Console_toggled(bool state);
 
 private:
     Ui::CMainWindow *ui;

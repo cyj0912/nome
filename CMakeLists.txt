@@ -54,6 +54,8 @@ set(SOURCES
         controlpanel.cpp
         MainWindow.cpp
 		MainWindow.ui
+		PythonModule.cpp
+		Console.cpp
         nomeparser.cpp
         nomeglwidget.cpp
         newNOME/Data.cpp
@@ -99,6 +101,8 @@ set(SOURCES
 set(HEADERS
         controlpanel.h
         MainWindow.h
+		PythonModule.h
+		Console.h
         nomeparser.h
         nomeglwidget.h
         newNOME/Data.h
@@ -163,3 +167,12 @@ target_compile_definitions(Nome PRIVATE GLM_ENABLE_EXPERIMENTAL)
 
 install(TARGETS Nome RUNTIME DESTINATION . BUNDLE DESTINATION .)
 install(DIRECTORY examples DESTINATION .)
+
+#Python support
+find_package(Python3 COMPONENTS Development)
+target_link_libraries(Nome PRIVATE Python3::Python)
+
+find_package(Boost REQUIRED COMPONENTS python36)
+
+target_link_libraries(Nome PRIVATE Boost::boost)
+target_link_libraries(Nome PRIVATE Boost::python36)
