@@ -55,8 +55,6 @@ set(SOURCES
         controlpanel.cpp
         MainWindow.cpp
         MainWindow.ui
-        PythonModule.cpp
-        Console.cpp
         DarkStyle.cpp
         darkstyle.qrc
         nomeparser.cpp
@@ -104,8 +102,6 @@ set(SOURCES
 set(HEADERS
         controlpanel.h
         MainWindow.h
-        PythonModule.h
-        Console.h
         DarkStyle.h
         nomeparser.h
         nomeglwidget.h

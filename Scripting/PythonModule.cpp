@@ -2,15 +2,13 @@
 
 #include <boost/python.hpp>
 
-const char* greet()
-{
-	return "hello from c++";
-}
+#include "SceneBuilder.h"
 
 BOOST_PYTHON_MODULE(nome)
 {
 	using namespace boost::python;
-	def("greet", greet);
+	class_<CSceneBuilder>("SceneBuilder", no_init)
+		.def("simple_instance", &CSceneBuilder::SimpleInstance);
 }
 
 void RegisterNomePythonModule()

@@ -1,8 +1,10 @@
 #pragma once
 
 #include <QMainWindow>
+#include <QTextEdit>
 
-class CMainWindowPriv;
+#include <string>
+
 class SlideGLWidget;
 class ControlPanel;
 class Session;
@@ -13,38 +15,50 @@ class CMainWindow;
 
 class CMainWindow : public QMainWindow
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    explicit CMainWindow(QWidget *parent = nullptr);
-    ~CMainWindow();
+	CMainWindow();
+	explicit CMainWindow(const QString& fileName);
+	~CMainWindow();
 
-private:
-	void LoadFile(QString fileName);
-	void CreateSliders(SlideGLWidget* canvas, Session* currSession);
-	void CreateSubdivisionSliders(SlideGLWidget* canvas, Session* currSession);
-	void CreateOffsetSliders(SlideGLWidget* canvas, Session* currSession);
-	void CreateControlPanel(SlideGLWidget* canvas, Session* currSession);
+	void tile(const QMainWindow* previous);
 
-	bool IsFileOpen() const
-	{
-		return Canvas && DocSession;
-	}
+protected:
+	void closeEvent(QCloseEvent* event) override;
 
 private slots:
-	void on_actionNew_triggered();
-	void on_actionOpen_triggered();
-	void on_actionSave_triggered();
-	void on_actionSave_As_triggered();
-	void on_actionClose_triggered();
-	void on_actionPython_Console_toggled(bool state);
+	void newFile();
+	void open();
+	bool save();
+	bool saveAs();
+	void updateRecentFileActions();
+	void openRecentFile();
+	void about();
+	void documentWasModified();
 
 private:
-    Ui::CMainWindow *ui;
+	enum { MaxRecentFiles = 5 };
 
-	SlideGLWidget* Canvas = nullptr;
-	ControlPanel* Controls = nullptr;
-	Session* DocSession = nullptr;
+	Ui::CMainWindow* ui;
 
-	std::vector<QWidget*> SliderWindows;
+	void init();
+	void readSettings();
+	void writeSettings();
+	bool maybeSave();
+	void openFile(const QString& fileName);
+	void loadFile(const QString& fileName);
+	static bool hasRecentFiles();
+	void prependToRecentFiles(const QString& fileName);
+	void setRecentFilesVisible(bool visible);
+	bool saveFile(const QString& fileName);
+	void setCurrentFile(const QString& fileName);
+	static QString strippedName(const QString& fullFileName);
+	CMainWindow* findMainWindow(const QString& fileName) const;
+
+	QAction* recentFileActs[MaxRecentFiles];
+	QAction* recentFileSubMenuAct;
+
+	QString curFile;
+	bool isUntitled;
 };

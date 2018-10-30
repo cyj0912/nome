@@ -18,6 +18,8 @@ int main(int argc, char *argv[])
 
     QApplication a(argc, argv);
 	a.setApplicationName("Nome");
+	a.setApplicationDisplayName("Nome 1 Extended Edition");
+	a.setApplicationVersion("1.0");
 	a.setOrganizationName("UC Berkeley");
 	a.setOrganizationDomain("eecs.berkeley.edu");
 
