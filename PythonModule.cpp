@@ -21,7 +21,6 @@ void RegisterNomePythonModule()
 void InitPython()
 {
 	//Init python
-	Py_SetPath(L"E:/Dev/vcpkg/packages/python3_x64-windows/share/python3/Lib");
 	RegisterNomePythonModule();
 
 	Py_Initialize();

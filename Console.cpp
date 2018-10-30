@@ -4,10 +4,10 @@
 CConsole::CConsole(QWidget *parent) :
 	QPlainTextEdit(parent)
 {
-	document()->setMaximumBlockCount(100);
+	document()->setMaximumBlockCount(1000);
 	QPalette p = palette();
 	p.setColor(QPalette::Base, Qt::black);
-	p.setColor(QPalette::Text, Qt::green);
+	p.setColor(QPalette::Text, Qt::lightGray);
 	setPalette(p);
 }
 

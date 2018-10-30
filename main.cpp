@@ -7,6 +7,7 @@
 
 #include "mainwindow.h"
 #include "nomeglwidget.h"
+#include "DarkStyle.h"
 #include <QApplication>
 #include <QSurfaceFormat>
 
@@ -21,7 +22,7 @@ int main(int argc, char *argv[])
 	a.setOrganizationName("UC Berkeley");
 	a.setOrganizationDomain("eecs.berkeley.edu");
 
-	a.setStyle("fusion");
+	a.setStyle(new DarkStyle);
 
 	QSurfaceFormat fmt;
 	fmt.setDepthBufferSize(24);

@@ -13,6 +13,7 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
 
 add_subdirectory(Math)
 
@@ -56,6 +57,8 @@ set(SOURCES
 		MainWindow.ui
 		PythonModule.cpp
 		Console.cpp
+		DarkStyle.cpp
+		darkstyle.qrc
         nomeparser.cpp
         nomeglwidget.cpp
         newNOME/Data.cpp
@@ -103,6 +106,7 @@ set(HEADERS
         MainWindow.h
 		PythonModule.h
 		Console.h
+		DarkStyle.h
         nomeparser.h
         nomeglwidget.h
         newNOME/Data.h
@@ -172,7 +176,7 @@ install(DIRECTORY examples DESTINATION .)
 find_package(Python3 COMPONENTS Development)
 target_link_libraries(Nome PRIVATE Python3::Python)
 
-find_package(Boost REQUIRED COMPONENTS python36)
+find_package(Boost REQUIRED COMPONENTS python37)
 
 target_link_libraries(Nome PRIVATE Boost::boost)
-target_link_libraries(Nome PRIVATE Boost::python36)
+target_link_libraries(Nome PRIVATE Boost::python37)
