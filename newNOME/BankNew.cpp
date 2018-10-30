@@ -9,7 +9,6 @@
 #include <string.h>
 #include "BankNew.h"
 #include "Data.h"
-#include "SliderWindow.h"
 #include "SliderNew.h"
 
 //Instantiation

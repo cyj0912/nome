@@ -28,8 +28,8 @@ int main(int argc, char *argv[])
 	fmt.setStencilBufferSize(8);
 	QSurfaceFormat::setDefaultFormat(fmt);
 
-    CMainWindow window;
-    window.show();
+	CMainWindow* window = new CMainWindow();
+    window->show();
 
     return a.exec();
 }

@@ -146,8 +146,10 @@ set(GLAD_SOURCES
 		glad/include/KHR/khrplatform.h
 		glad/src/glad.c
 		)
+		
+file(GLOB SCRIPTING_SOURCES Scripting/*.cpp Scripting/*.h)
 
-add_executable(Nome MACOSX_BUNDLE ${SOURCES} ${HEADERS} ${PARSER_SOURCES} ${GLAD_SOURCES} nome_resource.rc)
+add_executable(Nome MACOSX_BUNDLE ${SOURCES} ${HEADERS} ${PARSER_SOURCES} ${GLAD_SOURCES} ${SCRIPTING_SOURCES} nome_resource.rc)
 
 target_include_directories(Nome PRIVATE glad/include)
 
