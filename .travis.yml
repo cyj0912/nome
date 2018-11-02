@@ -1,8 +1,8 @@
 language: cpp
 os: osx
 before_install:
-- if [ $TRAVIS_OS_NAME == osx ]; then brew update && brew install qt glm; fi
+- if [ $TRAVIS_OS_NAME == osx ]; then brew update && brew install cmake qt boost boost-python3 glm; fi
 - if [ $TRAVIS_OS_NAME == osx ]; then export PATH="/usr/local/opt/qt/bin:$PATH"; fi
 script:
-- if [ $TRAVIS_OS_NAME == osx ]; then mkdir build && cd build && cmake .. && make -j3; fi
+- if [ $TRAVIS_OS_NAME == osx ]; then mkdir build && cd build && cmake .. && make -j2; fi
 - if [ $TRAVIS_OS_NAME == osx ]; then macdeployqt Nome.app; fi
