@@ -35,15 +35,31 @@ set(PARSER_SOURCES
     compilerObj/parserObj.y
     compilerObj/lexerObj.l)
 
+set(GENERATED_PARSERS)
+
 if(BISON_FOUND AND FLEX_FOUND)
-    BISON_TARGET(bank compilerBank/parserBank.y ${CMAKE_CURRENT_SOURCE_DIR}/compilerBank/parserBank.cpp COMPILE_FLAGS "-pbank -dy")
-    FLEX_TARGET(bank compilerBank/lexerBank.l ${CMAKE_CURRENT_SOURCE_DIR}/compilerBank/lexerBank.cpp)
-    BISON_TARGET(nom compilerNome/parser.y ${CMAKE_CURRENT_SOURCE_DIR}/compilerNome/parser.cpp COMPILE_FLAGS "-pnom -dy")
-    FLEX_TARGET(nom compilerNome/lexer.l ${CMAKE_CURRENT_SOURCE_DIR}/compilerNome/lexer.cpp)
-    BISON_TARGET(stl compilerStl/parserStl.y ${CMAKE_CURRENT_SOURCE_DIR}/compilerStl/parserStl.cpp COMPILE_FLAGS "-pstl -dy")
-    FLEX_TARGET(stl compilerStl/lexerStl.l ${CMAKE_CURRENT_SOURCE_DIR}/compilerStl/lexerStl.cpp)
-    BISON_TARGET(obj compilerObj/parserObj.y ${CMAKE_CURRENT_SOURCE_DIR}/compilerObj/parserObj.cpp COMPILE_FLAGS "-pobj -dy")
-    FLEX_TARGET(obj compilerObj/lexerObj.l ${CMAKE_CURRENT_SOURCE_DIR}/compilerObj/lexerObj.cpp)
+    BISON_TARGET(bankParser compilerBank/parserBank.y ${CMAKE_CURRENT_SOURCE_DIR}/compilerBank/parserBank.cpp COMPILE_FLAGS "-pbank -dy")
+    FLEX_TARGET(bankLexer compilerBank/lexerBank.l ${CMAKE_CURRENT_SOURCE_DIR}/compilerBank/lexerBank.cpp)
+    ADD_FLEX_BISON_DEPENDENCY(bankLexer bankParser)
+    BISON_TARGET(nomParser compilerNome/parser.y ${CMAKE_CURRENT_SOURCE_DIR}/compilerNome/parser.cpp COMPILE_FLAGS "-pnom -dy")
+    FLEX_TARGET(nomLexer compilerNome/lexer.l ${CMAKE_CURRENT_SOURCE_DIR}/compilerNome/lexer.cpp)
+    ADD_FLEX_BISON_DEPENDENCY(nomLexer nomParser)
+    BISON_TARGET(stlParser compilerStl/parserStl.y ${CMAKE_CURRENT_SOURCE_DIR}/compilerStl/parserStl.cpp COMPILE_FLAGS "-pstl -dy")
+    FLEX_TARGET(stlLexer compilerStl/lexerStl.l ${CMAKE_CURRENT_SOURCE_DIR}/compilerStl/lexerStl.cpp)
+    ADD_FLEX_BISON_DEPENDENCY(stlLexer stlParser)
+    BISON_TARGET(objParser compilerObj/parserObj.y ${CMAKE_CURRENT_SOURCE_DIR}/compilerObj/parserObj.cpp COMPILE_FLAGS "-pobj -dy")
+    FLEX_TARGET(objLexer compilerObj/lexerObj.l ${CMAKE_CURRENT_SOURCE_DIR}/compilerObj/lexerObj.cpp)
+    ADD_FLEX_BISON_DEPENDENCY(objLexer objParser)
+    set(GENERATED_PARSERS
+            ${BISON_bankParser_OUTPUTS}
+            ${FLEX_bankLexer_OUTPUTS}
+            ${BISON_nomParser_OUTPUTS}
+            ${FLEX_nomLexer_OUTPUTS}
+            ${BISON_stlParser_OUTPUTS}
+            ${FLEX_stlLexer_OUTPUTS}
+            ${BISON_objParser_OUTPUTS}
+            ${FLEX_objLexer_OUTPUTS}
+            )
 else()
     message(STATUS "Flex and Bison not found, skip regenerating parsers.")
 endif()
@@ -177,7 +193,7 @@ set(HEADERS
         newNOME/Sweep.h
 		commonDialogs.h)
 
-add_executable(Nome MACOSX_BUNDLE ${SOURCES} ${HEADERS} ${PARSER_SOURCES} nome_resource.rc)
+add_executable(Nome MACOSX_BUNDLE ${SOURCES} ${HEADERS} ${PARSER_SOURCES} ${GENERATED_PARSERS} nome_resource.rc)
 
 set_target_properties(Nome PROPERTIES MACOSX_BUNDLE_BUNDLE_NAME Nome MACOSX_BUNDLE_BUNDLE_VERSION 1.0)
 

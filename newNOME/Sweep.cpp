@@ -13,12 +13,25 @@ Sweep::Sweep(Session* session, const SweepInitializer& initializer)
 	bIsClosed = initializer.Closed;
     bMinTorsion = initializer.MinTorsion;
 
+    double temp;
+    AzimuthExpr = initializer.AzimuthExpr;
+	parseGetBankVal(AzimuthExpr.c_str(), session, &temp, 0);
+	Azimuth = static_cast<float>(temp);
+
+	TwistExpr = initializer.TwistExpr;
+	parseGetBankVal(TwistExpr.c_str(), session, &temp, 0);
+	Twist = static_cast<float>(temp);
+
 	if (!CheckSemantics())
 		throw std::invalid_argument("Cannot create sweep: some arguments are incorrect.");
 	surface = nullptr;
 	ParentSession = session;
 	Reader = createReader(ParentSession);
 	CalculateMesh();
+}
+
+void Sweep::Update()
+{
 }
 
 bool Sweep::CheckSemantics() const
@@ -49,8 +62,8 @@ void Sweep::CalculateMesh()
 	params.bMinimizeTorsion = bMinTorsion;
 	params.bClosed = bIsClosed;
 	params.Symmetry = 1;
-	params.Azimuth = 0.0f;
-	params.Twist = 0.0f;
+	params.Azimuth = Azimuth;
+	params.Twist = Twist;
 	const auto pathFrames = Path->GetSweepFrames(params);
     SweepPathParams csParams;
     csParams.bMinimizeTorsion = false;

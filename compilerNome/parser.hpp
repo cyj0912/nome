@@ -1,4 +1,4 @@
-/* A Bison parser, made by GNU Bison 3.1.  */
+/* A Bison parser, made by GNU Bison 3.2.  */
 
 /* Bison interface for Yacc-like parsers in C
 
@@ -30,6 +30,9 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
+/* Undocumented macros, especially those whose name start with YY_,
+   are private implementation details.  Do not rely on them.  */
+
 #ifndef YY_NOM_VOLUMES_MACDATA_BERKELEYCG_NOME_COMPILERNOME_PARSER_HPP_INCLUDED
 # define YY_NOM_VOLUMES_MACDATA_BERKELEYCG_NOME_COMPILERNOME_PARSER_HPP_INCLUDED
 /* Debug traces.  */
@@ -40,12 +43,12 @@
 extern int nomdebug;
 #endif
 /* "%code requires" blocks.  */
-#line 1 "compilerNome/parser.y" /* yacc.c:1919  */
+#line 1 "compilerNome/parser.y" /* yacc.c:1912  */
 
 #include <newNOME/Session.h>
 
 
-#line 49 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.hpp" /* yacc.c:1919  */
+#line 52 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.hpp" /* yacc.c:1912  */
 
 /* Token type.  */
 #ifndef YYTOKENTYPE
@@ -110,40 +113,42 @@ extern int nomdebug;
     END_BSPLINE = 313,
     CLOSED = 314,
     MINIMIZETORSION = 315,
-    SLICES = 316,
-    BEZIERCURVE = 317,
-    END_BEZIERCURVE = 318,
-    COS = 319,
-    SIN = 320,
-    TAN = 321,
-    EXPONENT = 322,
-    MULTIPLY = 323,
-    DIVIDE = 324,
-    ADD = 325,
-    SUBTRACT = 326,
-    SLIDEREXPRESSION = 327,
-    REVERSE = 328,
-    FOREGROUND = 329,
-    END_FOREGROUND = 330,
-    BACKGROUND = 331,
-    END_BACKGROUND = 332,
-    INSIDEFACES = 333,
-    END_INSIDEFACES = 334,
-    OUTSIDEFACES = 335,
-    END_OUTSIDEFACES = 336,
-    OFFSETFACES = 337,
-    END_OFFSETFACES = 338,
-    MERGE = 339,
-    END_MERGE = 340,
-    EPSILON = 341,
-    SWEEP = 342,
-    END_SWEEP = 343,
-    PATH = 344,
-    ENDPATH = 345,
-    CROSSSECTION = 346,
-    END_CROSSSECTION = 347,
-    BANK_EXPR = 348,
-    NUMBER = 349
+    AZIMUTH = 316,
+    TWIST = 317,
+    SLICES = 318,
+    BEZIERCURVE = 319,
+    END_BEZIERCURVE = 320,
+    COS = 321,
+    SIN = 322,
+    TAN = 323,
+    EXPONENT = 324,
+    MULTIPLY = 325,
+    DIVIDE = 326,
+    ADD = 327,
+    SUBTRACT = 328,
+    SLIDEREXPRESSION = 329,
+    REVERSE = 330,
+    FOREGROUND = 331,
+    END_FOREGROUND = 332,
+    BACKGROUND = 333,
+    END_BACKGROUND = 334,
+    INSIDEFACES = 335,
+    END_INSIDEFACES = 336,
+    OUTSIDEFACES = 337,
+    END_OUTSIDEFACES = 338,
+    OFFSETFACES = 339,
+    END_OFFSETFACES = 340,
+    MERGE = 341,
+    END_MERGE = 342,
+    EPSILON = 343,
+    SWEEP = 344,
+    END_SWEEP = 345,
+    PATH = 346,
+    ENDPATH = 347,
+    CROSSSECTION = 348,
+    END_CROSSSECTION = 349,
+    BANK_EXPR = 350,
+    NUMBER = 351
   };
 #endif
 /* Tokens.  */
@@ -205,47 +210,49 @@ extern int nomdebug;
 #define END_BSPLINE 313
 #define CLOSED 314
 #define MINIMIZETORSION 315
-#define SLICES 316
-#define BEZIERCURVE 317
-#define END_BEZIERCURVE 318
-#define COS 319
-#define SIN 320
-#define TAN 321
-#define EXPONENT 322
-#define MULTIPLY 323
-#define DIVIDE 324
-#define ADD 325
-#define SUBTRACT 326
-#define SLIDEREXPRESSION 327
-#define REVERSE 328
-#define FOREGROUND 329
-#define END_FOREGROUND 330
-#define BACKGROUND 331
-#define END_BACKGROUND 332
-#define INSIDEFACES 333
-#define END_INSIDEFACES 334
-#define OUTSIDEFACES 335
-#define END_OUTSIDEFACES 336
-#define OFFSETFACES 337
-#define END_OFFSETFACES 338
-#define MERGE 339
-#define END_MERGE 340
-#define EPSILON 341
-#define SWEEP 342
-#define END_SWEEP 343
-#define PATH 344
-#define ENDPATH 345
-#define CROSSSECTION 346
-#define END_CROSSSECTION 347
-#define BANK_EXPR 348
-#define NUMBER 349
+#define AZIMUTH 316
+#define TWIST 317
+#define SLICES 318
+#define BEZIERCURVE 319
+#define END_BEZIERCURVE 320
+#define COS 321
+#define SIN 322
+#define TAN 323
+#define EXPONENT 324
+#define MULTIPLY 325
+#define DIVIDE 326
+#define ADD 327
+#define SUBTRACT 328
+#define SLIDEREXPRESSION 329
+#define REVERSE 330
+#define FOREGROUND 331
+#define END_FOREGROUND 332
+#define BACKGROUND 333
+#define END_BACKGROUND 334
+#define INSIDEFACES 335
+#define END_INSIDEFACES 336
+#define OUTSIDEFACES 337
+#define END_OUTSIDEFACES 338
+#define OFFSETFACES 339
+#define END_OFFSETFACES 340
+#define MERGE 341
+#define END_MERGE 342
+#define EPSILON 343
+#define SWEEP 344
+#define END_SWEEP 345
+#define PATH 346
+#define ENDPATH 347
+#define CROSSSECTION 348
+#define END_CROSSSECTION 349
+#define BANK_EXPR 350
+#define NUMBER 351
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 
 union YYSTYPE
 {
-#line 87 "compilerNome/parser.y" /* yacc.c:1919  */
+#line 87 "compilerNome/parser.y" /* yacc.c:1912  */
 
     double intNumber;
     double number;
@@ -256,7 +263,7 @@ union YYSTYPE
         double number;   // int posVal;
     } numPos;
 
-#line 260 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.hpp" /* yacc.c:1919  */
+#line 267 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.hpp" /* yacc.c:1912  */
 };
 
 typedef union YYSTYPE YYSTYPE;

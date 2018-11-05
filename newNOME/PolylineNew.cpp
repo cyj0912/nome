@@ -96,14 +96,14 @@ std::vector<Matrix3x4> PolylineNew::GetSweepFrames(const SweepPathParams& params
 	//You can't really sweep correctly with size=1 or 2
 	if (s.size() == 1)
 	{
-		result.emplace_back(Matrix3x4(s[0], Quaternion::IDENTITY, Vector3::ONE));
+        result.emplace_back(Matrix3x4(s[0], Quaternion(params.Azimuth, Vector3::UNIT_Z), Vector3::ONE));
 		return result;
 	}
 	else if (s.size() == 2)
 	{
-		result.emplace_back(Matrix3x4(s[0], Quaternion::IDENTITY, Vector3::ONE));
-		result.emplace_back(Matrix3x4(s[1], Quaternion::IDENTITY, Vector3::ONE));
-		return result;
+        result.emplace_back(Matrix3x4(s[0], Quaternion(params.Azimuth, Vector3::UNIT_Z), Vector3::ONE));
+        result.emplace_back(Matrix3x4(s[1], Quaternion(params.Azimuth + params.Twist, Vector3::UNIT_Z), Vector3::ONE));
+        return result;
 	}
 
     if (params.bClosed)
@@ -136,7 +136,11 @@ std::vector<Matrix3x4> PolylineNew::GetSweepFrames(const SweepPathParams& params
             Y = (Y + newY) / 2.0f;
             f.SetRotation(Matrix3(X, newY, d[i]));
             f.SetTranslation(s[i]);
-            result.push_back(f);
+
+            Quaternion rotAroundTgt(params.Azimuth + params.Twist * i, Vector3::UNIT_Z);
+            Matrix3x4 localRot(Vector3::ZERO, rotAroundTgt, Vector3::ONE);
+
+            result.push_back(f * localRot);
         }
     }
     else
@@ -158,7 +162,11 @@ std::vector<Matrix3x4> PolylineNew::GetSweepFrames(const SweepPathParams& params
             Matrix3x4 f;
             f.SetRotation(Matrix3(biNormal, normal, tangent));
             f.SetTranslation(s[i]);
-            result.push_back(f);
+
+            Quaternion rotAroundTgt(params.Azimuth + params.Twist * i, Vector3::UNIT_Z);
+            Matrix3x4 localRot(Vector3::ZERO, rotAroundTgt, Vector3::ONE);
+
+            result.push_back(f * localRot);
         }
 
         {
@@ -171,7 +179,11 @@ std::vector<Matrix3x4> PolylineNew::GetSweepFrames(const SweepPathParams& params
             Matrix3x4 f;
             f.SetRotation(Matrix3(biNormal, normal, tangent));
             f.SetTranslation(s[0]);
-            result[0] = f;
+
+            Quaternion rotAroundTgt(params.Azimuth + params.Twist * 0, Vector3::UNIT_Z);
+            Matrix3x4 localRot(Vector3::ZERO, rotAroundTgt, Vector3::ONE);
+
+            result[0] = f * localRot;
         }
 
         {
@@ -184,7 +196,11 @@ std::vector<Matrix3x4> PolylineNew::GetSweepFrames(const SweepPathParams& params
             Matrix3x4 f;
             f.SetRotation(Matrix3(biNormal, normal, tangent));
             f.SetTranslation(s[s.size() - 1]);
-            result.push_back(f);
+
+            Quaternion rotAroundTgt(params.Azimuth + params.Twist * (s.size() - 1), Vector3::UNIT_Z);
+            Matrix3x4 localRot(Vector3::ZERO, rotAroundTgt, Vector3::ONE);
+
+            result.push_back(f * localRot);
         }
     }
 

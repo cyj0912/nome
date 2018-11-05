@@ -45,6 +45,8 @@ bspline[0-9]+            nomlval.intNumber = std::stoi(std::string(nomtext).subs
 endbspline[0-9]+         nomlval.intNumber = std::stoi(std::string(nomtext).substr (10)); return END_BSPLINE;
 closed                   return CLOSED;
 minimizetorsion          return MINIMIZETORSION;
+azimuth                  return AZIMUTH;
+twist                    return TWIST;
 slices                   return SLICES;
 beziercurve              return BEZIERCURVE;
 endbeziercurve           return END_BEZIERCURVE;

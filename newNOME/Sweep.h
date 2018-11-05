@@ -31,12 +31,17 @@ struct SweepInitializer
 	bool Closed = false;
 	bool MinTorsion = false;
 
+	std::string AzimuthExpr;
+	std::string TwistExpr;
+
 	void Clear()
 	{
 		PathInit.Clear();
 		CrossSectionInits.clear();
 		Closed = false;
         MinTorsion = false;
+		AzimuthExpr = std::string();
+		TwistExpr = std::string();
 	}
 };
 
@@ -45,6 +50,8 @@ class Sweep : public MeshNew
 {
 public:
 	explicit Sweep(Session* session, const SweepInitializer& initializer);
+
+	void Update();
 
 	bool CheckSemantics() const;
 
@@ -62,4 +69,9 @@ private:
 
 	bool bIsClosed = false;
 	bool bMinTorsion = false;
+
+	float Azimuth = 0.0f;
+    std::string AzimuthExpr;
+    float Twist = 0.0f;
+    std::string TwistExpr;
 };

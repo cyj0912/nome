@@ -72,7 +72,7 @@ POLYLINE END_POLYLINE INSTANCE END_INSTANCE CIRCLE END_CIRCLE BEG_DELETE END_DEL
 GROUP  END_GROUP TRANSLATE ROTATE MIRROR SET OPARENTHESES EPARENTHESES OBRACE
 EXPR DOLLAR EBRACE PERIOD TOKHEAT STATE TOKTARGET TOKTEMPERATURE
 SCALE SUBDIVISION END_SUBDIVISION SUBDIVISIONS TYPE OFFSET END_OFFSET MIN MAX STEP
-BSPLINE END_BSPLINE CLOSED MINIMIZETORSION SLICES BEZIERCURVE END_BEZIERCURVE COS SIN TAN EXPONENT
+BSPLINE END_BSPLINE CLOSED MINIMIZETORSION AZIMUTH TWIST SLICES BEZIERCURVE END_BEZIERCURVE COS SIN TAN EXPONENT
 MULTIPLY DIVIDE ADD SUBTRACT SLIDEREXPRESSION REVERSE FOREGROUND END_FOREGROUND BACKGROUND
 END_BACKGROUND INSIDEFACES END_INSIDEFACES OUTSIDEFACES END_OUTSIDEFACES OFFSETFACES END_OFFSETFACES
 MERGE END_MERGE EPSILON;
@@ -968,6 +968,8 @@ sweep_param_pack: | sweep_param_pack sweep_path
                   | sweep_param_pack sweep_crosssection
                   | sweep_param_pack sweep_closed
                   | sweep_param_pack sweep_mintorsion
+                  | sweep_param_pack sweep_azimuth
+                  | sweep_param_pack sweep_twist
 				  ;
 
 sweep_path: PATH VARIABLE ENDPATH
@@ -1007,6 +1009,14 @@ sweep_mintorsion: MINIMIZETORSION
                 {
                     currentSweepInitializer.MinTorsion = true;
                 };
+
+sweep_azimuth: AZIMUTH numberValue {
+    currentSweepInitializer.AzimuthExpr = $<string>2;
+};
+
+sweep_twist: TWIST numberValue {
+    currentSweepInitializer.TwistExpr = $<string>2;
+};
 
 foreground:
     FOREGROUND transformArgs END_FOREGROUND
