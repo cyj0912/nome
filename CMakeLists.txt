@@ -99,7 +99,8 @@ set(SOURCES
         newNOME/OctreeProxy.cpp
         newNOME/Sweep.cpp
 		commonDialogs.cpp
-        NomeDocument.cpp)
+        NomeDocument.cpp
+        )
 
 set(HEADERS
         controlpanel.h
@@ -138,7 +139,8 @@ set(HEADERS
         newNOME/OctreeProxy.h
         newNOME/Sweep.h
 		commonDialogs.h
-        NomeDocument.h)
+        NomeDocument.h
+        )
 
 set(GLAD_SOURCES
 		glad/include/glad/glad.h
