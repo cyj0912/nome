@@ -668,10 +668,16 @@ void SlideGLWidget::paintGLImpl()
 			newInstance->updateVerts();
 		}
 
-        for (InstanceNew* newInstance: currSession->instances) {
-            newInstance->applyTransformGroupChildren();
-            for (TransformationNew * t : newInstance->transformations){
-                newInstance->applyTransformation(t);
+        for (InstanceNew* currInstance: currSession->instances) {
+            //The following code is repeated in InstanceNew::applyTransformGroupChildren
+            currInstance->applyTransformGroupChildren();
+            for (Vert* v : currInstance->verts) {
+                for (TransformationNew* t : v->transformations) {
+                    v->applyTransformation(t);
+                }
+            }
+            for (TransformationNew* t : currInstance->transformations){
+                currInstance->applyTransformation(t);
             }
         }
     }

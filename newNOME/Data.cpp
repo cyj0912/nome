@@ -1345,7 +1345,7 @@ Vector3 Vert::getUntransformedPosition() const
 	//  so the untransformed position should be based on the vertex from the mesh.
 	//  But here is the thing: if copyOfVert itself is an instance vertex too, we get its transformed position,
 	//  otherwise we get its untransformed position.
-	if (copyOfVert)
+	if (copyOfVert && copyOfVert != this)
 	{
 		if (copyOfVert->copyOfVert)
 			return copyOfVert->getTransformedPosition();

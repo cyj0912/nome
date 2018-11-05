@@ -86,7 +86,6 @@ InstanceNew* createInstance(MeshNew* m0, std::list<Vert*> vertsDef, Reader* curr
            // MAYBE CHECK TRANSFORMATIONS.
 
            newVertex->transformations = currReader->getVertTransformations(v0->index);
-           //std::cout << newVertex->transformations.size() << std::endl;
            newVertex->copyOfVert = v0;
            setSurface(newVertex, m0->surface);
            i0->verts.push_back(newVertex);
@@ -545,16 +544,14 @@ void InstanceNew::updateVerts(){
 
 void InstanceNew::applyTransformGroupChildren(){
     if (group != NULL){
-        for (InstanceNew* currInstance : listInstances){
-    //        for (Vert* v : currInstance->verts){
-				//printf("v: %s len(tf):%d\n", v->getFullName().c_str(), v->transformations.size());
-    //            for (TransformationNew * t : v->transformations){
-    //                v->applyTransformation(t);
-    //            }
-
-    //        }
-			currInstance->applyTransformGroupChildren();
-            for (TransformationNew * t : currInstance->transformations){
+        for (InstanceNew* currInstance : listInstances) {
+            currInstance->applyTransformGroupChildren();
+            for (Vert* v : currInstance->verts) {
+                for (TransformationNew* t : v->transformations) {
+                    v->applyTransformation(t);
+                }
+            }
+            for (TransformationNew* t : currInstance->transformations) {
                 currInstance->applyTransformation(t);
             }
         }
