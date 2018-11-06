@@ -1,57 +1,51 @@
 #include "Console.h"
-#include <QScrollBar>
 
-CConsole::CConsole(QWidget *parent) :
-	QPlainTextEdit(parent)
+#include "SceneBuilder.h"
+#include "PythonModule.h"
+
+#include <QScrollBar>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
+
+CConsole::CConsole(QWidget *parent) : QWidget(parent, Qt::Window)
 {
-	document()->setMaximumBlockCount(1000);
 	QPalette p = palette();
 	p.setColor(QPalette::Base, Qt::black);
 	p.setColor(QPalette::Text, Qt::lightGray);
 	setPalette(p);
+
+    QVBoxLayout* vLayout = new QVBoxLayout(this);
+    TextArea = new QPlainTextEdit();
+    vLayout->addWidget(TextArea);
+
+    QHBoxLayout* btmLayout = new QHBoxLayout();
+    vLayout->addLayout(btmLayout);
+    TextEntry = new QPlainTextEdit();
+    EnterButton = new QPushButton("Enter");
+    btmLayout->addWidget(TextEntry);
+    btmLayout->addWidget(EnterButton);
+    this->setLayout(vLayout);
 }
 
-void CConsole::putData(const QByteArray &data)
+CPythonConsole::CPythonConsole(QWidget* parent) : CConsole(parent)
 {
-	insertPlainText(data);
+    setWindowTitle("Python Console");
 
-	QScrollBar *bar = verticalScrollBar();
-	bar->setValue(bar->maximum());
+    connect(EnterButton, &QPushButton::released, this, &CPythonConsole::enterButtonPressed);
 }
 
-void CConsole::setLocalEchoEnabled(bool set)
+void CPythonConsole::focusInEvent(QFocusEvent* event)
 {
-	m_localEchoEnabled = set;
+    QWidget::focusInEvent(event);
 }
 
-void CConsole::keyPressEvent(QKeyEvent *e)
+void CPythonConsole::enterButtonPressed()
 {
-	switch (e->key()) {
-	case Qt::Key_Backspace:
-	case Qt::Key_Left:
-	case Qt::Key_Right:
-	case Qt::Key_Up:
-	case Qt::Key_Down:
-		break;
-	default:
-		if (m_localEchoEnabled)
-			QPlainTextEdit::keyPressEvent(e);
-		emit getData(e->text().toLocal8Bit());
-	}
-}
+    //When this console is focused, switch context to CurrSession
+    CSceneBuilder::GetSingleton()->SetSession(CurrSession);
 
-void CConsole::mousePressEvent(QMouseEvent *e)
-{
-	Q_UNUSED(e)
-	setFocus();
-}
-
-void CConsole::mouseDoubleClickEvent(QMouseEvent *e)
-{
-	Q_UNUSED(e)
-}
-
-void CConsole::contextMenuEvent(QContextMenuEvent *e)
-{
-	Q_UNUSED(e)
+    auto text = TextEntry->toPlainText();
+    TextArea->appendPlainText(text);
+    PythonRun(text.toLocal8Bit().data());
+    TextEntry->clear();
 }

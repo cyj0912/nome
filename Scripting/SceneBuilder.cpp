@@ -3,6 +3,12 @@
 #include "newNOME/Reader.h"
 #include "newNOME/InstanceNew.h"
 
+CSceneBuilder* CSceneBuilder::GetSingleton()
+{
+    static CSceneBuilder builder(nullptr);
+    return &builder;
+}
+
 void CSceneBuilder::SimpleInstance(const std::string& instanceName, const std::string& generator, float posX, float posY, float posZ)
 {
 	Reader* currReader = createReader(currSession);

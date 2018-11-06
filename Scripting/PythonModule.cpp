@@ -4,11 +4,19 @@
 
 #include "SceneBuilder.h"
 
+boost::python::object get_builder()
+{
+    CSceneBuilder* builder = CSceneBuilder::GetSingleton();
+    return boost::python::object(builder);
+}
+
 BOOST_PYTHON_MODULE(nome)
 {
 	using namespace boost::python;
 	class_<CSceneBuilder>("SceneBuilder", no_init)
 		.def("simple_instance", &CSceneBuilder::SimpleInstance);
+
+	def("builder", &get_builder);
 }
 
 void RegisterNomePythonModule()

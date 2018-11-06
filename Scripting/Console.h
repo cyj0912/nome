@@ -1,26 +1,40 @@
 #pragma once
 
 #include <QPlainTextEdit>
+#include <QPushButton>
 
-class CConsole : public QPlainTextEdit
+class CConsole : public QWidget
 {
 	Q_OBJECT
-
-signals:
-	void getData(const QByteArray &data);
 
 public:
 	explicit CConsole(QWidget *parent = nullptr);
 
-	void putData(const QByteArray &data);
-	void setLocalEchoEnabled(bool set);
+protected:
+    QPlainTextEdit* TextArea;
+    QPlainTextEdit* TextEntry;
+    QPushButton* EnterButton;
+};
+
+class Session;
+
+class CPythonConsole : public CConsole
+{
+    Q_OBJECT
+public:
+    explicit CPythonConsole(QWidget *parent = nullptr);
+
+    void SetSession(Session* s)
+    {
+        CurrSession = s;
+    }
 
 protected:
-	void keyPressEvent(QKeyEvent *e) override;
-	void mousePressEvent(QMouseEvent *e) override;
-	void mouseDoubleClickEvent(QMouseEvent *e) override;
-	void contextMenuEvent(QContextMenuEvent *e) override;
+    void focusInEvent(QFocusEvent* event) override;
+
+private slots:
+    void enterButtonPressed();
 
 private:
-	bool m_localEchoEnabled = true;
+    Session* CurrSession;
 };

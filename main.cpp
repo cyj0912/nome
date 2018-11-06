@@ -7,6 +7,7 @@
 
 #include "MainWindow.h"
 #include "DarkStyle.h"
+#include "Scripting/PythonModule.h"
 #include <QApplication>
 #include <QSurfaceFormat>
 
@@ -14,6 +15,7 @@
 
 int main(int argc, char *argv[])
 {
+	InitPython();
     std::cout << "Welcome to NOME!" << std::endl;
 
     QApplication a(argc, argv);
@@ -33,5 +35,7 @@ int main(int argc, char *argv[])
 	CMainWindow* window = new CMainWindow();
     window->show();
 
-    return a.exec();
+    int retval = a.exec();
+    FiniPythion();
+	return retval;
 }

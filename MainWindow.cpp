@@ -10,69 +10,6 @@
 #include <QDesktopWidget>
 #include <QCloseEvent>
 
-//>>>>>>
-#include "Scripting/PythonModule.h"
-#include "Scripting/Console.h"
-
-class CPythonConsole : public QWidget
-{
-public:
-    explicit CPythonConsole(QWidget* parent = nullptr);
-
-    ~CPythonConsole() override;
-
-private:
-    void WriteData(const QByteArray& data);
-
-    std::string LineBuffer;
-};
-
-CPythonConsole::CPythonConsole(QWidget* parent) : QWidget(parent, Qt::Window)
-{
-    auto* layout = new QVBoxLayout(this);
-    setLayout(layout);
-    layout->setContentsMargins(0, 0, 0, 0);
-
-    auto* console = new CConsole(this);
-    layout->addWidget(console);
-
-    connect(console, &CConsole::getData, this, &CPythonConsole::WriteData);
-
-    setWindowTitle("Python Console");
-
-    InitPython();
-}
-
-CPythonConsole::~CPythonConsole()
-{
-    FiniPythion();
-}
-
-void CPythonConsole::WriteData(const QByteArray& data)
-{
-    if (data.length() == 0)
-        return;
-
-    for (int i = 0; i < data.length(); i++)
-    {
-        char ch = data.at(i);
-        if (ch == '\n' || ch == '\r')
-        {
-            if (LineBuffer.size() != 0)
-            {
-                std::cout << ">>> " << LineBuffer << std::endl;
-                PythonRun(LineBuffer.c_str());
-                LineBuffer.clear();
-            }
-        }
-        else
-        {
-            LineBuffer.push_back(ch);
-        }
-    }
-}
-//<<<<<<
-
 CMainWindow::CMainWindow()
     : ui(new Ui::CMainWindow)
 {
@@ -265,7 +202,7 @@ void CMainWindow::writeSettings()
 
 bool CMainWindow::maybeSave()
 {
-    if (!document->IsModified())
+    if (!document || !document->IsModified())
         return true;
     const QMessageBox::StandardButton ret
         = QMessageBox::warning(this, tr("Nome"),
@@ -300,6 +237,10 @@ void CMainWindow::loadFile(const QString& fileName)
     document->CreateControlPanel(this);
     ui->controlPanelDock->setWidget(document->GetControls());
     ui->centralHLayout->addWidget(document->GetCanvas());
+
+    pyConsole = new CPythonConsole(this);
+    pyConsole->SetSession(document->GetSession());
+    pyConsole->show();
 
     QApplication::restoreOverrideCursor();
 

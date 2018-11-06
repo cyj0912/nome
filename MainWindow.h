@@ -1,6 +1,7 @@
 #pragma once
 
 #include "NomeDocument.h"
+#include "Scripting/Console.h"
 
 #include <QMainWindow>
 #include <QTextEdit>
@@ -64,4 +65,5 @@ private:
     bool isUntitled;
 
     CNomeDocument* document = nullptr;
+    CPythonConsole* pyConsole = nullptr;
 };

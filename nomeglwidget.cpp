@@ -616,7 +616,7 @@ void SlideGLWidget::mouseMoveEvent(QMouseEvent* event)
 }
 
 void SlideGLWidget::timerEvent(QTimerEvent *event) {
-	const float ROTATION_SPEED = 0.1f;
+	const float ROTATION_SPEED = 0.6f;
 
     if(last_mx != cur_mx || last_my != cur_my) {
         glm::vec3 va = get_arcball_vector(last_mx, last_my);
