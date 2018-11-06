@@ -76,6 +76,8 @@ endfunnel               return END_FUNNEL;
 polyline                return POLYLINE;
 circle                  return CIRCLE;
 endcircle               return END_CIRCLE;
+torusknot				return TORUSKNOT;
+endtorusknot			return END_TORUSKNOT;
 scale                   return SCALE;
 endpolyline             return END_POLYLINE;
 instance                return INSTANCE;

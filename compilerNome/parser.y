@@ -24,6 +24,7 @@
 #include <newNOME/BSplineNew.h>
 #include <newNOME/BezierCurveNew.h>
 #include <newNOME/Sweep.h>
+#include <newNOME/TorusKnotNew.h>
 
 extern int nomlineno;
 extern char* nomtext;
@@ -68,7 +69,7 @@ SweepInitializer currentSweepInitializer;
 
 %token COLOR VARIABLE NEWLINE SURFACE END_SURFACE MESH END_MESH FACE END_FACE BEG_POINT
 END_POINT OBJECT END_OBJECT BANK END_BANK TUNNEL END_TUNNEL FUNNEL END_FUNNEL
-POLYLINE END_POLYLINE INSTANCE END_INSTANCE CIRCLE END_CIRCLE BEG_DELETE END_DELETE
+POLYLINE END_POLYLINE INSTANCE END_INSTANCE CIRCLE END_CIRCLE TORUSKNOT END_TORUSKNOT BEG_DELETE END_DELETE
 GROUP  END_GROUP TRANSLATE ROTATE MIRROR SET OPARENTHESES EPARENTHESES OBRACE
 EXPR DOLLAR EBRACE PERIOD TOKHEAT STATE TOKTARGET TOKTEMPERATURE
 SCALE SUBDIVISION END_SUBDIVISION SUBDIVISIONS TYPE OFFSET END_OFFSET MIN MAX STEP
@@ -114,7 +115,7 @@ commands: /* empty */
 
 command:
   mesh | surface | point | face | object | bank |
-  tunnel | funnel | polyline | instance | delete | group | circle |
+  tunnel | funnel | polyline | instance | delete | group | circle | torusknot |
   subdivision | offset | bspline | beziercurve | foreground | background |
   insidefaces | outsidefaces | offsetfaces | merging | sweep;
 
@@ -669,6 +670,38 @@ circle:
 
         currSession->circles.push_back(currCircle);
     };
+
+torusknot:
+	TORUSKNOT uniqueName OPARENTHESES numberValue numberValue numberValue numberValue numberValue EPARENTHESES END_TORUSKNOT
+	{
+		string name = $<string>2;
+        double *pass = (double*) malloc(sizeof(double));
+        double *turn = (double*) malloc(sizeof(double));
+		double *rmaj = (double*) malloc(sizeof(double));
+        double *rmin = (double*) malloc(sizeof(double));
+		double *num = (double*) malloc(sizeof(double));
+
+        double *currentValSet = (double*) malloc(sizeof(double));
+        parseGetBankVal($<string>4, currSession, currentValSet, nomlineno);
+        *pass = *currentValSet;
+
+        parseGetBankVal($<string>5, currSession, currentValSet, nomlineno);
+        *turn = *currentValSet;
+
+		parseGetBankVal($<string>6, currSession, currentValSet, nomlineno);
+        *rmaj = *currentValSet;
+
+        parseGetBankVal($<string>7, currSession, currentValSet, nomlineno);
+        *rmin = *currentValSet;
+
+        parseGetBankVal($<string>8, currSession, currentValSet, nomlineno);
+        *num = *currentValSet;
+
+        TorusKnotNew* currTorusKnot = createTorusKnot(pass, turn, rmaj, rmin, num);
+		currTorusKnot->setName(nameUnique);
+
+        currSession->meshes.push_back(currTorusKnot);
+	};
 
 tunnel:
     TUNNEL uniqueName OPARENTHESES numberValue numberValue numberValue numberValue EPARENTHESES

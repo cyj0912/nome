@@ -106,6 +106,7 @@ set(SOURCES
         newNOME/SliderNew.cpp
         newNOME/PolylineNew.cpp
         newNOME/CircleNew.cpp
+		newNOME/TorusKnotNew.cpp
         newNOME/FunnelNew.cpp
         newNOME/TunnelNew.cpp
         newNOME/ConsolidateWindow.cpp
@@ -174,6 +175,7 @@ set(HEADERS
         newNOME/SliderNew.h
         newNOME/PolylineNew.h
         newNOME/CircleNew.h
+		newNOME/TorusKnotNew.h
         newNOME/FunnelNew.h
         newNOME/TunnelNew.h
         newNOME/ConsolidateWindow.h
