@@ -1362,35 +1362,9 @@ Vector3 Vert::getTransformedPosition() const
 void Vert::applyTransformation(TransformationNew * t){
     if (dynamic_cast<Rotate*>(t)){
         Rotate* rotate = dynamic_cast<Rotate*>(t);
-
-        double *xTmp = (double*) malloc(sizeof(double));
-        double *yTmp = (double*) malloc(sizeof(double));
-        double *zTmp = (double*) malloc(sizeof(double));
-
-        // Rotation around an axis
-        // http://ksuweb.kennesaw.edu/~plaval//math4490/rotgen.pdf
-        double radAngle = *rotate->angle * (3.141592f/180.0f);
-        double t = 1 - glm::cos(radAngle);
-        double S = glm::sin(radAngle);
-        double C = glm::cos(radAngle);
-
-        double x1 = t * pow(*rotate->x, 2) + C;
-        double x2 = t * *rotate->x * *rotate->y - S * *rotate->z;
-        double x3 = t * *rotate->x * *rotate->z + S * *rotate->y;
-        double y1 = t * *rotate->x * *rotate->y + S * *rotate->z;
-        double y2 = t * pow(*rotate->y, 2) + C;
-        double y3 = t * *rotate->y * *rotate->z - S * *rotate->x;
-        double z1 = t * *rotate->x * *rotate->z - S * *rotate->y;
-        double z2 = t * *rotate->y * *rotate->z + S * *rotate->x;
-        double z3 = t * pow(*rotate->z, 2) + C;
-
-        // Matrix multiplication
-        // https://i.ytimg.com/vi/r-WlZLV0E0s/hqdefault.jpg
-        double ax = this->xTransformed * x1 + this->yTransformed * x2 + this->zTransformed * x3;
-        double ay = this->xTransformed * y1 + this->yTransformed * y2 + this->zTransformed * y3;
-        double az = this->xTransformed * z1 + this->yTransformed * z2 + this->zTransformed * z3;
-
-        this->setWorldPos(ax, ay, az);
+        Quaternion quat = Quaternion(*rotate->angle, Vector3(*rotate->x, *rotate->y, *rotate->z));
+        auto newPos = quat * Vector3(this->xTransformed, this->yTransformed, this->zTransformed);
+        this->setWorldPos(newPos.x_, newPos.y_, newPos.z_);
     } else if (dynamic_cast<Scale*>(t)){
         Scale* scale = dynamic_cast<Scale*>(t);
         this->setWorldPos(this->xTransformed * *scale->x, this->yTransformed * *scale->y, this->zTransformed * *scale->z);
