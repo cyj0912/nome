@@ -186,6 +186,18 @@ Node* MeshNew::vert(int i)
     return NULL;
 }
 
+Node* MeshNew::getVertByIndex(int i) {
+
+    int counter = 0;
+    for(Vert* v0 : verts)
+    {
+        if(counter == i)
+            return v0;
+        counter++;
+    }
+    return nullptr;
+}
+
 Node* MeshNew::edge(int i)
 {
     for(EdgeNew* e0 : edges)

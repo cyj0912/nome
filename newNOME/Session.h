@@ -57,7 +57,7 @@ public:
     bool recalculateSlider = true;
 
     int subdivisionLevel = 0;
-    MeshNew* flattenMesh;
+    MeshNew* flattenMesh = nullptr;
     std::vector<MeshNew*> flattenMeshList = std::vector<MeshNew*>();
 
     int tmpFaceIndex = 0;
@@ -113,10 +113,13 @@ public:
     void createFlattenMesh(bool instance);
     std::vector<Vert*> findLoop(Vert* startVert, std::vector<Vert*> selectedVertsLoop);
     std::tuple<std::vector<Vert*>, std::vector<EdgeNew*>> findBorder(Vert* startVert);
-    std::tuple<std::vector<Vert*>, std::vector<EdgeNew*>> findBorderRec(Vert* startVert, std::vector<Vert*> borderVerts, std::vector<EdgeNew*> seenEdges);
+    std::tuple<std::vector<Vert*>, std::vector<EdgeNew*>> findBorderRec(Vert* startVert, std::unordered_set<EdgeNew*> sEdges);
     void zipBorders();
+    std::tuple<std::vector<Vert*>, std::vector<EdgeNew*>> findFlattenMeshBorder();
+//    std::tuple<std::vector<Vert*>, std::vector<EdgeNew*>> findFlattenMeshBordeRec(Vert* startVert, std::vector<Vert*> borderVerts, std::vector<EdgeNew*> seenEdges);
 
     OctantNew* getOctreeRoot() const { return OctreeRoot; }
+    OctantNew* getPostMergeOctreeRoot() const { return PostMergeOctreeRoot; }
 
     static Session& getSingleton();
 
@@ -124,6 +127,7 @@ private:
     int accesses;
 
     OctantNew* OctreeRoot;
+    OctantNew* PostMergeOctreeRoot;
 };
 
 //Instantiation

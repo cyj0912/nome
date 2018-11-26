@@ -188,7 +188,7 @@ void SlideGLWidget::set_to_editing_mode(bool in_editing_mode)
 
 void SlideGLWidget::mouse_select(int x, int y)
 {
-    if(viewer_mode != 0) {
+    if( !(viewer_mode == 0 || viewer_mode == 1) ) {
         return;
     }
 
@@ -224,7 +224,13 @@ void SlideGLWidget::mouse_select(int x, int y)
 
         Ray mouseRay = Ray(camPos, dir);
         vector<OctreeProxy*> rayIntersectResults;
-        currSession->getOctreeRoot()->findNodes(mouseRay, rayIntersectResults);
+
+        if (viewer_mode == 1) {
+            currSession->getPostMergeOctreeRoot()->findNodes(mouseRay, rayIntersectResults);
+        } else {
+            currSession->getOctreeRoot()->findNodes(mouseRay, rayIntersectResults);
+        }
+
         for (OctreeProxy* proxy : rayIntersectResults)
         {
             auto* vertProxy = dynamic_cast<VertOctreeProxy*>(proxy);
@@ -288,7 +294,14 @@ void SlideGLWidget::mouse_select(int x, int y)
 
         Ray mouseRay = Ray(camPos, dir);
         vector<OctreeProxy*> rayIntersectResults;
-        currSession->getOctreeRoot()->findNodes(mouseRay, rayIntersectResults);
+
+        //Search in merged or unmerged oct-tree
+        if (viewer_mode == 1) {
+            currSession->getPostMergeOctreeRoot()->findNodes(mouseRay, rayIntersectResults);
+        } else {
+            currSession->getOctreeRoot()->findNodes(mouseRay, rayIntersectResults);
+        }
+
         for (OctreeProxy* proxy : rayIntersectResults)
         {
             //cout << proxy->toString() << endl;
@@ -336,7 +349,7 @@ void SlideGLWidget::mouse_select(int x, int y)
             }
 
 
-
+            //Adds a tmpBorder which is then added to currSession->borders in addBorderCalled(bool)
             currSession->tmpBorder = std::make_tuple(loop, eloop);
             currSession->isBorderSelected = true;
             update();
@@ -497,6 +510,8 @@ void SlideGLWidget::draw_scene()
         }
         glLineWidth(1.0);
     }
+
+
 }
 
 void SlideGLWidget::paintGL()
@@ -684,6 +699,7 @@ void SlideGLWidget::paintGLImpl()
 
 
     //std::cout << currSession->recompute << std::endl;
+    //Note viewer_mode is 1 if the merge has been called or Merged Mesh is selected
     if (viewer_mode == 0){
         currSession->draw();
     } else if (viewer_mode == 1){
@@ -1273,6 +1289,7 @@ void SlideGLWidget::addTempToMasterCalled(bool) {
     repaint();
 }
 
+//Adds any newly found border to currSession->borders
 void SlideGLWidget::addBorderCalled(bool)
 {
     if (currSession->isBorderSelected == true){

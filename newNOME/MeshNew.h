@@ -62,6 +62,7 @@ public:
     Node* vert(int);
     Node* edge(int);
     Node* face(int);
+    Node* getVertByIndex(int);
     bool setSurface(Surface* surface);
     //Node* surface();
 

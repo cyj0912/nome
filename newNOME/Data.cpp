@@ -78,6 +78,17 @@ QColor Surface::getColor(){
     return color;
 }
 
+//Used so the edge colors are darker than the corresponding faces, subValue is an integer from 0 to 255
+//Note that the corresponding rgb values are at least 0
+QColor Surface::getEdgeColor(int subValue){
+    double darkenAmount = ((double) subValue) / 255.0;
+    int redVal = 255 * std::max((*r - darkenAmount), 0.0);
+    int greenVal = 255 * std::max((*g - darkenAmount), 0.0);
+    int blueVal = 255 * std::max((*b - darkenAmount), 0.0);
+    color = QColor(redVal, greenVal, blueVal);
+    return color;
+}
+
 ///Vertex functions
 ///Create a default vert, will be at the origin with weight of 1.0
 Vert* createVert()
@@ -831,13 +842,21 @@ bool drawVert(Vert* v0, Surface * instSurface, Session* currSession){
 
 bool drawEdge(EdgeNew* e0, Surface * instSurface, Session* currSession)
 {
+    //Added to make edges more visible
+    QColor(200, 200, 200);
+
     QColor color;
     if (instSurface != NULL){
         color = instSurface->color;
     } else if (e0->surface != NULL){
         color = e0->surface->getColor();
     } else{
-        color = currSession->foreColor->getColor();;
+        /*Note: To remove the edge darkening,
+         * comment out the first two lines and uncomment the third */
+
+        int foreColorDarkening = 80;
+        color = currSession->foreColor->getEdgeColor(foreColorDarkening);
+        //color = currSession->foreColor->getColor();
     }
 
     GLfloat fcolor[4] = {0,0,0,0};
@@ -1240,6 +1259,26 @@ void Vert::updateOctreeProxy()
     }
 }
 
+void Vert::initPostMergeOctreeProxy()
+{
+    if (!postMergeOctreeProxy)
+        postMergeOctreeProxy = new VertOctreeProxy(Session::getSingleton().getPostMergeOctreeRoot(), this, xTransformed, yTransformed, zTransformed);
+}
+
+void Vert::destroyPostMergeOctreeProxy()
+{
+    delete postMergeOctreeProxy;
+}
+
+void Vert::updatePostMergeOctreeProxy()
+{
+    if (postMergeOctreeProxy)
+    {
+        //printf("Vert %s updated: %f, %f, %f\n", getFullName().c_str(), xTransformed, yTransformed, zTransformed);
+        postMergeOctreeProxy->updateWorldPosition(xTransformed, yTransformed, zTransformed);
+    }
+}
+
 void Vert::calculateVertPoint(){
     double Rx = 0;
     double Ry = 0;
@@ -1336,6 +1375,14 @@ void Vert::setWorldPos(double x, double y, double z)
     yTransformed = y;
     zTransformed = z;
     updateOctreeProxy();
+}
+
+void Vert::setPostMergeWorldPos(double x, double y, double z)
+{
+    xTransformed = x;
+    yTransformed = y;
+    zTransformed = z;
+    updatePostMergeOctreeProxy();
 }
 
 Vector3 Vert::getUntransformedPosition() const

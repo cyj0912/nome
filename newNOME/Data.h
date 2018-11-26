@@ -52,6 +52,7 @@ public:
     QColor color;
     std::string name;
     QColor getColor();
+    QColor getEdgeColor(int subValue);
     void update();
 } Surface;
 
@@ -93,15 +94,23 @@ public:
     std::vector<FaceNew*> facesReversed = std::vector<FaceNew*>();
 
     VertOctreeProxy* octreeProxy = nullptr;
+    VertOctreeProxy* postMergeOctreeProxy = nullptr;
 
     ~Vert()
     {
         destroyOctreeProxy();
+        destroyPostMergeOctreeProxy();
     }
 
     void initOctreeProxy();
     void destroyOctreeProxy();
     void updateOctreeProxy();
+
+    //Post merge operations (this is pretty band-aid, sorry)
+    void initPostMergeOctreeProxy();
+    void destroyPostMergeOctreeProxy();
+    void updatePostMergeOctreeProxy();
+    void setPostMergeWorldPos(double x, double y, double z);
 
     // Used for subdivision
     Vert* vertPoint;

@@ -23,6 +23,7 @@
 #include <fstream>
 #include <sstream>
 #include <glm/glm.hpp>
+#include <unordered_set>
 
 #include "bankFlexBison.cpp"
 #include "compilerNome/parser.hpp"
@@ -135,6 +136,7 @@ void Session::reset()
 	recalculateSubdivision = true;
 	recalculateOffset = true;
 	flattenMeshList.clear();
+	flattenMesh = nullptr;
 }
 
 Session& Session::getSingleton()
@@ -915,17 +917,7 @@ void Session::mergeEdges(MeshNew* flattenMesh){
         }*/
         //flattenMesh->edges.remove(std::get<1>(e));
 
-        /*for (EdgeNew* ff : flattenMesh->edges){
-            if (ff->v0->index == std::get<1>(e)->v1->index){
-                ff->v0 = newVertexDict[std::get<1>(e)->v1];
-            } else if (ff->v0->index == std::get<1>(e)->v0->index){
-                ff->v0 = newVertexDict[std::get<1>(e)->v0];
-            } else if (ff->v1->index == std::get<1>(e)->v1->index){
-                ff->v1 = newVertexDict[std::get<1>(e)->v1];
-            } else if (ff->v1->index == std::get<1>(e)->v0->index){
-                ff->v1 = newVertexDict[std::get<1>(e)->v0];
-            }
-        }*/
+
         /*for (FaceNew* f0 : flattenMesh->faces){
             std::cout << f0->verts.size() << std::endl;
         }*/
@@ -1014,6 +1006,7 @@ void Session::mergeEdges(MeshNew* flattenMesh){
 
 void Session::createFlattenMesh(bool instance){
     MeshNew* tmpflattenMesh = createMesh();
+
     if (instance){
         //std::cout << "INSTANCE" << std::endl;
         for (std::list<InstanceNew*>::iterator itMesh = instances.begin(); itMesh != instances.end(); itMesh++){
@@ -1025,6 +1018,7 @@ void Session::createFlattenMesh(bool instance){
     else{
         tmpflattenMesh = flattenMesh;
     }
+
 
     // http://www.rorydriscoll.com/2008/08/01/catmull-clark-subdivision-the-basics/
     // STEP 1: Calculate face points.
@@ -1038,52 +1032,113 @@ void Session::createFlattenMesh(bool instance){
         }
     }
 
+    PostMergeOctreeRoot = new OctantNew();
+    PostMergeOctreeRoot->setExtent(BoundingBox(-100.0f, 100.0f));
+
     for (EdgeNew* currEdge : tmpflattenMesh->edges){
         currEdge->calculateEdgePoint();
     }
 
     for (Vert* currVert : tmpflattenMesh->verts){
         currVert->calculateVertPoint();
+        currVert->initPostMergeOctreeProxy();
+        currVert->setPostMergeWorldPos(*currVert->x, *currVert->y, *currVert->z);
+
     }
 
     flattenMesh = tmpflattenMesh;
 }
 
-std::tuple<std::vector<Vert*>, std::vector<EdgeNew*>> Session::findBorder(Vert* startVert){
+//Chooses the border around a flatten mesh for the first vertex in the mesh (since no vertex correspondences between selection exist)
+std::tuple<std::vector<Vert*>, std::vector<EdgeNew*>> Session::findFlattenMeshBorder() {
+    std::tuple<std::vector<Vert*>, std::vector<EdgeNew*>> retval;
     std::vector<Vert*> borderVerts = std::vector<Vert*>();
-    std::vector<EdgeNew*> seenEdges = std::vector<EdgeNew*>();
+    std::unordered_set<EdgeNew*> seenEdges = std::unordered_set<EdgeNew*>();
+    Vert* startVert = (Vert*) flattenMesh->getVertByIndex(0);
 
-    borderVerts.push_back(startVert);
-
-    return findBorderRec(startVert, borderVerts, seenEdges);
-}
-
-std::tuple<std::vector<Vert*>, std::vector<EdgeNew*>> Session::findBorderRec(Vert* startVert, std::vector<Vert*> borderVerts, std::vector<EdgeNew*> seenEdges){
-    if ((startVert->index == borderVerts.front()->index) && (borderVerts.size() != 1)){
-        return std::make_tuple(borderVerts, seenEdges);
-    }
-
-    for (EdgeNew* edge : startVert->edges){
-        if (std::find(seenEdges.begin(), seenEdges.end(), edge) == seenEdges.end()){
-            if ((edge->f0 == NULL) || (edge->f1 == NULL)){
-                seenEdges.push_back(edge);
-                std::tuple<std::vector<Vert*>, std::vector<EdgeNew*>> borderRet;
-                if (startVert->index == edge->v0->index){
-                    borderVerts.push_back(edge->v1);
-                    borderRet = findBorderRec(edge->v1, borderVerts, seenEdges);
-                } else {
-                    borderVerts.push_back(edge->v0);
-                    borderRet = findBorderRec(edge->v0, borderVerts, seenEdges);
-                }
-
-                if (std::get<0>(borderRet).size() != 0){
-                    return borderRet;
-                }
-
-            }
+    for (EdgeNew* edge : startVert->edges) {
+        if (!(edge->f0 != NULL && edge->f1 != NULL)) {
+            seenEdges.insert(edge);
+            retval = findBorderRec(startVert, seenEdges);
+            return retval;
         }
     }
+
     return std::make_tuple(std::vector<Vert*>(), std::vector<EdgeNew*>());
+
+
+}
+
+std::tuple<std::vector<Vert*>, std::vector<EdgeNew*>> Session::findBorder(Vert* startVert){
+    //Check if a flatten mesh has been created, and if so select that border instead
+    if (flattenMesh != nullptr) {
+        std::tuple<std::vector<Vert*>, std::vector<EdgeNew*>> retval;
+        retval = findFlattenMeshBorder();
+        return retval;
+    }
+
+    std::unordered_set<EdgeNew*> seenEdges = std::unordered_set<EdgeNew*>();
+    seenEdges.insert(*startVert->edges.begin());
+    return findBorderRec(startVert, seenEdges);
+}
+
+std::tuple<std::vector<Vert*>, std::vector<EdgeNew*>> Session::findBorderRec(Vert* startVert, std::unordered_set<EdgeNew*> sEdges){
+
+//    for (EdgeNew* edge : startVert->edges){
+//        if (std::find(seenEdges.begin(), seenEdges.end(), edge) == seenEdges.end()){
+//            //Border edges neighbor only a single face
+//            if (edge->faceCount == 1){
+//                seenEdges.push_back(edge);
+//                std::tuple<std::vector<Vert*>, std::vector<EdgeNew*>> borderRet;
+//                if (startVert->index == edge->v0->index){
+//                    borderVerts.push_back(edge->v1);
+//                    borderRet = findBorderRec(edge->v1, borderVerts, seenEdges);
+//                } else {
+//                    borderVerts.push_back(edge->v0);
+//                    borderRet = findBorderRec(edge->v0, borderVerts, seenEdges);
+//                }
+//
+//                if (std::get<0>(borderRet).size() != 0){
+//                    return borderRet;
+//                }
+//
+//            }
+//        }
+//    }
+
+    //Edge list - use this to ensure one to one correspondence of vertices and edges
+    std::vector<EdgeNew*> seenEdges = std::vector<EdgeNew*>();
+    std::vector<Vert*> seenVerts = std::vector<Vert*>();
+    EdgeNew* nextEdge = *sEdges.begin();
+    seenEdges.push_back(nextEdge);
+    Vert* currVert = startVert;
+
+    //Iterate along the border, finding each edge/vertex along the way
+    do {
+        seenVerts.push_back(currVert);
+
+        //Choose the next vertex along the edge
+        if (currVert == nextEdge->v0) {
+            currVert = nextEdge->v1;
+        } else {
+            currVert = nextEdge->v0;
+        }
+
+        //Choose the next border edge - note this assumes only 1 other edge is a viable border edge (2-manifold assumption)
+        for (EdgeNew* candidateEdge : currVert->edges) {
+            //Check if the edge is a border edge, and make sure we haven't already seen the edge
+            if (!(candidateEdge->f0 != NULL && candidateEdge->f1 != NULL) && sEdges.find(candidateEdge) == sEdges.end()) {
+                nextEdge = candidateEdge;
+                seenEdges.push_back(nextEdge);
+                sEdges.insert(nextEdge);
+                break;
+            }
+        }
+
+
+    } while (currVert != startVert);
+
+    return std::make_tuple(seenVerts, seenEdges);
 }
 
 void Session::drawSubdivide(int subdivision, int previousSubdivisionLevel, double offset, bool calculateOffset, bool calculateSubdivide, bool calculateSlider){
@@ -1128,15 +1183,14 @@ void Session::drawSubdivide(int subdivision, int previousSubdivisionLevel, doubl
 
     flattenMesh->draw(offset, (computeOffset || calculateOffset), outsideColor, insideColor, offsetColor, this);
 
-    /*for (Vert* hello : flattenMesh->verts){
-        drawVert(hello->vertPoint, NULL);
-    }*/
-    /*for (EdgeNew* hello : flattenMesh->edges){
-        drawVert(hello->edgePoint, NULL);
-    }*/
-    /*for (FaceNew* hello : flattenMesh->faces){
-        drawVert(hello->facePoint, NULL);
-    }*/
+    //Draw the vertices and edges of the merged mesh
+    for (Vert* vert : flattenMesh->verts){
+        drawVert(vert, NULL, this);
+    }
+    for (EdgeNew* edge : flattenMesh->edges){
+        drawEdge(edge, NULL, this);
+    }
+
 }
 
 void saveFaceSTL(FaceNew* currFace, std::ofstream& file){
