@@ -241,6 +241,9 @@ void CMainWindow::loadFile(const QString& fileName)
     pyConsole = new CPythonConsole(this);
     pyConsole->SetSession(document->GetSession());
     pyConsole->show();
+	connect(pyConsole, &CConsole::OnCommandSent, [&]() {
+		document->GetCanvas()->update();
+	});
 
     QApplication::restoreOverrideCursor();
 

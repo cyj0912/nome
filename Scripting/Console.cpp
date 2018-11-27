@@ -48,4 +48,6 @@ void CPythonConsole::enterButtonPressed()
     TextArea->appendPlainText(text);
     PythonRun(text.toLocal8Bit().data());
     TextEntry->clear();
+
+	emit OnCommandSent();
 }

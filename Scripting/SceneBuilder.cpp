@@ -49,6 +49,8 @@ void CSceneBuilder::SimpleInstance(const std::string& instanceName, const std::s
 	currTranslate->yStr = buffer;
 	snprintf(buffer, sizeof(buffer), "%f", posZ);
 	currTranslate->zStr = buffer;
+	newInstance->transformations.push_back(currTranslate);
+
 	for (TransformationNew * t : newInstance->transformations) {
 		newInstance->applyTransformation(t);
 	}

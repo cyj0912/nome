@@ -10,6 +10,9 @@ class CConsole : public QWidget
 public:
 	explicit CConsole(QWidget *parent = nullptr);
 
+signals:
+	void OnCommandSent();
+
 protected:
     QPlainTextEdit* TextArea;
     QPlainTextEdit* TextEntry;

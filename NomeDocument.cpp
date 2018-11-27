@@ -95,9 +95,12 @@ bool CNomeDocument::SaveFile(const QString& fileName)
     if (fileName.right(3).toLower() == "stl")
     {
         CurrSession->SaveSessionStl(fileName.toStdString());
+		return true;
     }
-    else if (fileName.right(3).toLower() == "nom")
+    if (fileName.right(3).toLower() == "nom")
     {
         CurrSession->SaveSessionNom(fileName.toStdString());
+		return true;
     }
+	return false;
 }
