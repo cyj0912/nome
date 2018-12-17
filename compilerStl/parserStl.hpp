@@ -1,4 +1,4 @@
-/* A Bison parser, made by GNU Bison 3.0.5.  */
+/* A Bison parser, made by GNU Bison 3.2.2.  */
 
 /* Bison interface for Yacc-like parsers in C
 
@@ -30,8 +30,11 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
-#ifndef YY_STL_E_DEVGRA_NOME_COMPILERSTL_PARSERSTL_HPP_INCLUDED
-# define YY_STL_E_DEVGRA_NOME_COMPILERSTL_PARSERSTL_HPP_INCLUDED
+/* Undocumented macros, especially those whose name start with YY_,
+   are private implementation details.  Do not rely on them.  */
+
+#ifndef YY_STL_D_DEV_NOME_COMPILERSTL_PARSERSTL_HPP_INCLUDED
+# define YY_STL_D_DEV_NOME_COMPILERSTL_PARSERSTL_HPP_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -40,11 +43,11 @@
 extern int stldebug;
 #endif
 /* "%code requires" blocks.  */
-#line 1 "compilerStl/parserStl.y" /* yacc.c:1910  */
+#line 1 "compilerStl/parserStl.y" /* yacc.c:1906  */
 
 #include <newNOME/Session.h>
 
-#line 48 "E:/DevGra/nome/compilerStl/parserStl.hpp" /* yacc.c:1910  */
+#line 51 "D:/Dev/nome/compilerStl/parserStl.hpp" /* yacc.c:1906  */
 
 /* Token type.  */
 #ifndef YYTOKENTYPE
@@ -84,7 +87,7 @@ extern int stldebug;
 
 union YYSTYPE
 {
-#line 66 "compilerStl/parserStl.y" /* yacc.c:1910  */
+#line 66 "compilerStl/parserStl.y" /* yacc.c:1906  */
 
     double number;
     char *string;
@@ -93,7 +96,7 @@ union YYSTYPE
         double number;   // int posVal;
     } numPos;
 
-#line 97 "E:/DevGra/nome/compilerStl/parserStl.hpp" /* yacc.c:1910  */
+#line 100 "D:/Dev/nome/compilerStl/parserStl.hpp" /* yacc.c:1906  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -120,4 +123,4 @@ extern YYSTYPE stllval;
 extern YYLTYPE stllloc;
 int stlparse (Session* currSession);
 
-#endif /* !YY_STL_E_DEVGRA_NOME_COMPILERSTL_PARSERSTL_HPP_INCLUDED  */
+#endif /* !YY_STL_D_DEV_NOME_COMPILERSTL_PARSERSTL_HPP_INCLUDED  */

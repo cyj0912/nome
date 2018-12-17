@@ -1,6 +1,6 @@
-#line 1 "E:/DevGra/nome/compilerObj/lexerObj.cpp"
+#line 1 "D:/Dev/nome/compilerObj/lexerObj.cpp"
 
-#line 3 "E:/DevGra/nome/compilerObj/lexerObj.cpp"
+#line 3 "D:/Dev/nome/compilerObj/lexerObj.cpp"
 
 #define  YY_INT_ALIGNED short int
 
@@ -776,10 +776,10 @@ int objcolumn = 0;
     objcolumn += objleng;
 
 static int isatty(int) {return 0;}
-#line 779 "E:/DevGra/nome/compilerObj/lexerObj.cpp"
+#line 779 "D:/Dev/nome/compilerObj/lexerObj.cpp"
 #define YY_NO_UNISTD_H 1
 
-#line 782 "E:/DevGra/nome/compilerObj/lexerObj.cpp"
+#line 782 "D:/Dev/nome/compilerObj/lexerObj.cpp"
 
 #define INITIAL 0
 #define MULTI_COMMENT 1
@@ -999,7 +999,7 @@ YY_DECL
 	{
 #line 24 "compilerObj/lexerObj.l"
 
-#line 1002 "E:/DevGra/nome/compilerObj/lexerObj.cpp"
+#line 1002 "D:/Dev/nome/compilerObj/lexerObj.cpp"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1148,7 +1148,7 @@ YY_RULE_SETUP
 #line 40 "compilerObj/lexerObj.l"
 ECHO;
 	YY_BREAK
-#line 1151 "E:/DevGra/nome/compilerObj/lexerObj.cpp"
+#line 1151 "D:/Dev/nome/compilerObj/lexerObj.cpp"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(MULTI_COMMENT):
 	yyterminate();

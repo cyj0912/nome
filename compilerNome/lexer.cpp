@@ -1,6 +1,6 @@
-#line 1 "/Volumes/macData/BerkeleyCG/nome/compilerNome/lexer.cpp"
+#line 1 "D:/Dev/nome/compilerNome/lexer.cpp"
 
-#line 3 "/Volumes/macData/BerkeleyCG/nome/compilerNome/lexer.cpp"
+#line 3 "D:/Dev/nome/compilerNome/lexer.cpp"
 
 #define  YY_INT_ALIGNED short int
 
@@ -1046,10 +1046,10 @@ int numBegComments = 0;
     nomcolumn += nomleng;
 
 static int isatty(int) {return 0;}
-#line 1049 "/Volumes/macData/BerkeleyCG/nome/compilerNome/lexer.cpp"
+#line 1049 "D:/Dev/nome/compilerNome/lexer.cpp"
 #define YY_NO_UNISTD_H 1
 
-#line 1052 "/Volumes/macData/BerkeleyCG/nome/compilerNome/lexer.cpp"
+#line 1052 "D:/Dev/nome/compilerNome/lexer.cpp"
 
 #define INITIAL 0
 #define MULTI_COMMENT 1
@@ -1270,7 +1270,7 @@ YY_DECL
 	{
 #line 27 "compilerNome/lexer.l"
 
-#line 1273 "/Volumes/macData/BerkeleyCG/nome/compilerNome/lexer.cpp"
+#line 1273 "D:/Dev/nome/compilerNome/lexer.cpp"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1810,7 +1810,7 @@ YY_RULE_SETUP
 #line 124 "compilerNome/lexer.l"
 ECHO;
 	YY_BREAK
-#line 1813 "/Volumes/macData/BerkeleyCG/nome/compilerNome/lexer.cpp"
+#line 1813 "D:/Dev/nome/compilerNome/lexer.cpp"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -2828,11 +2828,9 @@ void yyfree (void * ptr )
 #line 124 "compilerNome/lexer.l"
 
 
-int scanFromSessionFileContent(Session* s)
+int scanFromSessionFileContent(Session* s, const char* textBuffer, size_t textBufferSize)
 {
-	const char* buf = s->fileContent.data();
-	size_t sz = s->fileContent.size();
-	YY_BUFFER_STATE bufferState = nom_scan_bytes(buf, sz);
+	YY_BUFFER_STATE bufferState = nom_scan_bytes(textBuffer, textBufferSize);
 
 	nomlineno = 1;
     nomcolumn = 0;

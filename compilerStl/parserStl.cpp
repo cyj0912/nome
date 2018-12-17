@@ -1,4 +1,4 @@
-/* A Bison parser, made by GNU Bison 3.0.5.  */
+/* A Bison parser, made by GNU Bison 3.2.2.  */
 
 /* Bison implementation for Yacc-like parsers in C
 
@@ -40,11 +40,14 @@
    define necessary library symbols; they are noted "INFRINGES ON
    USER NAME SPACE" below.  */
 
+/* Undocumented macros, especially those whose name start with YY_,
+   are private implementation details.  Do not rely on them.  */
+
 /* Identify Bison output.  */
 #define YYBISON 1
 
 /* Bison version.  */
-#define YYBISON_VERSION "3.0.5"
+#define YYBISON_VERSION "3.2.2"
 
 /* Skeleton name.  */
 #define YYSKELETON_NAME "yacc.c"
@@ -70,8 +73,8 @@
 #define yychar          stlchar
 #define yylloc          stllloc
 
-/* Copy the first part of user declarations.  */
-#line 5 "compilerStl/parserStl.y" /* yacc.c:339  */
+/* First part of user prologue.  */
+#line 5 "compilerStl/parserStl.y" /* yacc.c:338  */
 
 #include <stdio.h>
 #include <string.h>
@@ -122,13 +125,16 @@ std::list<FaceNew *> currentSolidFace;
 std::list<TransformationNew *> currentTransformations;
 
 
-#line 126 "E:/DevGra/nome/compilerStl/parserStl.cpp" /* yacc.c:339  */
-
+#line 129 "D:/Dev/nome/compilerStl/parserStl.cpp" /* yacc.c:338  */
 # ifndef YY_NULLPTR
-#  if defined __cplusplus && 201103L <= __cplusplus
-#   define YY_NULLPTR nullptr
+#  if defined __cplusplus
+#   if 201103L <= __cplusplus
+#    define YY_NULLPTR nullptr
+#   else
+#    define YY_NULLPTR 0
+#   endif
 #  else
-#   define YY_NULLPTR 0
+#   define YY_NULLPTR ((void*)0)
 #  endif
 # endif
 
@@ -142,8 +148,8 @@ std::list<TransformationNew *> currentTransformations;
 
 /* In a future release of Bison, this section will be replaced
    by #include "parserStl.hpp".  */
-#ifndef YY_STL_E_DEVGRA_NOME_COMPILERSTL_PARSERSTL_HPP_INCLUDED
-# define YY_STL_E_DEVGRA_NOME_COMPILERSTL_PARSERSTL_HPP_INCLUDED
+#ifndef YY_STL_D_DEV_NOME_COMPILERSTL_PARSERSTL_HPP_INCLUDED
+# define YY_STL_D_DEV_NOME_COMPILERSTL_PARSERSTL_HPP_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -152,11 +158,11 @@ std::list<TransformationNew *> currentTransformations;
 extern int stldebug;
 #endif
 /* "%code requires" blocks.  */
-#line 1 "compilerStl/parserStl.y" /* yacc.c:355  */
+#line 1 "compilerStl/parserStl.y" /* yacc.c:353  */
 
 #include <newNOME/Session.h>
 
-#line 160 "E:/DevGra/nome/compilerStl/parserStl.cpp" /* yacc.c:355  */
+#line 166 "D:/Dev/nome/compilerStl/parserStl.cpp" /* yacc.c:353  */
 
 /* Token type.  */
 #ifndef YYTOKENTYPE
@@ -196,7 +202,7 @@ extern int stldebug;
 
 union YYSTYPE
 {
-#line 66 "compilerStl/parserStl.y" /* yacc.c:355  */
+#line 66 "compilerStl/parserStl.y" /* yacc.c:353  */
 
     double number;
     char *string;
@@ -205,7 +211,7 @@ union YYSTYPE
         double number;   // int posVal;
     } numPos;
 
-#line 209 "E:/DevGra/nome/compilerStl/parserStl.cpp" /* yacc.c:355  */
+#line 215 "D:/Dev/nome/compilerStl/parserStl.cpp" /* yacc.c:353  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -232,11 +238,9 @@ extern YYSTYPE stllval;
 extern YYLTYPE stllloc;
 int stlparse (Session* currSession);
 
-#endif /* !YY_STL_E_DEVGRA_NOME_COMPILERSTL_PARSERSTL_HPP_INCLUDED  */
+#endif /* !YY_STL_D_DEV_NOME_COMPILERSTL_PARSERSTL_HPP_INCLUDED  */
 
-/* Copy the second part of user declarations.  */
 
-#line 240 "E:/DevGra/nome/compilerStl/parserStl.cpp" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -257,13 +261,13 @@ typedef signed char yytype_int8;
 #ifdef YYTYPE_UINT16
 typedef YYTYPE_UINT16 yytype_uint16;
 #else
-typedef unsigned short int yytype_uint16;
+typedef unsigned short yytype_uint16;
 #endif
 
 #ifdef YYTYPE_INT16
 typedef YYTYPE_INT16 yytype_int16;
 #else
-typedef short int yytype_int16;
+typedef short yytype_int16;
 #endif
 
 #ifndef YYSIZE_T
@@ -275,7 +279,7 @@ typedef short int yytype_int16;
 #  include <stddef.h> /* INFRINGES ON USER NAME SPACE */
 #  define YYSIZE_T size_t
 # else
-#  define YYSIZE_T unsigned int
+#  define YYSIZE_T unsigned
 # endif
 #endif
 
@@ -311,15 +315,6 @@ typedef short int yytype_int16;
 # define YY_ATTRIBUTE_UNUSED YY_ATTRIBUTE ((__unused__))
 #endif
 
-#if !defined _Noreturn \
-     && (!defined __STDC_VERSION__ || __STDC_VERSION__ < 201112)
-# if defined _MSC_VER && 1200 <= _MSC_VER
-#  define _Noreturn __declspec (noreturn)
-# else
-#  define _Noreturn YY_ATTRIBUTE ((__noreturn__))
-# endif
-#endif
-
 /* Suppress unused-variable warnings by "using" E.  */
 #if ! defined lint || defined __GNUC__
 # define YYUSE(E) ((void) (E))
@@ -327,7 +322,7 @@ typedef short int yytype_int16;
 # define YYUSE(E) /* empty */
 #endif
 
-#if defined __GNUC__ && 407 <= __GNUC__ * 100 + __GNUC_MINOR__
+#if defined __GNUC__ && ! defined __ICC && 407 <= __GNUC__ * 100 + __GNUC_MINOR__
 /* Suppress an incorrect diagnostic about yylval being uninitialized.  */
 # define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN \
     _Pragma ("GCC diagnostic push") \
@@ -497,7 +492,7 @@ union yyalloc
 #define YYMAXUTOK   269
 
 #define YYTRANSLATE(YYX)                                                \
-  ((unsigned int) (YYX) <= YYMAXUTOK ? yytranslate[YYX] : YYUNDEFTOK)
+  ((unsigned) (YYX) <= YYMAXUTOK ? yytranslate[YYX] : YYUNDEFTOK)
 
 /* YYTRANSLATE[TOKEN-NUM] -- Symbol number corresponding to TOKEN-NUM
    as returned by yylex, without out-of-bounds checking.  */
@@ -729,10 +724,10 @@ do {                                            \
 /* Print *YYLOCP on YYO.  Private, do not rely on its existence. */
 
 YY_ATTRIBUTE_UNUSED
-static unsigned
+static int
 yy_location_print_ (FILE *yyo, YYLTYPE const * const yylocp)
 {
-  unsigned res = 0;
+  int res = 0;
   int end_col = 0 != yylocp->last_column ? yylocp->last_column - 1 : 0;
   if (0 <= yylocp->first_line)
     {
@@ -775,41 +770,41 @@ do {                                                                      \
 } while (0)
 
 
-/*----------------------------------------.
-| Print this symbol's value on YYOUTPUT.  |
-`----------------------------------------*/
+/*-----------------------------------.
+| Print this symbol's value on YYO.  |
+`-----------------------------------*/
 
 static void
-yy_symbol_value_print (FILE *yyoutput, int yytype, YYSTYPE const * const yyvaluep, YYLTYPE const * const yylocationp, Session* currSession)
+yy_symbol_value_print (FILE *yyo, int yytype, YYSTYPE const * const yyvaluep, YYLTYPE const * const yylocationp, Session* currSession)
 {
-  FILE *yyo = yyoutput;
-  YYUSE (yyo);
+  FILE *yyoutput = yyo;
+  YYUSE (yyoutput);
   YYUSE (yylocationp);
   YYUSE (currSession);
   if (!yyvaluep)
     return;
 # ifdef YYPRINT
   if (yytype < YYNTOKENS)
-    YYPRINT (yyoutput, yytoknum[yytype], *yyvaluep);
+    YYPRINT (yyo, yytoknum[yytype], *yyvaluep);
 # endif
   YYUSE (yytype);
 }
 
 
-/*--------------------------------.
-| Print this symbol on YYOUTPUT.  |
-`--------------------------------*/
+/*---------------------------.
+| Print this symbol on YYO.  |
+`---------------------------*/
 
 static void
-yy_symbol_print (FILE *yyoutput, int yytype, YYSTYPE const * const yyvaluep, YYLTYPE const * const yylocationp, Session* currSession)
+yy_symbol_print (FILE *yyo, int yytype, YYSTYPE const * const yyvaluep, YYLTYPE const * const yylocationp, Session* currSession)
 {
-  YYFPRINTF (yyoutput, "%s %s (",
+  YYFPRINTF (yyo, "%s %s (",
              yytype < YYNTOKENS ? "token" : "nterm", yytname[yytype]);
 
-  YY_LOCATION_PRINT (yyoutput, *yylocationp);
-  YYFPRINTF (yyoutput, ": ");
-  yy_symbol_value_print (yyoutput, yytype, yyvaluep, yylocationp, currSession);
-  YYFPRINTF (yyoutput, ")");
+  YY_LOCATION_PRINT (yyo, *yylocationp);
+  YYFPRINTF (yyo, ": ");
+  yy_symbol_value_print (yyo, yytype, yyvaluep, yylocationp, currSession);
+  YYFPRINTF (yyo, ")");
 }
 
 /*------------------------------------------------------------------.
@@ -843,7 +838,7 @@ do {                                                            \
 static void
 yy_reduce_print (yytype_int16 *yyssp, YYSTYPE *yyvsp, YYLTYPE *yylsp, int yyrule, Session* currSession)
 {
-  unsigned long int yylno = yyrline[yyrule];
+  unsigned long yylno = yyrline[yyrule];
   int yynrhs = yyr2[yyrule];
   int yyi;
   YYFPRINTF (stderr, "Reducing stack by rule %d (line %lu):\n",
@@ -976,7 +971,7 @@ yytnamerr (char *yyres, const char *yystr)
   if (! yyres)
     return yystrlen (yystr);
 
-  return yystpcpy (yyres, yystr) - yyres;
+  return (YYSIZE_T) (yystpcpy (yyres, yystr) - yyres);
 }
 # endif
 
@@ -1238,12 +1233,12 @@ yyparse (Session* currSession)
   yyssp++;
 
  yysetstate:
-  *yyssp = yystate;
+  *yyssp = (yytype_int16) yystate;
 
   if (yyss + yystacksize - 1 <= yyssp)
     {
       /* Get the current used size of the three stacks, in elements.  */
-      YYSIZE_T yysize = yyssp - yyss + 1;
+      YYSIZE_T yysize = (YYSIZE_T) (yyssp - yyss + 1);
 
 #ifdef yyoverflow
       {
@@ -1263,10 +1258,9 @@ yyparse (Session* currSession)
                     &yyvs1, yysize * sizeof (*yyvsp),
                     &yyls1, yysize * sizeof (*yylsp),
                     &yystacksize);
-
-        yyls = yyls1;
         yyss = yyss1;
         yyvs = yyvs1;
+        yyls = yyls1;
       }
 #else /* no yyoverflow */
 # ifndef YYSTACK_RELOCATE
@@ -1300,7 +1294,7 @@ yyparse (Session* currSession)
       yylsp = yyls + yysize - 1;
 
       YYDPRINTF ((stderr, "Stack size increased to %lu\n",
-                  (unsigned long int) yystacksize));
+                  (unsigned long) yystacksize));
 
       if (yyss + yystacksize - 1 <= yyssp)
         YYABORT;
@@ -1413,7 +1407,7 @@ yyreduce:
   switch (yyn)
     {
         case 5:
-#line 95 "compilerStl/parserStl.y" /* yacc.c:1648  */
+#line 95 "compilerStl/parserStl.y" /* yacc.c:1645  */
     {
         Reader* currReader = createReader(currSession);
         MeshNew* currMesh = createMesh();
@@ -1450,11 +1444,11 @@ yyreduce:
         currSession->offsets.push_back(currOffset);
 
     }
-#line 1454 "E:/DevGra/nome/compilerStl/parserStl.cpp" /* yacc.c:1648  */
+#line 1448 "D:/Dev/nome/compilerStl/parserStl.cpp" /* yacc.c:1645  */
     break;
 
   case 6:
-#line 134 "compilerStl/parserStl.y" /* yacc.c:1648  */
+#line 134 "compilerStl/parserStl.y" /* yacc.c:1645  */
     {
         double *x = (double*) malloc(sizeof(double));
         double *y = (double*) malloc(sizeof(double));
@@ -1478,11 +1472,11 @@ yyreduce:
 
         currentFaceVertices.push_back(newVertex);
     }
-#line 1482 "E:/DevGra/nome/compilerStl/parserStl.cpp" /* yacc.c:1648  */
+#line 1476 "D:/Dev/nome/compilerStl/parserStl.cpp" /* yacc.c:1645  */
     break;
 
   case 11:
-#line 166 "compilerStl/parserStl.y" /* yacc.c:1648  */
+#line 166 "compilerStl/parserStl.y" /* yacc.c:1645  */
     {
         Reader* currReader = createReader(currSession);
         double *x = (double*) malloc(sizeof(double));
@@ -1505,11 +1499,11 @@ yyreduce:
         currentSolidFace.push_back(newFace);
         currentFaceVertices.clear();
     }
-#line 1509 "E:/DevGra/nome/compilerStl/parserStl.cpp" /* yacc.c:1648  */
+#line 1503 "D:/Dev/nome/compilerStl/parserStl.cpp" /* yacc.c:1645  */
     break;
 
 
-#line 1513 "E:/DevGra/nome/compilerStl/parserStl.cpp" /* yacc.c:1648  */
+#line 1507 "D:/Dev/nome/compilerStl/parserStl.cpp" /* yacc.c:1645  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1535,14 +1529,13 @@ yyreduce:
   /* Now 'shift' the result of the reduction.  Determine what state
      that goes to, based on the state we popped back to and the rule
      number reduced by.  */
-
-  yyn = yyr1[yyn];
-
-  yystate = yypgoto[yyn - YYNTOKENS] + *yyssp;
-  if (0 <= yystate && yystate <= YYLAST && yycheck[yystate] == *yyssp)
-    yystate = yytable[yystate];
-  else
-    yystate = yydefgoto[yyn - YYNTOKENS];
+  {
+    const int yylhs = yyr1[yyn] - YYNTOKENS;
+    const int yyi = yypgoto[yylhs] + *yyssp;
+    yystate = (0 <= yyi && yyi <= YYLAST && yycheck[yyi] == *yyssp
+               ? yytable[yyi]
+               : yydefgoto[yylhs]);
+  }
 
   goto yynewstate;
 

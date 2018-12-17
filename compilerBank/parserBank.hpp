@@ -1,4 +1,4 @@
-/* A Bison parser, made by GNU Bison 3.0.5.  */
+/* A Bison parser, made by GNU Bison 3.2.2.  */
 
 /* Bison interface for Yacc-like parsers in C
 
@@ -30,8 +30,11 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
-#ifndef YY_BANK_E_DEVGRA_NOME_COMPILERBANK_PARSERBANK_HPP_INCLUDED
-# define YY_BANK_E_DEVGRA_NOME_COMPILERBANK_PARSERBANK_HPP_INCLUDED
+/* Undocumented macros, especially those whose name start with YY_,
+   are private implementation details.  Do not rely on them.  */
+
+#ifndef YY_BANK_D_DEV_NOME_COMPILERBANK_PARSERBANK_HPP_INCLUDED
+# define YY_BANK_D_DEV_NOME_COMPILERBANK_PARSERBANK_HPP_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -40,11 +43,11 @@
 extern int bankdebug;
 #endif
 /* "%code requires" blocks.  */
-#line 1 "compilerBank/parserBank.y" /* yacc.c:1910  */
+#line 1 "compilerBank/parserBank.y" /* yacc.c:1906  */
 
 #include <newNOME/Session.h>
 
-#line 48 "E:/DevGra/nome/compilerBank/parserBank.hpp" /* yacc.c:1910  */
+#line 51 "D:/Dev/nome/compilerBank/parserBank.hpp" /* yacc.c:1906  */
 
 /* Token type.  */
 #ifndef YYTOKENTYPE
@@ -110,12 +113,12 @@ extern int bankdebug;
 
 union YYSTYPE
 {
-#line 49 "compilerBank/parserBank.y" /* yacc.c:1910  */
+#line 49 "compilerBank/parserBank.y" /* yacc.c:1906  */
 
     double number;
     char *string;
 
-#line 119 "E:/DevGra/nome/compilerBank/parserBank.hpp" /* yacc.c:1910  */
+#line 122 "D:/Dev/nome/compilerBank/parserBank.hpp" /* yacc.c:1906  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -142,4 +145,4 @@ extern YYSTYPE banklval;
 extern YYLTYPE banklloc;
 int bankparse (Session* currSession);
 
-#endif /* !YY_BANK_E_DEVGRA_NOME_COMPILERBANK_PARSERBANK_HPP_INCLUDED  */
+#endif /* !YY_BANK_D_DEV_NOME_COMPILERBANK_PARSERBANK_HPP_INCLUDED  */

@@ -1,6 +1,6 @@
-#line 1 "E:/DevGra/nome/compilerStl/lexerStl.cpp"
+#line 1 "D:/Dev/nome/compilerStl/lexerStl.cpp"
 
-#line 3 "E:/DevGra/nome/compilerStl/lexerStl.cpp"
+#line 3 "D:/Dev/nome/compilerStl/lexerStl.cpp"
 
 #define  YY_INT_ALIGNED short int
 
@@ -803,10 +803,10 @@ int stlcolumn = 0;
     stlcolumn += stlleng;
 
 static int isatty(int) {return 0;}
-#line 806 "E:/DevGra/nome/compilerStl/lexerStl.cpp"
+#line 806 "D:/Dev/nome/compilerStl/lexerStl.cpp"
 #define YY_NO_UNISTD_H 1
 
-#line 809 "E:/DevGra/nome/compilerStl/lexerStl.cpp"
+#line 809 "D:/Dev/nome/compilerStl/lexerStl.cpp"
 
 #define INITIAL 0
 #define MULTI_COMMENT 1
@@ -1026,7 +1026,7 @@ YY_DECL
 	{
 #line 22 "compilerStl/lexerStl.l"
 
-#line 1029 "E:/DevGra/nome/compilerStl/lexerStl.cpp"
+#line 1029 "D:/Dev/nome/compilerStl/lexerStl.cpp"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1164,7 +1164,7 @@ YY_RULE_SETUP
 #line 36 "compilerStl/lexerStl.l"
 ECHO;
 	YY_BREAK
-#line 1167 "E:/DevGra/nome/compilerStl/lexerStl.cpp"
+#line 1167 "D:/Dev/nome/compilerStl/lexerStl.cpp"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(MULTI_COMMENT):
 	yyterminate();

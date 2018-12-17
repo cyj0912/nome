@@ -1,6 +1,6 @@
-#line 1 "E:/DevGra/nome/compilerBank/lexerBank.cpp"
+#line 1 "D:/Dev/nome/compilerBank/lexerBank.cpp"
 
-#line 3 "E:/DevGra/nome/compilerBank/lexerBank.cpp"
+#line 3 "D:/Dev/nome/compilerBank/lexerBank.cpp"
 
 #define  YY_INT_ALIGNED short int
 
@@ -794,10 +794,10 @@ int bankcolumn = 0;
     bankcolumn += bankleng;
 
 static int isatty(int) {return 0;}
-#line 797 "E:/DevGra/nome/compilerBank/lexerBank.cpp"
+#line 797 "D:/Dev/nome/compilerBank/lexerBank.cpp"
 #define YY_NO_UNISTD_H 1
 
-#line 800 "E:/DevGra/nome/compilerBank/lexerBank.cpp"
+#line 800 "D:/Dev/nome/compilerBank/lexerBank.cpp"
 
 #define INITIAL 0
 #define MULTI_COMMENT 1
@@ -1017,7 +1017,7 @@ YY_DECL
 	{
 #line 23 "compilerBank/lexerBank.l"
 
-#line 1020 "E:/DevGra/nome/compilerBank/lexerBank.cpp"
+#line 1020 "D:/Dev/nome/compilerBank/lexerBank.cpp"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1220,7 +1220,7 @@ YY_RULE_SETUP
 #line 50 "compilerBank/lexerBank.l"
 ECHO;
 	YY_BREAK
-#line 1223 "E:/DevGra/nome/compilerBank/lexerBank.cpp"
+#line 1223 "D:/Dev/nome/compilerBank/lexerBank.cpp"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(MULTI_COMMENT):
 	yyterminate();

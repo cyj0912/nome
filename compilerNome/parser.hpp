@@ -1,4 +1,4 @@
-/* A Bison parser, made by GNU Bison 3.2.1.  */
+/* A Bison parser, made by GNU Bison 3.2.2.  */
 
 /* Bison interface for Yacc-like parsers in C
 
@@ -33,8 +33,8 @@
 /* Undocumented macros, especially those whose name start with YY_,
    are private implementation details.  Do not rely on them.  */
 
-#ifndef YY_NOM_VOLUMES_MACDATA_BERKELEYCG_NOME_COMPILERNOME_PARSER_HPP_INCLUDED
-# define YY_NOM_VOLUMES_MACDATA_BERKELEYCG_NOME_COMPILERNOME_PARSER_HPP_INCLUDED
+#ifndef YY_NOM_D_DEV_NOME_COMPILERNOME_PARSER_HPP_INCLUDED
+# define YY_NOM_D_DEV_NOME_COMPILERNOME_PARSER_HPP_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -43,12 +43,12 @@
 extern int nomdebug;
 #endif
 /* "%code requires" blocks.  */
-#line 1 "compilerNome/parser.y" /* yacc.c:1912  */
+#line 1 "compilerNome/parser.y" /* yacc.c:1906  */
 
 #include <newNOME/Session.h>
 
 
-#line 52 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.hpp" /* yacc.c:1912  */
+#line 52 "D:/Dev/nome/compilerNome/parser.hpp" /* yacc.c:1906  */
 
 /* Token type.  */
 #ifndef YYTOKENTYPE
@@ -256,7 +256,7 @@ extern int nomdebug;
 
 union YYSTYPE
 {
-#line 88 "compilerNome/parser.y" /* yacc.c:1912  */
+#line 88 "compilerNome/parser.y" /* yacc.c:1906  */
 
     double intNumber;
     double number;
@@ -267,7 +267,7 @@ union YYSTYPE
         double number;   // int posVal;
     } numPos;
 
-#line 271 "/Volumes/macData/BerkeleyCG/nome/compilerNome/parser.hpp" /* yacc.c:1912  */
+#line 271 "D:/Dev/nome/compilerNome/parser.hpp" /* yacc.c:1906  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -294,4 +294,4 @@ extern YYSTYPE nomlval;
 extern YYLTYPE nomlloc;
 int nomparse (Session* currSession);
 
-#endif /* !YY_NOM_VOLUMES_MACDATA_BERKELEYCG_NOME_COMPILERNOME_PARSER_HPP_INCLUDED  */
+#endif /* !YY_NOM_D_DEV_NOME_COMPILERNOME_PARSER_HPP_INCLUDED  */
