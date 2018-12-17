@@ -628,7 +628,7 @@ void Session::parseSavedStr()
 	parsingPhase = 0;
 	scanFromSessionFileContent(this, fileContent.c_str(), fileContent.size());
 	parsingPhase = 1;
-	scanFromSessionFileContent(this);
+	scanFromSessionFileContent(this, fileContent.c_str(), fileContent.size());
 }
 
 void Session::deleteFace(){
