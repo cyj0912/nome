@@ -22,11 +22,14 @@ static int isatty(int) {return 0;}
 %option yylineno
 %x MULTI_COMMENT
 %x LINE_COMMENT
+%x INSIDE_MACRO
 
 
 %%
 <INITIAL>{
 "(*"              numBegComments++; BEGIN(MULTI_COMMENT);
+MACRO             numBegComments++; BEGIN(INSIDE_MACRO);
+EXPAND            numBegComments++; BEGIN(INSIDE_MACRO);
 }
 <MULTI_COMMENT>{
 "*)"      numBegComments--; if (numBegComments == 0){ BEGIN(INITIAL); };
@@ -34,6 +37,12 @@ static int isatty(int) {return 0;}
 "(*"      numBegComments++;
 "*"       // eat the lone star
 \n        ;
+}
+<INSIDE_MACRO>{
+ENDMACRO  numBegComments--; if (numBegComments == 0){ BEGIN(INITIAL); };
+ENDEXPAND numBegComments--; if (numBegComments == 0){ BEGIN(INITIAL); };
+. ;
+\n ;
 }
 "\#"            { BEGIN(LINE_COMMENT); }
 <LINE_COMMENT>\n   { BEGIN(INITIAL); }
