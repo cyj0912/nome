@@ -624,7 +624,10 @@ void Session::saveFileToStr(string fileName){
 
 void Session::parseSavedStr()
 {
-	extern int scanFromSessionFileContent(Session* s);
+	extern int scanFromSessionFileContent(Session* s, const char* textBuffer, size_t textBufferSize);
+	parsingPhase = 0;
+	scanFromSessionFileContent(this, fileContent.c_str(), fileContent.size());
+	parsingPhase = 1;
 	scanFromSessionFileContent(this);
 }
 

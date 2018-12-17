@@ -123,11 +123,9 @@ endcrosssection         return END_CROSSSECTION;
 [ \t\n]+                /* ignore whitespace */;
 %%
 
-int scanFromSessionFileContent(Session* s)
+int scanFromSessionFileContent(Session* s, const char* textBuffer, size_t textBufferSize)
 {
-	const char* buf = s->fileContent.data();
-	size_t sz = s->fileContent.size();
-	YY_BUFFER_STATE bufferState = nom_scan_bytes(buf, sz);
+	YY_BUFFER_STATE bufferState = nom_scan_bytes(textBuffer, textBufferSize);
 
 	nomlineno = 1;
     nomcolumn = 0;

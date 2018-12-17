@@ -81,6 +81,9 @@ public:
     double epsilon = 0.1;
     std::string epsilonStr = "0.1";
 
+	//We use multi-phased parsing to handle macros, phase0 is bank/set, phase1 is everything else
+	int parsingPhase = 0;
+
     Session();
     ~Session();
 	void reset();

@@ -133,6 +133,9 @@ numberValue:
 
 uniqueName: VARIABLE
     {
+		if (currSession->parsingPhase < 1)
+			break;
+
         Reader* currReader = createReader(currSession);
         if (!currReader->isUnique(strdup($<string>1))){
           nomerror(currSession, "Duplicate construct name.");
@@ -143,6 +146,9 @@ uniqueName: VARIABLE
 
 uniqueNameFaceMesh: VARIABLE
     {
+		if (currSession->parsingPhase < 1)
+			break;
+
         for (FaceNew* fa : currentMeshFaces2){
             string currentF = strdup($<string>1);
           if(!currentF.compare(fa->name)){
@@ -155,6 +161,9 @@ uniqueNameFaceMesh: VARIABLE
 
 uniqueNameInstanceGroup: VARIABLE
     {
+		if (currSession->parsingPhase < 1)
+			break;
+
         for (InstanceNew* fa : currentGroup2){
             string currentF = strdup($<string>1);
           if(!currentF.compare(fa->name)){
@@ -188,12 +197,18 @@ numPosTok:
 variables:
   |
     variables VARIABLE {
+		if (currSession->parsingPhase < 1)
+			break;
+
         tempVariables2.push_back($<string>2);
     }
         ;
 
 surfaceArgs:
     SURFACE VARIABLE {
+		if (currSession->parsingPhase < 1)
+			break;
+
         if (surfaceFromArg.length() == 0){
           surfaceFromArg = strdup($<string>2);
         }
@@ -212,6 +227,9 @@ transformArgs:
 reverseArgs:
     REVERSE
     {
+		if (currSession->parsingPhase < 1)
+			break;
+
       Reverse* currReverse = createReverse();
       currentTransformations2.push_back(currReverse);
     };
@@ -219,6 +237,9 @@ reverseArgs:
 rotateArgs:
     ROTATE OPARENTHESES numberValue numberValue numberValue EPARENTHESES OPARENTHESES numberValue EPARENTHESES
     {
+		if (currSession->parsingPhase < 1)
+			break;
+
         double *x = (double*) malloc(sizeof(double));
         double *y = (double*) malloc(sizeof(double));
         double *z = (double*) malloc(sizeof(double));
@@ -248,6 +269,9 @@ rotateArgs:
 translateArgs:
     TRANSLATE OPARENTHESES numberValue numberValue numberValue EPARENTHESES
     {
+		if (currSession->parsingPhase < 1)
+			break;
+
         double *x = (double*) malloc(sizeof(double));
         double *y = (double*) malloc(sizeof(double));
         double *z = (double*) malloc(sizeof(double));
@@ -272,6 +296,9 @@ translateArgs:
 scaleArgs:
     SCALE OPARENTHESES numberValue numberValue numberValue EPARENTHESES
     {
+		if (currSession->parsingPhase < 1)
+			break;
+
         double *x = (double*) malloc(sizeof(double));
         double *y = (double*) malloc(sizeof(double));
         double *z = (double*) malloc(sizeof(double));
@@ -296,6 +323,9 @@ scaleArgs:
 mirrorArgs:
     MIRROR OPARENTHESES numberValue numberValue numberValue numberValue EPARENTHESES
     {
+		if (currSession->parsingPhase < 1)
+			break;
+
         double *currentValSet = (double*) malloc(sizeof(double));
         parseGetBankVal($<string>3, currSession, currentValSet, nomlineno);
         double x = *currentValSet;
@@ -320,6 +350,9 @@ instanceArgs:
 instanceGroup:
     INSTANCE uniqueNameInstanceGroup VARIABLE transformArgs END_INSTANCE
     {
+		if (currSession->parsingPhase < 1)
+			break;
+
         Reader* currReader = createReader(currSession);
 
         string instanceName = strdup($<string>2);
@@ -396,6 +429,9 @@ instanceOffseSubdivideArgs:
 subdivision:
     SUBDIVISION VARIABLE instanceOffseSubdivideArgs TYPE VARIABLE SUBDIVISIONS numberValue END_SUBDIVISION
     {
+		if (currSession->parsingPhase < 1)
+			break;
+
         double *subdivision = (double*) malloc(sizeof(double));
 
         double *currentValSet = (double*) malloc(sizeof(double));
@@ -416,6 +452,9 @@ subdivision:
 offset:
     OFFSET VARIABLE instanceOffseSubdivideArgs TYPE VARIABLE MIN numberValue MAX numberValue STEP numberValue END_OFFSET
     {
+		if (currSession->parsingPhase < 1)
+			break;
+
         double *min = (double*) malloc(sizeof(double));
         double *max = (double*) malloc(sizeof(double));
         double *step = (double*) malloc(sizeof(double));
@@ -445,6 +484,8 @@ offset:
 mesh:
         MESH uniqueName faceArgs END_MESH
     {
+		if (currSession->parsingPhase < 1)
+			break;
 
         MeshNew* currMesh = createMesh();
 
@@ -472,6 +513,9 @@ mesh:
 group:
         GROUP uniqueName instanceArgs END_GROUP
     {
+		if (currSession->parsingPhase < 1)
+			break;
+
         GroupNew* currGroup = createGroup(currentGroup2);
         currGroup->setName(nameUnique);
         currSession->groups.push_back(currGroup);
@@ -488,6 +532,9 @@ expr:
 delete:
     BEG_DELETE faceDeleteArgs END_DELETE
     {
+		if (currSession->parsingPhase < 1)
+			break;
+
         Reader* currReader = createReader(currSession);
 
         for (std::string currFace : tempFaceDelete2){
@@ -501,6 +548,9 @@ delete:
 set:
     SET VARIABLE numPosTok numberValue numberValue numberValue
     {
+		if (currSession->parsingPhase > 0)
+			break;
+
         string currentSetName = $<string>2;
         double currentSetValue = (double)atof($<numPos>3.string);
         double *currentValSet = (double*) malloc(sizeof(double));
@@ -529,6 +579,9 @@ setArgs:
 polylineMesh:
 POLYLINE uniqueName parenthesisName transformArgs END_POLYLINE
 {
+		if (currSession->parsingPhase < 1)
+			break;
+
     Reader* currReader = createReader(currSession);
 
     // Create list of vertices of face.
@@ -574,6 +627,9 @@ POLYLINE uniqueName parenthesisName transformArgs END_POLYLINE
 faceMesh:
     FACE uniqueNameFaceMesh parenthesisName transformArgs END_FACE
     {
+		if (currSession->parsingPhase < 1)
+			break;
+
         Reader* currReader = createReader(currSession);
 
         std::list<Vert*> verticesFace;
@@ -627,6 +683,8 @@ faceMesh:
 bank:
         BANK VARIABLE setArgs END_BANK
     {
+		if (currSession->parsingPhase > 0)
+			break;
         BankNew * currentBank2 = createBank();
         currentBank2->name = strdup($<string>2);
         currentBank2->sets = currentSetList2;
@@ -638,6 +696,9 @@ bank:
 merging:
     MERGE EPSILON numberValue END_MERGE
     {
+		if (currSession->parsingPhase < 1)
+			break;
+
         double *epsilonVal = (double*) malloc(sizeof(double));
 
         double *currentValSet = (double*) malloc(sizeof(double));
@@ -650,6 +711,9 @@ merging:
 circle:
     CIRCLE uniqueName OPARENTHESES numberValue numberValue EPARENTHESES END_CIRCLE
     {
+		if (currSession->parsingPhase < 1)
+			break;
+
         string name = $<string>2;
         double *num = (double*) malloc(sizeof(double));
         double *rad = (double*) malloc(sizeof(double));
@@ -674,6 +738,9 @@ circle:
 torusknot:
 	TORUSKNOT uniqueName OPARENTHESES numberValue numberValue numberValue numberValue numberValue EPARENTHESES END_TORUSKNOT
 	{
+		if (currSession->parsingPhase < 1)
+			break;
+
 		string name = $<string>2;
         double *pass = (double*) malloc(sizeof(double));
         double *turn = (double*) malloc(sizeof(double));
@@ -707,6 +774,9 @@ tunnel:
     TUNNEL uniqueName OPARENTHESES numberValue numberValue numberValue numberValue EPARENTHESES
   END_TUNNEL
         {
+		if (currSession->parsingPhase < 1)
+			break;
+
         Reader* currReader = createReader(currSession);
 
         string name = $<string>2;
@@ -741,6 +811,9 @@ funnel:
     FUNNEL uniqueName OPARENTHESES numberValue numberValue numberValue numberValue EPARENTHESES
   END_FUNNEL
         {
+		if (currSession->parsingPhase < 1)
+			break;
+
         Reader* currReader = createReader(currSession);
 
         string name = $<string>2;
@@ -773,14 +846,14 @@ funnel:
         ;
 
 parenthesisName:
-        OPARENTHESES variables EPARENTHESES
-    {
-        }
-        ;
+        OPARENTHESES variables EPARENTHESES;
 
 face:
         FACE uniqueName parenthesisName transformArgs END_FACE
     {
+		if (currSession->parsingPhase < 1)
+			break;
+			
         Reader* currReader = createReader(currSession);
 
         std::list<Vert*> verticesFace;
@@ -823,12 +896,19 @@ face:
 faceDelete:
         FACE VARIABLE END_FACE
         {
+		if (currSession->parsingPhase < 1)
+			break;
+
         tempFaceDelete2.push_back($<string>2);
         }
         ;
 
 beziercurve:
-  BEZIERCURVE uniqueName parenthesisName SLICES numberValue transformArgs END_BEZIERCURVE{
+  BEZIERCURVE uniqueName parenthesisName SLICES numberValue transformArgs END_BEZIERCURVE
+  {
+		if (currSession->parsingPhase < 1)
+			break;
+
     double *slices = (double*) malloc(sizeof(double));
     Reader* currReader = createReader(currSession);
 
@@ -877,7 +957,11 @@ beziercurve:
 
 
 bspline:
-        BSPLINE uniqueName parenthesisName closedArgs SLICES numberValue transformArgs END_BSPLINE{
+        BSPLINE uniqueName parenthesisName closedArgs SLICES numberValue transformArgs END_BSPLINE
+        {
+		if (currSession->parsingPhase < 1)
+			break;
+
     if ($<intNumber>1 != $<intNumber>8) {
         nomerror(currSession, "bspline and endbspline do not have the same number.");
         YYABORT;
@@ -945,6 +1029,9 @@ bspline:
 polyline:
         POLYLINE uniqueName parenthesisName transformArgs END_POLYLINE
         {
+		if (currSession->parsingPhase < 1)
+			break;
+
         Reader* currReader = createReader(currSession);
 
         // Create list of vertices of face.
@@ -983,6 +1070,9 @@ polyline:
 		
 sweep: SWEEP uniqueName sweep_param_pack END_SWEEP 
        {
+		if (currSession->parsingPhase < 1)
+			break;
+
 	       try
 		   {
 		       Sweep* sweep = new Sweep(currSession, currentSweepInitializer);
@@ -1007,6 +1097,9 @@ sweep_param_pack: | sweep_param_pack sweep_path
 
 sweep_path: PATH VARIABLE ENDPATH
             {
+		if (currSession->parsingPhase < 1)
+			break;
+
 				Reader* currReader = createReader(currSession);
 				MeshNew* path = currReader->getMesh($<string>2);
 				if (!path || !dynamic_cast<ISweepPath*>(path))
@@ -1020,6 +1113,9 @@ sweep_path: PATH VARIABLE ENDPATH
 
 sweep_crosssection: CROSSSECTION VARIABLE END_CROSSSECTION
 					{
+		if (currSession->parsingPhase < 1)
+			break;
+
 						Reader* currReader = createReader(currSession);
 						MeshNew* path = currReader->getMesh($<string>2);
 						if (!path || !dynamic_cast<ISweepPath*>(path))
@@ -1035,25 +1131,40 @@ sweep_crosssection: CROSSSECTION VARIABLE END_CROSSSECTION
 
 sweep_closed: CLOSED
 {
+		if (currSession->parsingPhase < 1)
+			break;
+
     currentSweepInitializer.Closed = true;
 };
 
 sweep_mintorsion: MINIMIZETORSION
                 {
+		if (currSession->parsingPhase < 1)
+			break;
+
                     currentSweepInitializer.MinTorsion = true;
                 };
 
 sweep_azimuth: AZIMUTH numberValue {
+		if (currSession->parsingPhase < 1)
+			break;
+
     currentSweepInitializer.AzimuthExpr = $<string>2;
 };
 
 sweep_twist: TWIST numberValue {
+		if (currSession->parsingPhase < 1)
+			break;
+
     currentSweepInitializer.TwistExpr = $<string>2;
 };
 
 foreground:
     FOREGROUND transformArgs END_FOREGROUND
     {
+		if (currSession->parsingPhase < 1)
+			break;
+
       Reader* currReader = createReader(currSession);
       string surfaceName = surfaceFromArg;
       // Check if a surface has been applied.
@@ -1073,6 +1184,9 @@ foreground:
 background:
     BACKGROUND transformArgs END_BACKGROUND
     {
+		if (currSession->parsingPhase < 1)
+			break;
+
       Reader* currReader = createReader(currSession);
       string surfaceName = surfaceFromArg;
       // Check if a surface has been applied.
@@ -1092,6 +1206,9 @@ background:
 insidefaces:
     INSIDEFACES transformArgs END_INSIDEFACES
     {
+		if (currSession->parsingPhase < 1)
+			break;
+
       Reader* currReader = createReader(currSession);
       string surfaceName = surfaceFromArg;
       // Check if a surface has been applied.
@@ -1111,6 +1228,9 @@ insidefaces:
 outsidefaces:
     OUTSIDEFACES transformArgs END_OUTSIDEFACES
     {
+		if (currSession->parsingPhase < 1)
+			break;
+
       Reader* currReader = createReader(currSession);
       string surfaceName = surfaceFromArg;
       // Check if a surface has been applied.
@@ -1130,6 +1250,9 @@ outsidefaces:
 offsetfaces:
     OFFSETFACES transformArgs END_OFFSETFACES
     {
+		if (currSession->parsingPhase < 1)
+			break;
+
       Reader* currReader = createReader(currSession);
       string surfaceName = surfaceFromArg;
       // Check if a surface has been applied.
@@ -1149,6 +1272,9 @@ offsetfaces:
 instance:
     INSTANCE uniqueName VARIABLE transformArgs END_INSTANCE
     {
+		if (currSession->parsingPhase < 1)
+			break;
+
         Reader* currReader = createReader(currSession);
 
         string instanceName = nameUnique;
@@ -1206,6 +1332,9 @@ instance:
 object:
         OBJECT uniqueName parenthesisName END_OBJECT
         {
+		if (currSession->parsingPhase < 1)
+			break;
+
           Reader* currReader = createReader(currSession);
 
           std::list<FaceNew*> facesObject;
@@ -1242,6 +1371,9 @@ object:
 surface:
     SURFACE uniqueName COLOR OPARENTHESES numberValue numberValue numberValue EPARENTHESES END_SURFACE
     {
+		if (currSession->parsingPhase < 1)
+			break;
+
         double *r = (double*) malloc(sizeof(double));
         double *g = (double*) malloc(sizeof(double));
         double *b = (double*) malloc(sizeof(double));
@@ -1268,6 +1400,9 @@ surface:
 point:
     BEG_POINT uniqueName OPARENTHESES numberValue numberValue numberValue EPARENTHESES END_POINT
     {
+		if (currSession->parsingPhase < 1)
+			break;
+
         double *x = (double*) malloc(sizeof(double));
         double *y = (double*) malloc(sizeof(double));
         double *z = (double*) malloc(sizeof(double));
