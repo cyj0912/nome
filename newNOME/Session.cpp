@@ -20,6 +20,7 @@
 #include "TunnelNew.h"
 #include "SubdivisionNew.h"
 #include "OffsetNew.h"
+#include "MacroExpander.h"
 #include <fstream>
 #include <sstream>
 #include <glm/glm.hpp>
@@ -627,8 +628,21 @@ void Session::parseSavedStr()
 	extern int scanFromSessionFileContent(Session* s, const char* textBuffer, size_t textBufferSize);
 	parsingPhase = 0;
 	scanFromSessionFileContent(this, fileContent.c_str(), fileContent.size());
+
+	std::string macroExpandedStr;
+	try
+	{
+		CMacroExpander expander;
+		macroExpandedStr = expander.ExpandAll(fileContent);
+	}
+	catch (const std::runtime_error& e)
+	{
+		std::cout << "Encountered macro expansion error:" << std::endl;
+		std::cout << e.what() << std::endl;
+		return;
+	}
 	parsingPhase = 1;
-	scanFromSessionFileContent(this, fileContent.c_str(), fileContent.size());
+	scanFromSessionFileContent(this, macroExpandedStr.c_str(), macroExpandedStr.size());
 }
 
 void Session::deleteFace(){

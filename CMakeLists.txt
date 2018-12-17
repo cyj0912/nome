@@ -21,6 +21,7 @@ find_package(Qt5Widgets REQUIRED)
 find_package(Qt5OpenGL REQUIRED)
 find_package(OpenGL REQUIRED)
 find_package(glm REQUIRED)
+find_package(Boost REQUIRED COMPONENTS regex)
 
 find_package(BISON 3)
 find_package(FLEX 2.6)
@@ -132,7 +133,8 @@ set(SOURCES
         newNOME/Octree.cpp
         newNOME/OctreeProxy.cpp
         newNOME/Sweep.cpp
-		commonDialogs.cpp)
+		commonDialogs.cpp
+        MacroExpander.cpp)
 
 set(HEADERS
         edge.h
@@ -193,7 +195,8 @@ set(HEADERS
         newNOME/Octree.h
         newNOME/OctreeProxy.h
         newNOME/Sweep.h
-		commonDialogs.h)
+		commonDialogs.h
+        MacroExpander.h)
 
 add_executable(Nome MACOSX_BUNDLE ${SOURCES} ${HEADERS} ${PARSER_SOURCES} ${GENERATED_PARSERS} nome_resource.rc)
 
@@ -214,6 +217,8 @@ target_link_libraries(Nome PRIVATE ${OPENGL_LIBRARIES})
 
 target_link_libraries(Nome PRIVATE glm)
 target_compile_definitions(Nome PRIVATE GLM_ENABLE_EXPERIMENTAL)
+
+target_link_libraries(Nome PRIVATE Boost::regex)
 
 install(TARGETS Nome RUNTIME DESTINATION . BUNDLE DESTINATION .)
 install(DIRECTORY examples DESTINATION .)
