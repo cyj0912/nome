@@ -31,7 +31,7 @@ build_script:
 
 after_build:
 - cmd: dir build-appveyor
-- cmd: cp build-appveyor\*.dll %APPVEYOR_BUILD_FOLDER%\install
+- cmd: copy build-appveyor\*.dll %APPVEYOR_BUILD_FOLDER%\install
 - cmd: windeployqt %APPVEYOR_BUILD_FOLDER%\install
 - cmd: del /f %APPVEYOR_BUILD_FOLDER%\install\opengl32sw.dll
 - cmd: 7z a Nome-win64-%APPVEYOR_BUILD_VERSION%.zip %APPVEYOR_BUILD_FOLDER%\install
