@@ -4,5 +4,14 @@ before_install:
 - if [ $TRAVIS_OS_NAME == osx ]; then brew update && brew install qt glm; fi
 - if [ $TRAVIS_OS_NAME == osx ]; then export PATH="/usr/local/opt/qt/bin:$PATH"; fi
 script:
-- if [ $TRAVIS_OS_NAME == osx ]; then mkdir build && cd build && cmake .. && make -j3; fi
+- if [ $TRAVIS_OS_NAME == osx ]; then mkdir build && cd build && cmake .. && make
+  -j3; fi
 - if [ $TRAVIS_OS_NAME == osx ]; then macdeployqt Nome.app; fi
+- if [ $TRAVIS_OS_NAME == osx ]; then zip -r Nome.app.zip Nome.app; fi
+deploy:
+  provider: releases
+  api_key:
+    secure: QLE0b8xDVuZN07dY9GD2FZ8A0cJdHskiSudxLXmttm1xWCY/by3M+pvv3y6mLBiUoDqQMbIA/oGe07qGmiVr/4jlvoCICRhZk2//oLdyBb9GuIjtAxrbXF1CVT/yLbYdZzkVHFP1f+in3ScVZiMbQ3iIpBC98f4UeTOThPrPZvabAQBApF/2GFG5CLozhr7oRUgTdyDaqMfAkS+/PkWmxxsdjWt2JbBb7WhnzOPeuJ53gJWPoFKsrQaC1wAB3VBEXSwN+iOTHjRTmohRG89BXP2W5ssfyKzMC6HnFupiHIRudNCWOYRicLuzO+2c8Z7o54dkoa8Ecm06WvU5MhkTffW5DSX9f7SByV8YV2aGW6QQozfK1ifwi9FniAz1sf8KVVNUw4ptPRNYXDqDto2CCSQ8lqBC7f1NoUL6X5P9zbdyXQe0jVRFczQyCiy0ADtRoTmC70aXkOoSVyAT3yY/LbeZ9zDrCfYLvj9gNHWNFXzD3srixqebL53117oECxkf/ggc5v99ef5m5COg5AkAWsskeBJrXgesoALc96ejB3jY0BP9cgksDjmDYjzPMIrm6gqQ2k+I9LPGy9onCzJ9gEVIoA4imRPROFAnqMmhJtdwCgyWodMb8uxBlqD/GDNZW5F1yThpCJG0DcSzbnEqW4eRE7YcYtpz652sJZm4HuY=
+  file: bui/Nome.app.zip
+  on:
+    repo: cyj0912/nome
