@@ -6,7 +6,7 @@ install:
   # update mysy2
   - C:\msys64\usr\bin\bash -lc "pacman --needed --noconfirm -Sy pacman-mirrors"
   - C:\msys64\usr\bin\bash -lc "pacman --noconfirm -Sy"
-  - C:\msys64\usr\bin\bash -lc "pacman --noconfirm -S bison flex"
+  - C:\msys64\usr\bin\bash -lc "pacman --noconfirm --needed -S bison flex"
   # setup envionment
   - set PATH=C:\Qt\5.11\msvc2017_64\bin;%PATH%
   - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat"
